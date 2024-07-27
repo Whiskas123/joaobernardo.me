@@ -1,1791 +1,669 @@
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap"
       rel="stylesheet"
     />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-    <style type="text/css">
+    <style>
       body {
         font-family: "Open Sans", sans-serif;
-        width: 50%;
-        margin: 10vh auto;
+        width: 90%;
+        margin: 5vh auto;
+        max-width: 800px;
       }
 
-      .source {
-        margin: 0 auto;
-        text-align: center;
-      }
-
+      .source,
       .image {
-        display: flex;
-        justify-content: center; /* Centers horizontally */
-        align-items: center;
+        text-align: center;
+        margin: 20px 0;
       }
 
-      @media (max-width: 850px) {
+      .image img {
+        max-width: 80%;
+        height: auto;
+      }
+
+      @media (min-width: 850px) {
         body {
-          width: 90%;
-          margin: 5vh auto;
+          width: 50%;
+          margin: 10vh auto;
         }
       }
     </style>
   </head>
 
   <body>
-    <h1>
-      <span>Viewsletter</span><span>&nbsp;#1 - Visualizing Elections</span>
-    </h1>
-    <p><span></span></p>
+    <h1>Viewsletter #1 - Visualizing Elections</h1>
     <p>
-      <span
-        >Welcome to Viewsletter, your monthly data visualization newsletter.
-        Each issue, we explore different themes to show how thoughtful
-        visualization choices can transform data into clear and compelling
-        insights. This month we focus on how data visualizations can be used to
-        tell stories about elections. From colorful maps to complex graphs,
-        we&rsquo;ll see how different visualization techniques can be used to
-        effectively represent electoral data.
-      </span>
+      Welcome to Viewsletter, your monthly data visualization newsletter. Each
+      issue, we explore different themes to show how thoughtful visualization
+      choices can transform data into clear and compelling insights. This month
+      we focus on how data visualizations can be used to tell stories about
+      elections. From colorful maps to complex graphs, we’ll see how different
+      visualization techniques can be used to effectively represent electoral
+      data.
     </p>
     <p>
-      <span>2024</span><span>&nbsp;</span
-      ><span
-        >has been a year full of elections. Indonesia, India, UK, France,
-        Mexico, Iran, United States, South Africa, Thailand, the European
-        Parliament&hellip; As the </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/&amp;sa=D&amp;source=editors&amp;ust=1721066927062568&amp;usg=AOvVaw07jrU56CjEgicida1l0Fj7"
-          >timeline published by Reuters</a
-        ></span
-      ><span>&nbsp;shows, m</span><span>ost of the world&#39;s</span
-      ><span
-        >&nbsp;major democracies &mdash; totalling almost half of the
-        world&rsquo;s population &mdash; have had or will have general elections
-        until the end of the year.
-      </span>
+      2024 has been a year full of elections. Indonesia, India, UK, France,
+      Mexico, Iran, United States, South Africa, Thailand, the European
+      Parliament… As the
+      <a
+        href="https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/"
+        >timeline published by Reuters</a
+      >
+      shows, most of the world's major democracies — totalling almost half of
+      the world’s population — have had or will have general elections until the
+      end of the year.
     </p>
     <p class="image">
-      <span><br /></span
-      ><span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 594.92px;
-          height: 272.19px;
-        "
-        ><img
-          alt=""
-          src="images/image24.png"
-          style="
-            width: 594.92px;
-            height: 272.19px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image24.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/&amp;sa=D&amp;source=editors&amp;ust=1721066927063152&amp;usg=AOvVaw33UIKp84Byqj0rua93kGbY"
-          >Reuters</a
-        ></span
+      Source:
+      <a
+        href="https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/"
+        >Reuters</a
       >
     </p>
-    <p><span></span></p>
     <p>
-      <span
-        >Every election is different, and such a wide array of countries will
-        obviously have different political contexts, electoral systems, and
-        voting issues. For example, we take for granted that having an election
-        means that there will be a day in which everyone in a country can vote.
-        Well&hellip; that&rsquo;s not always the case. </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html&amp;sa=D&amp;source=editors&amp;ust=1721066927063635&amp;usg=AOvVaw0eO9LsZSSEFymSBi5_8KYr"
-          >Take the example of India</a
-        ></span
-      ><span
-        >, whose general elections can last for months, as different regions
-        vote on different days.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 654.5px;
-          height: 216.7px;
-        "
-        ><img
-          alt=""
-          src="images/image27.png"
-          style="
-            width: 654.5px;
-            height: 216.7px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      Every election is different, and such a wide array of countries will
+      obviously have different political contexts, electoral systems, and voting
+      issues. For example, we take for granted that having an election means
+      that there will be a day in which everyone in a country can vote. Well…
+      that’s not always the case.
+      <a
+        href="https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html"
+        >Take the example of India</a
+      >, whose general elections can last for months, as different regions vote
+      on different days.
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 462px;
-          height: 546.79px;
-        "
-        ><img
-          alt=""
-          src="images/image26.png"
-          style="
-            width: 462px;
-            height: 546.79px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image27.png" alt="Election Image" />
+    </p>
+    <p class="image">
+      <img src="images/image26.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>(Questionable color choice) Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html&amp;sa=D&amp;source=editors&amp;ust=1721066927064148&amp;usg=AOvVaw25pAok7u4rRAP4vBQ-KXBc"
-          >CNN World</a
-        ></span
+      (Questionable color choice) Source:
+      <a
+        href="https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html"
+        >CNN World</a
       >
     </p>
-    <p><span></span></p>
     <p>
-      <span
-        >This heterogeneity also means that there is a huge diversity of data
-        visualization problems to tackle. In fact, even for the same election,
-        very different techniques can be used to represent the same data. Many
-        of those choices are deliberate and guide narratives in a certain,
-        intentional way. As an example, the </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://wevis-info.translate.goog/election66-report/?_x_tr_sl%3Dauto%26_x_tr_tl%3Den%26_x_tr_hl%3Den%26_x_tr_pto%3Dwapp&amp;sa=D&amp;source=editors&amp;ust=1721066927064576&amp;usg=AOvVaw145CECketaR7D9wctAzfmB"
-          >Thai website WeVIS did an amazing job mapping different visualization
-          choices</a
-        ></span
-      ><span>&nbsp;of several websites covering the Thai elections.</span
-      ><span
-        >&nbsp;(I suggest using the Safari in-browser translation function, as
-        it also translates the text labels in images).</span
+      This heterogeneity also means that there is a huge diversity of data
+      visualization problems to tackle. In fact, even for the same election,
+      very different techniques can be used to represent the same data. Many of
+      those choices are deliberate and guide narratives in a certain,
+      intentional way. As an example, the
+      <a href="https://wevis-info.translate.goog/election66-report/"
+        >Thai website WeVIS did an amazing job mapping different visualization
+        choices</a
       >
+      of several websites covering the Thai elections. (I suggest using the
+      Safari in-browser translation function, as it also translates the text
+      labels in images).
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 586.64px;
-          height: 595.54px;
-        "
-        ><img
-          alt=""
-          src="images/image8.png"
-          style="
-            width: 586.64px;
-            height: 595.54px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image8.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://wevis-info.translate.goog/election66-report/?_x_tr_sl%3Dauto%26_x_tr_tl%3Den%26_x_tr_hl%3Den%26_x_tr_pto%3Dwapp&amp;sa=D&amp;source=editors&amp;ust=1721066927065108&amp;usg=AOvVaw1q6RPsmdwLB4NZlC0bFt9x"
-          >WeVIS</a
-        ></span
-      >
+      Source:
+      <a href="https://wevis-info.translate.goog/election66-report/">WeVIS</a>
     </p>
-    <h2 id="h.g0hffg2k076c"><span>Empty land doesn&rsquo;t vote!</span></h2>
-    <h2 id="h.sm67bo7447t6" class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 345px;
-          height: 326.66px;
-        "
-        ><img
-          alt=""
-          src="images/image2.jpg"
-          style="
-            width: 345px;
-            height: 326.66px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+    <h2>Empty land doesn’t vote!</h2>
+    <h2 class="image">
+      <img src="images/image2.jpg" alt="Election Image" />
     </h2>
     <p>
-      <span
-        >One of the biggest challenges in election coverage is effectively
-        representing the proportion of voters for each candidate on traditional
-        maps. Standard Mercator projected maps often fall short, particularly in
-        areas where population density varies significantly. When vast, sparsely
-        populated regions visually dominate the map, they can inadvertently
-        suggest an overwhelming support for a candidate, overshadowing densely
-        populated areas where the majority of voters actually reside. This
-        creates a misleading narrative, highlighting the necessity for
-        alternative visualization techniques that more accurately reflect voter
-        distribution.</span
-      >
+      One of the biggest challenges in election coverage is effectively
+      representing the proportion of voters for each candidate on traditional
+      maps. Standard Mercator projected maps often fall short, particularly in
+      areas where population density varies significantly. When vast, sparsely
+      populated regions visually dominate the map, they can inadvertently
+      suggest an overwhelming support for a candidate, overshadowing densely
+      populated areas where the majority of voters actually reside. This creates
+      a misleading narrative, highlighting the necessity for alternative
+      visualization techniques that more accurately reflect voter distribution.
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 613px;
-          height: 391.87px;
-        "
-        ><img
-          alt=""
-          src="images/image28.png"
-          style="
-            width: 613px;
-            height: 456px;
-            margin-left: 0px;
-            margin-top: -64.13px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image28.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=http://engaging-data.com&amp;sa=D&amp;source=editors&amp;ust=1721066927066155&amp;usg=AOvVaw1RTQtBRjZXVUvBGkePwL6o"
-          >engaging-data.com</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p>
-      <span
-        >In the United Kingdom, the parliamentary electoral system is structured
-        around constituencies that are roughly equal in terms of population but
-        can differ dramatically in geographic size. This means that while each
-        Member of Parliament represents approximately the same number of
-        constituents, the physical areas of these constituencies can range from
-        very small urban districts to vast rural regions. Furthermore, the UK
-        uses a &quot;first past the post&quot; (FPTP) voting system, in which
-        the candidate who receives the most votes in a constituency wins the
-        seat, regardless of whether they achieve an outright majority. To
-        visualize the election results it is important then to represent
-        constituencies consistently using the same visual units.</span
-      >
+      Source: <a href="http://engaging-data.com">engaging-data.com</a>
     </p>
     <p>
-      <span>In the case of </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927066785&amp;usg=AOvVaw3WA7kiKAJEs5gC33iHho4D"
-          >Bloomberg&rsquo;s article about the elections</a
-        ></span
-      ><span
-        >, this was achieved by using a square grid in which each square
-        represents a constituency. The squares&#39; positions are relative to
-        the geographic position of each other. This results in a map that
-        clearly communicates the election results, but that is far from an
-        accurate geographical representation of the United Kingdom.
-      </span>
+      In the United Kingdom, the parliamentary electoral system is structured
+      around constituencies that are roughly equal in terms of population but
+      can differ dramatically in geographic size. This means that while each
+      Member of Parliament represents approximately the same number of
+      constituents, the physical areas of these constituencies can range from
+      very small urban districts to vast rural regions. Furthermore, the UK uses
+      a "first past the post" (FPTP) voting system, in which the candidate who
+      receives the most votes in a constituency wins the seat, regardless of
+      whether they achieve an outright majority. To visualize the election
+      results it is important then to represent constituencies consistently
+      using the same visual units.
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 328.35px;
-          height: 525.54px;
-        "
-        ><img
-          alt=""
-          src="images/image20.png"
-          style="
-            width: 328.35px;
-            height: 525.54px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image20.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927067278&amp;usg=AOvVaw2G9WOCPf5D1xmE7DZf1ImX"
-          >Bloomberg</a
-        ></span
+      Source:
+      <a href="https://www.bloomberg.com/graphics/2024-uk-election-results/"
+        >Bloomberg</a
       >
     </p>
-    <p><span></span></p>
     <p>
-      <span
-        >A similar example of using a grid to represent constituency results can
-        be found in </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html&amp;sa=D&amp;source=editors&amp;ust=1721066927067784&amp;usg=AOvVaw3wJOhvX2LREsk6HVORLGCq"
-          >Le Monde&#39;s article about the French legislative election
-          results</a
-        ></span
-      ><span
-        >. In this case, a hexagonal grid is used alongside icons that indicate
-        whether a constituency has shifted towards a nearby or distant political
-        family.</span
-      >
+      A similar example of using a grid to represent constituency results can be
+      found in
+      <a
+        href="https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html"
+        >Le Monde's article about the French legislative election results</a
+      >. In this case, a hexagonal grid is used alongside icons that indicate
+      whether a constituency has shifted towards a nearby or distant political
+      family.
     </p>
-    <p><span></span></p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 434.18px;
-          height: 625.66px;
-        "
-        ><img
-          alt=""
-          src="images/image7.png"
-          style="
-            width: 434.18px;
-            height: 625.66px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image7.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html&amp;sa=D&amp;source=editors&amp;ust=1721066927068393&amp;usg=AOvVaw0ZlAtUYzD0hwaejIFRNfNX"
-          >Le Monde</a
-        ></span
+      Source:
+      <a
+        href="https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html"
+        >Le Monde</a
       >
     </p>
     <p>
-      <span>An example workaround of this issue is </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.economist.com/interactive/uk-general-election/forecast&amp;sa=D&amp;source=editors&amp;ust=1721066927068711&amp;usg=AOvVaw2Ue4-bpRzDuNCe_Qcc7OIy"
-          >The Economist&rsquo;s UK election forecast</a
-        ></span
-      ><span
-        >&nbsp;maps. In this case, a geographically accurate map of Britain is
-        used, with the constituencies colored by the winning party. However,
-        that map is layered on top by a set of circles that are in the closest
-        possible position of the geometric center of the constituencies.
-        Obviously, in denser regions (like London), this results in the circles
-        being not even on top of their own constituencies, but the clever circle
-        hover interaction that highlights the borders of the respective
-        constituency solves this problem by providing a clear connection between
-        circle and geographic entity. Interestingly, the article then focuses on
-        specific regions, guiding the reader on a more in-depth analysis of the
-        maps.</span
+      An example workaround of this issue is
+      <a
+        href="https://www.economist.com/interactive/uk-general-election/forecast"
+        >The Economist’s UK election forecast</a
       >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 572px;
-          height: 465.32px;
-        "
-        ><img
-          alt=""
-          src="images/image13.gif"
-          style="
-            width: 572px;
-            height: 465.32px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      maps. In this case, a geographically accurate map of Britain is used, with
+      the constituencies colored by the winning party. However, that map is
+      layered on top by a set of circles that are in the closest possible
+      position of the geometric center of the constituencies. Obviously, in
+      denser regions (like London), this results in the circles being not even
+      on top of their own constituencies, but the clever circle hover
+      interaction that highlights the borders of the respective constituency
+      solves this problem by providing a clear connection between circle and
+      geographic entity. Interestingly, the article then focuses on specific
+      regions, guiding the reader on a more in-depth analysis of the maps.
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 595px;
-          height: 294.3px;
-        "
-        ><img
-          alt=""
-          src="images/image3.png"
-          style="
-            width: 595px;
-            height: 294.3px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image13.gif" alt="Election Image" />
+    </p>
+    <p class="image">
+      <img src="images/image3.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.economist.com/interactive/uk-general-election/forecast&amp;sa=D&amp;source=editors&amp;ust=1721066927069137&amp;usg=AOvVaw24fnsIba-TmIbCOLa9IF03"
-          >The Economist</a
-        ></span
+      Source:
+      <a
+        href="https://www.economist.com/interactive/uk-general-election/forecast"
+        >The Economist</a
       >
     </p>
-    <p><span></span></p>
-    <p><span></span></p>
     <p>
-      <span
-        >The previously mentioned WeVIS article on online coverage of the Thai
-        elections provides an interesting comparison between representations of
-        results in a map. It divides maps that use the geographic area of
-        constituencies and those that use the same visual unit for all
-        constituencies. This last category is further divided by the shape of
-        the visual unit used (circle, square or diamond).</span
-      >
+      The previously mentioned WeVIS article on online coverage of the Thai
+      elections provides an interesting comparison between representations of
+      results in a map. It divides maps that use the geographic area of
+      constituencies and those that use the same visual unit for all
+      constituencies. This last category is further divided by the shape of the
+      visual unit used (circle, square or diamond).
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 602px;
-          height: 581.17px;
-        "
-        ><img
-          alt=""
-          src="images/image14.png"
-          style="
-            width: 602px;
-            height: 581.17px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image14.png" alt="Election Image" />
     </p>
-    <h2 id="h.4a208j27eloj"><span>Polls and uncertainty</span></h2>
+    <h2>Polls and uncertainty</h2>
     <p>
-      <span
-        >When it comes to understanding elections, interpreting poll data and
-        communicating uncertainty and possible outcomes is central. However,
-        journalistic coverage about polls still falls many times in over
-        simplistic conclusions like &ldquo;Candidate X has an advantage over
-        Y&rdquo; without giving odds to the outcomes, or &ldquo;Party Z has n%
-        of the votes&rdquo;, when in fact vote shares from polls are ranges, and
-        what is highly probable is that the results will fall into those ranges.
-        (For more about this, I recommend </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.amazon.com/Signal-Noise-Many-Predictions-Fail-but/dp/0143125087&amp;sa=D&amp;source=editors&amp;ust=1721066927069677&amp;usg=AOvVaw0gqxVawMMNj8Q_V2sd4e6e"
-          >Nate Silver&rsquo;s book</a
-        ></span
-      ><span>). </span>
+      When it comes to understanding elections, interpreting poll data and
+      communicating uncertainty and possible outcomes is central. However,
+      journalistic coverage about polls still falls many times in over
+      simplistic conclusions like “Candidate X has an advantage over Y” without
+      giving odds to the outcomes, or “Party Z has n% of the votes”, when in
+      fact vote shares from polls are ranges, and what is highly probable is
+      that the results will fall into those ranges. (For more about this, I
+      recommend
+      <a
+        href="https://www.amazon.com/Signal-Noise-Many-Predictions-Fail-but/dp/0143125087"
+        >Nate Silver’s book</a
+      >).
     </p>
     <p>
-      <span
-        >FiveThirtyEight is usually referred to as a good example when it comes
-        to statistical communication. In </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://projects.fivethirtyeight.com/2024-election-forecast/&amp;sa=D&amp;source=editors&amp;ust=1721066927069914&amp;usg=AOvVaw1Y4Tk80i4XWws6i9MEEh6C"
-          >their article about the US 2024 Presidential Election</a
-        ></span
-      ><span
-        >, outcome distribution is central. 100 simulations are performed and
-        then arranged horizontally following an electoral vote margin axis. It
-        is easy to understand that outcomes resulting from more simulations have
-        bigger odds of happening than cases that appear less often.</span
-      >
+      FiveThirtyEight is usually referred to as a good example when it comes to
+      statistical communication. In
+      <a href="https://projects.fivethirtyeight.com/2024-election-forecast/"
+        >their article about the US 2024 Presidential Election</a
+      >, outcome distribution is central. 100 simulations are performed and then
+      arranged horizontally following an electoral vote margin axis. It is easy
+      to understand that outcomes resulting from more simulations have bigger
+      odds of happening than cases that appear less often.
     </p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 654.2px;
-          height: 593.4px;
-        "
-        ><img
-          alt=""
-          src="images/image11.png"
-          style="
-            width: 654.2px;
-            height: 593.4px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image11.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://projects.fivethirtyeight.com/2024-election-forecast/&amp;sa=D&amp;source=editors&amp;ust=1721066927070178&amp;usg=AOvVaw1bv9qALXVxVZYa6o30YHGO"
-          >538</a
-        ></span
+      Source:
+      <a href="https://projects.fivethirtyeight.com/2024-election-forecast/"
+        >538</a
       >
     </p>
-    <p><span></span></p>
     <p>
-      <span>The Economist </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.economist.com/interactive/uk-general-election/forecast&amp;sa=D&amp;source=editors&amp;ust=1721066927070414&amp;usg=AOvVaw3KdHUpKBtn5bzaEnr9Slbd"
-          >opted for a simplified version of a boxplot,</a
-        ></span
-      ><span
-        >&nbsp;with lowest, highest and median outcome results for each party,
-        color hues representing probability, an indication of number of MPs
-        needed for majority, and a comparison with last election&rsquo;s
-        results. Instead of telling a story around the median result, sometimes
-        mistaken as the most probable result, ranges and outcome probabilities
-        are central in this visualization.</span
+      The Economist
+      <a
+        href="https://www.economist.com/interactive/uk-general-election/forecast"
+        >opted for a simplified version of a boxplot,</a
       >
+      with lowest, highest and median outcome results for each party, color hues
+      representing probability, an indication of number of MPs needed for
+      majority, and a comparison with last election’s results. Instead of
+      telling a story around the median result, sometimes mistaken as the most
+      probable result, ranges and outcome probabilities are central in this
+      visualization.
     </p>
-    <p><span></span></p>
     <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 669.5px;
-          height: 491.83px;
-        "
-        ><img
-          alt=""
-          src="images/image12.png"
-          style="
-            width: 669.5px;
-            height: 491.83px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
+      <img src="images/image12.png" alt="Election Image" />
     </p>
     <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.economist.com/interactive/uk-general-election/forecast&amp;sa=D&amp;source=editors&amp;ust=1721066927070750&amp;usg=AOvVaw3iCOJSJ8rT43uMc6xSuPpK"
-          >The Economist</a
-        ></span
+      Source:
+      <a
+        href="https://www.economist.com/interactive/uk-general-election/forecast"
+        >The Economist</a
       >
     </p>
-    <p><span></span></p>
     <p>
-      <span>An useful exercise that is </span><span>often</span
-      ><span
-        >&nbsp;overlooked is to compare poll forecasts with the actual election
-        results. In the article </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://blog.datawrapper.de/german-party-polls-vs-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927071056&amp;usg=AOvVaw1G3nlv-XEOMUhNRJiKCP8A"
+      An useful exercise that is often overlooked is to compare poll forecasts
+      with the actual election results. In the article
+      <a
+        href="https://blog.datawrapper.de/german-party-polls-vs-election-results/"
+        >Which German party is the most unlucky when it comes to election
+        dates?</a
+      >
+      by Datawrapper, a graph for each party shows the difference between
+      average forecasted voting share and actual voting share in the following
+      election. The graphs are annotated with useful information about events
+      that might have contributed to variations in this difference.
+    </p>
+    <p class="image">
+      <img src="images/image16.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://blog.datawrapper.de/german-party-polls-vs-election-results/"
+        >Datawrapper</a
+      >
+    </p>
+    <h3>Change</h3>
+    <p>
+      When it comes to visualizing change, it is important to consider both the
+      temporal and spatial dimensions. The
+      <a href="https://www.publico.pt/eleicoes/resultados/legislativas/2024/"
+        >Público’s coverage of the Portuguese legislative elections</a
+      >
+      is a good example of this, as it shows how the political landscape has
+      evolved over time and across different regions.
+    </p>
+    <p class="image">
+      <img src="images/image22.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://www.publico.pt/eleicoes/resultados/legislativas/2024/"
+        >Público</a
+      >
+    </p>
+    <p>
+      Bloomberg’s coverage of the UK Elections
+      <a href="https://www.bloomberg.com/graphics/2024-uk-election-results/"
+        >uses a similar approach</a
+      >, showing how the political landscape has changed over time and across
+      different regions. This is particularly useful for understanding the
+      impact of recent events on the election results.
+    </p>
+    <p class="image">
+      <img src="images/image30.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://www.bloomberg.com/graphics/2024-uk-election-results/"
+        >Bloomberg</a
+      >
+    </p>
+    <p>
+      A different example is Bloomberg’s coverage of the French elections, which
+      <a href="https://www.bloomberg.com/graphics/2024-french-election-results/"
+        >uses a ternary chart</a
+      >
+      to show how the withdrawal of candidates in three-way runoffs has affected
+      the final results. This is a unique approach that highlights the
+      importance of strategic voting in the French electoral system.
+    </p>
+    <p class="image">
+      <img src="images/image9.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://www.bloomberg.com/graphics/2024-french-election-results/"
+        >Bloomberg</a
+      >
+    </p>
+    <p>
+      The New York Times coverage of the UK elections
+      <a
+        href="https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html"
+        >uses a similar approach</a
+      >, showing how the political landscape has changed over time and across
+      different regions. This is particularly useful for understanding the
+      impact of recent events on the election results.
+    </p>
+    <p class="image">
+      <img src="images/image21.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html"
+        >The New York Times</a
+      >
+    </p>
+    <p>
+      Bloomberg also focuses on the rise of Reform UK, showing how
+      <a
+        href="https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/"
+        >this new party has affected the election results</a
+      >. This is a good example of how new political movements can disrupt the
+      traditional political landscape.
+    </p>
+    <p class="image">
+      <img src="images/image4.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/"
+        >Bloomberg</a
+      >
+    </p>
+    <p>
+      Finally, by looking at change from a spatial perspective, it is possible
+      to uncover specific regional trends. The
+      <a
+        href="https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html"
+        >New York Times coverage of the UK elections</a
+      >
+      is a richer example, since instead of just showing a general national
+      trend, it uncovers specific and very defined regional trends. As Belgium
+      is made up of three very different political entities (Flanders, Wallonia
+      and Brussels) with separated political parties, it is interesting to note
+      that the ones typically more on the left side of the spectrum, Wallonia
+      and Brussels, have moved very noticeably to the right, while the
+      historically right-wing Flanders has moved to the left, even if not in the
+      same degree.
+    </p>
+    <p class="image">
+      <img src="images/image23.gif" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://x.com/karim_douieb/status/1805864269688324241"
+        >@karim_douieb</a
+      >
+    </p>
+    <h2>More maps!</h2>
+    <p>
+      There is no question that spatial variables are of huge importance when it
+      comes to political identification and voting. In this section I will
+      showcase some examples of projects that use maps to tell different
+      election stories.
+    </p>
+    <p class="image">
+      <img src="images/image6.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.reddit.com/r/MapPorn/comments/nvgyu5/how_a_coastline_100_million_years_ago_influences/"
+        >Reddit</a
+      >
+    </p>
+    <p>
+      It is impossible to talk about geography in elections without talking
+      about constituency borders. Somewhat overlooked in proportional electoral
+      systems (like the Portuguese one), this issue becomes election-defining in
+      systems with uninominal electoral circles. The way districts are shaped is
+      so determinant to the results of elections that there is an incentive for
+      malicious actors to change them for self-benefit. Gerrymandering, or the
+      “political manipulation of electoral district boundaries with the intent
+      to create undue advantage for a party, group, or socioeconomic class
+      within the constituency” is a very important issue, especially in US
+      politics.
+    </p>
+    <p>
+      The best didactic and interactive example I’ve seen to explain the real
+      power of gerrymandering is The New York Times’ interactive game
+      <a
+        href="https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html"
+        >Can You Gerrymander Your Party to Power?</a
+      >. It puts the reader into the shoes of a district designer, with the sole
+      purpose of maximizing its own election result.
+    </p>
+    <p class="image">
+      <img src="images/image29.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html"
+        >The New York Times</a
+      >
+    </p>
+    <p>
+      The Guardian uses scrollytelling to show how
+      <a
+        href="https://www.theguardian.com/us-news/ng-interactive/2021/nov/12/gerrymander-redistricting-map-republicans-democrats-visual"
+        >Republicans gerrymandered North Carolina’s electoral district
+        borders</a
+      >
+      to dismantle a widely democratic district. The interactive nature of the
+      article helps readers understand the impact of gerrymandering on election
+      outcomes.
+    </p>
+    <p class="image">
+      <img src="images/image1.gif" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.theguardian.com/us-news/ng-interactive/2021/nov/12/gerrymander-redistricting-map-republicans-democrats-visual"
+        >The Guardian</a
+      >
+    </p>
+    <p>
+      The New Yorker newspaper The City published an interactive map that allows
+      users to explore the new City Council district boundaries. This tool helps
+      residents understand how redistricting affects their representation.
+    </p>
+    <p class="image">
+      <img src="images/image18.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://projects.thecity.nyc/new-york-city-council-district/"
+        >The City</a
+      >
+    </p>
+    <p>
+      Redistricting can also happen for different reasons, such as population
+      changes. The Pudding’s interactive visualization shows how the European
+      Union’s regions have changed over time, highlighting the impact of
+      demographic shifts on political boundaries.
+    </p>
+    <p class="image">
+      <img src="images/image10.gif" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source: <a href="https://pudding.cool/2019/04/eu-regions/">The Pudding</a>
+    </p>
+    <p>
+      Finally, it is impossible not to talk about maps without mentioning the
+      detailed visualizations of election results. El País provides a
+      comprehensive map of the Spanish general elections, showing results down
+      to the street level. This level of detail helps readers understand the
+      geographic distribution of votes.
+    </p>
+    <p class="image">
+      <img src="images/image19.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://elpais.com/espana/elecciones-generales/2023-07-24/el-mapa-con-los-resultados-de-las-elecciones-generales-del-23-j-calle-a-calle.html"
+        >El País</a
+      >
+    </p>
+    <p>
+      A wider-picture map also from El País shows how the regions of Europe have
+      voted in the European Parliament elections since 1999. This historical
+      perspective provides insights into long-term political trends across the
+      continent.
+    </p>
+    <p class="image">
+      <img src="images/image17.gif" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://elpais.com/internacional/elecciones-europeas/2024-06-09/mapa-asi-han-votado-las-regiones-de-cada-pais-de-europa-desde-1999.html"
+        >El País</a
+      >
+    </p>
+    <h2>Extras</h2>
+    <p>
+      Extra stuff that didn’t fit any other categories but are still worth
+      mentioning:
+    </p>
+    <p>
+      Due to the uncommon two-round system in French Legislative elections,
+      Bloomberg provides a detailed analysis of how the results change between
+      the first and second rounds. This helps readers understand the dynamics of
+      runoff elections.
+    </p>
+    <p class="image">
+      <img src="images/image25.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a href="https://www.bloomberg.com/graphics/2024-french-election-results/"
+        >Bloomberg</a
+      >
+    </p>
+    <p>
+      Cute visualizations for the NLP analysis of political debates can be found
+      in La Nacion’s coverage. They show how candidates use language and which
+      topics they focus on during debates.
+    </p>
+    <p class="image">
+      <img src="images/image15.png" alt="Election Image" />
+    </p>
+    <p class="source">
+      Source:
+      <a
+        href="https://www.lanacion.com.ar/politica/monitor-del-debate-que-palabras-eligen-los-candidatos-y-cuales-evitan-a-quienes-nombran-y-a-quienes-nid08102023/"
+        >La Nacion</a
+      >
+    </p>
+    <h3>Featured Projects:</h3>
+    <ul>
+      <li>
+        <a href="https://wevis-info.translate.goog/election66-report/"
+          >Election 66 Website Report @ WeVIS</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/"
+          >How this year of elections is set to reshape global politics @
+          Reuters</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html"
+          >India election: A visual guide to voting in the world’s largest
+          democracy @ CNN World</a
+        >
+      </li>
+      <li>
+        <a href="https://www.bloomberg.com/graphics/2024-uk-election-results/"
+          >2024 UK Election Results @ Bloomberg</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html"
+          >Législatives 2024 : 155 circonscriptions changent de couleur
+          politique @ Le Monde</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.economist.com/interactive/uk-general-election/forecast"
+          >Labour is extremely likely to win the July 4th general election @ The
+          Economist</a
+        >
+      </li>
+      <li>
+        <a href="https://projects.fivethirtyeight.com/2024-election-forecast/"
+          >Who is Favored To Win The 2024 Presidential Election? @ 538</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.datawrapper.de/german-party-polls-vs-election-results/"
           >Which German party is the most unlucky when it comes to election
-          dates?</a
-        ></span
-      ><span
-        >&nbsp;by Datawrapper, a graph for each party shows the difference
-        between average forecasted voting share and actual voting share in the
-        following election. The graphs are annotated with useful information
-        about events that might have contributed to variations in this
-        difference.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 647px;
-          height: 282.2px;
-        "
-        ><img
-          alt=""
-          src="images/image16.png"
-          style="
-            width: 647px;
-            height: 282.2px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://blog.datawrapper.de/german-party-polls-vs-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927071495&amp;usg=AOvVaw0Ucgws2QMwJoBaUX3RW_Qy"
-          >Datawrapper</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <h3 id="h.qxesnu16tcuw"><span>Change</span></h3>
-    <p>
-      <span
-        >When it comes to visualizing change, the array of visualization
-        solutions is almost infinite, depending on the angle of analysis or
-        story that is intended to be told. Talking about change in the number of
-        elected officials instead of differences in voting share can almost turn
-        a sweeping victory into a disappointing defeat. The same can happen when
-        we look at individual parties instead of political blocks; or when we
-        look at specific regions instead of at a country as a whole (or
-        vice-versa).</span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>A very simple example is the one of </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.publico.pt/eleicoes/resultados/legislativas/2024/&amp;sa=D&amp;source=editors&amp;ust=1721066927072058&amp;usg=AOvVaw3KOZUeSkJVEv0xgAsW-7pJ"
-          >P&uacute;blico&rsquo;s 2024 Portuguese Elections</a
-        ></span
-      ><span
-        >. It goes straight to the point, showing differences in the number of
-        MPs in relation with the previous election. This approach is valid and
-        useful, but can also be too simplistic if not accompanied with other
-        sets of information.
-      </span>
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 538px;
-          height: 297.43px;
-        "
-        ><img
-          alt=""
-          src="images/image22.png"
-          style="
-            width: 538px;
-            height: 321px;
-            margin-left: 0px;
-            margin-top: -0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.publico.pt/eleicoes/resultados/legislativas/2024/&amp;sa=D&amp;source=editors&amp;ust=1721066927072458&amp;usg=AOvVaw0UhJfD5hsjeyK70uLHTI_S"
-          >P&uacute;blico</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p>
-      <span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927072828&amp;usg=AOvVaw3ad-U1cUfu3kgDB8YtZtMa"
-          >Bloomberg&rsquo;s coverage of the UK Elections</a
-        ></span
-      ><span
-        >&nbsp;shows a similar example, but about vote share instead of number
-        of elected MPs.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 635px;
-          height: 406.47px;
-        "
-        ><img
-          alt=""
-          src="images/image30.png"
-          style="
-            width: 635px;
-            height: 428px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927073149&amp;usg=AOvVaw0nUKTFDpfZCPflqtMkNapw"
-          >Bloomberg</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>A different example is </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-french-election-results/?accessToken%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTcyMDQ0NTA5NCwiZXhwIjoxNzIxMDQ5ODk0LCJhcnRpY2xlSWQiOiJTRzlTMUhUMEcxS1cwMCIsImJjb25uZWN0SWQiOiJEMjk1RDc5RkRFQzc0QjQ4OEJDMUY1Mjc1Mjg1RUQ2NSJ9.SB-lardCewYbYTc-ipGmDtaPS2KzDWIrQ4UvpJUqSj0&amp;sa=D&amp;source=editors&amp;ust=1721066927073681&amp;usg=AOvVaw2EL6g_rH-JLMxOa42fqL8L"
-          >Bloomberg&rsquo;s coverage of the recent French elections</a
-        ></span
-      ><span
-        >. In this case, we can see not only the evolution in terms of
-        representation of each party since 2012, but also how the political
-        blocks (or coalitions) they integrate have evolved. For example, if we
-        looked only into France Unbowed&rsquo;s numbers, we could get to the
-        conclusion that they stagnated from 2022 to 2024. However, it misses the
-        context in which they integrate (and lead) a coalition that kept growing
-        during that period. On the other hand, we see that the unquestionable
-        growth of the far-right has been happening at the expense of the
-        right-wing Republicans, and that the sum of both is still less than what
-        it was in 2012.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 570px;
-          height: 541.19px;
-        "
-        ><img
-          alt=""
-          src="images/image9.png"
-          style="
-            width: 570px;
-            height: 541.19px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-french-election-results/?accessToken%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTcyMDQ0NTA5NCwiZXhwIjoxNzIxMDQ5ODk0LCJhcnRpY2xlSWQiOiJTRzlTMUhUMEcxS1cwMCIsImJjb25uZWN0SWQiOiJEMjk1RDc5RkRFQzc0QjQ4OEJDMUY1Mjc1Mjg1RUQ2NSJ9.SB-lardCewYbYTc-ipGmDtaPS2KzDWIrQ4UvpJUqSj0&amp;sa=D&amp;source=editors&amp;ust=1721066927074226&amp;usg=AOvVaw1I7Tsut2YMF9l1UYdScWhW"
-          >Bloomberg</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>The</span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html&amp;sa=D&amp;source=editors&amp;ust=1721066927074540&amp;usg=AOvVaw2WrWkNUt5Ad44Pb_lhjDQG"
-          >&nbsp;New York Times coverage of the UK elections</a
-        ></span
-      ><span
-        >&nbsp;gives us an even more clear and intentional perspective on the
-        downfall of a party (in this example, the Conservatives) in relation to
-        the rise of others (Reform UK). This chart related Conservative&rsquo;s
-        vote shift with Reform&rsquo;s voting share, with the help of suggestive
-        downward arrows.</span
-      >
-    </p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 658.5px;
-          height: 416px;
-        "
-        ><img
-          alt=""
-          src="images/image21.png"
-          style="
-            width: 658.5px;
-            height: 416px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html&amp;sa=D&amp;source=editors&amp;ust=1721066927074862&amp;usg=AOvVaw3K1zh61Axu7_THkzjzRrkd"
-          >The New York Times</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/&amp;sa=D&amp;source=editors&amp;ust=1721066927075126&amp;usg=AOvVaw3syRqNk5gZ-JzxeAQNrWYm"
-          >Bloomberg also focuses on the rise of Reform UK</a
-        ></span
-      ><span
-        >. Showing how close Conservatives came to hold a seat relating the
-        margin of loss with the third parties vote share is a way to suggest the
-        theory that if Reform didn&rsquo;t run, the Conservatives would have had
-        a much better result. &nbsp;</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 396.48px;
-          height: 592.89px;
-        "
-        ><img
-          alt=""
-          src="images/image4.png"
-          style="
-            width: 396.48px;
-            height: 592.89px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/&amp;sa=D&amp;source=editors&amp;ust=1721066927075536&amp;usg=AOvVaw1nJftgy01OOzQ6yS-UcnnE"
-          >Bloomberg</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p>
-      <span
-        >Finally, by looking at change from a spatial perspective, it is
-        possible to uncover trends that would be undetectable otherwise. A
-        common way to look at this is by using the wind map metaphor, inspired
-        by an </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://archive.nytimes.com/www.nytimes.com/interactive/2012/11/11/sunday-review/counties-moving.html&amp;sa=D&amp;source=editors&amp;ust=1721066927075856&amp;usg=AOvVaw0G6viyIPF8k_aee9nmpzc6"
-          >older New York Times</a
-        ></span
-      ><span
-        >&nbsp;visualization that became very popular due to its simplicity:
-        blue </span
-      ><span>leftward</span
-      ><span
-        >&nbsp;arrows mean that a location has moved its vote to the left, and
-        red rightward ones mean that it has moved its vote to the right (due to
-        opposite political color conventions, the colors and directions have to
-        be swapped in the rest of the world). The size/velocity (and sometimes
-        color intensity) of the arrow is proportional to the size of the vote
-        shift.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >This metaphor is still widely used, as we can see in the example of the
-        recent </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html&amp;sa=D&amp;source=editors&amp;ust=1721066927076267&amp;usg=AOvVaw0g4c8boEQZ_9rlzySaEHvl"
-          >UK elections coverage of The New York Times</a
-        ></span
-      ><span
-        >&nbsp;(in this case, arrows are pointing down perhaps to represent
-        downfall).</span
-      >
-    </p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 242px;
-          height: 292.5px;
-        "
-        ><img
-          alt=""
-          src="images/image5.png"
-          style="
-            width: 242px;
-            height: 292.5px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html&amp;sa=D&amp;source=editors&amp;ust=1721066927076558&amp;usg=AOvVaw0AIMxZsiHlQ3rN62XKuZOm"
-          >The New York Times</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>Perhaps the map of the Belgian shifts between the </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://x.com/karim_douieb/status/1805864269688324241&amp;sa=D&amp;source=editors&amp;ust=1721066927076862&amp;usg=AOvVaw0-amp97p7AUIRHLSK4ZoL9"
-          >2019 and 2024 European Elections by Karim Douieb</a
-        ></span
-      ><span
-        >&nbsp;is a richer example, since instead of just showing a general
-        national trend, it uncovers specific and very defined regional trends.
-        As Belgium is made up of three very different political entities
-        (Flanders, Wallonia and Brussels) with separated political parties, it
-        is interesting to note that the ones typically more on the left side of
-        the spectrum, Wallonia and Brussels, have moved very noticeably to the
-        right, while the historically right-wing Flanders has moved to the left,
-        even if not in the same degree.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 400.5px;
-          height: 400.5px;
-        "
-        ><img
-          alt=""
-          src="images/image23.gif"
-          style="
-            width: 400.5px;
-            height: 400.5px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://x.com/karim_douieb/status/1805864269688324241&amp;sa=D&amp;source=editors&amp;ust=1721066927077414&amp;usg=AOvVaw1DO57pFd7PZJliBvQgrDks"
-          >@karim_douieb</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <h2 id="h.jympl65kuc6r"><span>More maps!</span></h2>
-    <p>
-      <span
-        >There is no question that spatial variables are of huge importance when
-        it comes to political identification and voting. In this section I will
-        showcase some examples of projects that use maps to tell different
-        election stories.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 385px;
-          height: 489.05px;
-        "
-        ><img
-          alt=""
-          src="images/image6.png"
-          style="
-            width: 385px;
-            height: 489.05px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.reddit.com/r/MapPorn/comments/nvgyu5/how_a_coastline_100_million_years_ago_influences/&amp;sa=D&amp;source=editors&amp;ust=1721066927077974&amp;usg=AOvVaw3hMlPm3KUtp3qCf4iks6Aj"
-          >Reddit</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >It is impossible to talk about geography in elections without talking
-        about constituency borders. Somewhat overlooked in proportional
-        electoral systems (like the Portuguese one), this issue becomes
-        election-defining in systems with uninominal electoral circles. The way
-        districts are shaped is so determinant to the results of elections that
-        there is an incentive for malicious actors to change them for
-        self-benefit. </span
-      ><span>Gerrymandering</span
-      ><span
-        >, or the &ldquo;political manipulation of electoral district boundaries
-        with the intent to create undue advantage for a party, group, or
-        socioeconomic class within the constituency&rdquo; is a very important
-        issue, especially in US politics.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >The best didactic and interactive example I&rsquo;ve seen to explain
-        the real power of gerrymandering is The New York Times&rsquo;
-        interactive game </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html&amp;sa=D&amp;source=editors&amp;ust=1721066927078453&amp;usg=AOvVaw2a1nyRSee-lZ8y290Wwqlu"
-          >Can You Gerrymander Your Party to Power?</a
-        ></span
-      ><span
-        >. It puts the reader into the shoes of a district designer, with the
-        sole purpose of maximizing its own election result.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 406.5px;
-          height: 339.99px;
-        "
-        ><img
-          alt=""
-          src="images/image29.png"
-          style="
-            width: 406.5px;
-            height: 339.99px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html&amp;sa=D&amp;source=editors&amp;ust=1721066927078892&amp;usg=AOvVaw2p9eJNGrxeX3bBdpcGoWtq"
-          >The New York Times</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>The Guardian uses scrollytelling to show how </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.theguardian.com/us-news/ng-interactive/2021/nov/12/gerrymander-redistricting-map-republicans-democrats-visual&amp;sa=D&amp;source=editors&amp;ust=1721066927079271&amp;usg=AOvVaw1xYxK-CSdydWDL75PIvIh2"
-          >Republicans gerrymandered North Carolina&rsquo;s electoral district
-          borders</a
-        ></span
-      ><span>&nbsp;</span
-      ><span
-        >to dismantle a widely democratic district diluting it into several
-        Republican majority ones.</span
-      >
-    </p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 617.5px;
-          height: 329.75px;
-        "
-        ><img
-          alt=""
-          src="images/image1.gif"
-          style="
-            width: 617.5px;
-            height: 329.75px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.theguardian.com/us-news/ng-interactive/2021/nov/12/gerrymander-redistricting-map-republicans-democrats-visual&amp;sa=D&amp;source=editors&amp;ust=1721066927079723&amp;usg=AOvVaw16DSftjax1M6JP1BPFP88S"
-          >The Guardian</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>The New Yorker newspaper The City published </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://projects.thecity.nyc/new-york-city-council-district/&amp;sa=D&amp;source=editors&amp;ust=1721066927079979&amp;usg=AOvVaw3QfeOa5eFBjVEwwXbnd6WA"
-          >Get To Know Your City Council District</a
-        ></span
-      ><span>&nbsp;</span><span>where it </span
-      ><span
-        >includes a wide range of information for every city district in New
-        York, from socio-economic data to redistricting information (as shown
-        below).</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 327.5px;
-          height: 301.89px;
-        "
-        ><img
-          alt=""
-          src="images/image18.png"
-          style="
-            width: 327.5px;
-            height: 301.89px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://projects.thecity.nyc/new-york-city-council-district/&amp;sa=D&amp;source=editors&amp;ust=1721066927080379&amp;usg=AOvVaw2dm2ZhwMID3ikR5MlVhCVW"
-          >The City</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >Redistricting can also happen for different reasons. In the European
-        Union, economic development funds are often allocated to regions
-        according to their economic performance relative to the other regions,
-        so that funds are allocated proportionally to the regions most in need.
-        The Pudding&rsquo;s </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://pudding.cool/2019/04/eu-regions/&amp;sa=D&amp;source=editors&amp;ust=1721066927080853&amp;usg=AOvVaw3sJA_5k2tK__RuP9O9v98A"
-          >Why EU Regions are Reshaping Their Borders</a
-        ></span
-      ><span
-        >&nbsp;uncovers how countries are reshaping their internal borders to
-        maximize the amount of funds received, separating richer capital cities
-        from their surroundings. It also happened in Portugal this year, with
-        the creation of a new region, &ldquo;Oeste e Vale do Tejo&rdquo;, and
-        the separation of the Metropolitan Area of Lisbon from
-        Set&uacute;bal&rsquo;s Peninsula.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 698px;
-          height: 370.97px;
-        "
-        ><img
-          alt=""
-          src="images/image10.gif"
-          style="
-            width: 698px;
-            height: 370.97px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://pudding.cool/2019/04/eu-regions/&amp;sa=D&amp;source=editors&amp;ust=1721066927081330&amp;usg=AOvVaw3g2IXXfrh1Ia6XEmazmpcp"
-          >The Pudding</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >Finally, it is impossible not to talk about maps and elections without
-        at least mentioning the amazing </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://elpais.com/espana/elecciones-generales/2023-07-24/el-mapa-con-los-resultados-de-las-elecciones-generales-del-23-j-calle-a-calle.html&amp;sa=D&amp;source=editors&amp;ust=1721066927081630&amp;usg=AOvVaw27801PGbAVBTD9MN1SuaxG"
-          >electoral results maps from El Pa&iacute;s</a
-        ></span
-      ><span
-        >. Due to the availability of &nbsp;very granular election data, it is
-        possible to visualize results from very small neighborhoods and
-        cross-reference it with socio-economic data.
-      </span>
-    </p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 547px;
-          height: 554.99px;
-        "
-        ><img
-          alt=""
-          src="images/image19.png"
-          style="
-            width: 547px;
-            height: 554.99px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://elpais.com/espana/elecciones-generales/2023-07-24/el-mapa-con-los-resultados-de-las-elecciones-generales-del-23-j-calle-a-calle.html&amp;sa=D&amp;source=editors&amp;ust=1721066927081994&amp;usg=AOvVaw3UbAnHrq3ELp7WC73eAbSk"
-          >El Pa&iacute;s</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span
-        >A wider-picture map also from El Pa&iacute;s, showing the evolution
-        of</span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://elpais.com/internacional/elecciones-europeas/2024-06-09/mapa-asi-han-votado-las-regiones-de-cada-pais-de-europa-desde-1999.html&amp;sa=D&amp;source=editors&amp;ust=1721066927082282&amp;usg=AOvVaw2F_j0LfKjkMi--esVqB07v"
-          >&nbsp;European Election results in all EU countries since 1999.</a
-        ></span
-      >
-    </p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 485.5px;
-          height: 481.24px;
-        "
-        ><img
-          alt=""
-          src="images/image17.gif"
-          style="
-            width: 485.5px;
-            height: 481.24px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://elpais.com/internacional/elecciones-europeas/2024-06-09/mapa-asi-han-votado-las-regiones-de-cada-pais-de-europa-desde-1999.html&amp;sa=D&amp;source=editors&amp;ust=1721066927082623&amp;usg=AOvVaw00PMEndZA8UXZ5iJ1aeOWK"
-          >El Pa&iacute;s</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <h2 id="h.x28euiw9zr5f"><span>Extras</span></h2>
-    <p><span>Extra stuff that didn&rsquo;t fit any other categories.</span></p>
-    <p><span></span></p>
-    <p>
-      <span
-        >Due to the uncommon two-round system in French Legislative elections,
-        the withdrawal of candidates in three-way runoffs has a huge importance
-        on the final results of the election. In the last elections, a </span
-      ><span>Republican Front</span
-      ><span
-        >&nbsp;was established between most left-wing and centrist candidates,
-        pushing the far-right to a much worse result than they previously
-        expected. </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-french-election-results/?accessToken%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTcyMDQ0NTA5NCwiZXhwIjoxNzIxMDQ5ODk0LCJhcnRpY2xlSWQiOiJTRzlTMUhUMEcxS1cwMCIsImJjb25uZWN0SWQiOiJEMjk1RDc5RkRFQzc0QjQ4OEJDMUY1Mjc1Mjg1RUQ2NSJ9.SB-lardCewYbYTc-ipGmDtaPS2KzDWIrQ4UvpJUqSj0&amp;sa=D&amp;source=editors&amp;ust=1721066927083313&amp;usg=AOvVaw30RdfUAOPiQSkzZoT6TmbB"
-          >This ternary chart by Bloomberg</a
-        ></span
-      ><span
-        >&nbsp;shows how this unique strategy worked out in different
-        scenarios.</span
-      >
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 497.71px;
-          height: 419.39px;
-        "
-        ><img
-          alt=""
-          src="images/image25.png"
-          style="
-            width: 497.71px;
-            height: 419.39px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-french-election-results/?accessToken%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTcyMDQ0NTA5NCwiZXhwIjoxNzIxMDQ5ODk0LCJhcnRpY2xlSWQiOiJTRzlTMUhUMEcxS1cwMCIsImJjb25uZWN0SWQiOiJEMjk1RDc5RkRFQzc0QjQ4OEJDMUY1Mjc1Mjg1RUQ2NSJ9.SB-lardCewYbYTc-ipGmDtaPS2KzDWIrQ4UvpJUqSj0&amp;sa=D&amp;source=editors&amp;ust=1721066927083755&amp;usg=AOvVaw11R3RTxR8XEXbJJsmrM1Aq"
-          >Bloomberg</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p>
-      <span>Cute visualizations for the </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.lanacion.com.ar/politica/monitor-del-debate-que-palabras-eligen-los-candidatos-y-cuales-evitan-a-quienes-nombran-y-a-quienes-nid08102023/&amp;sa=D&amp;source=editors&amp;ust=1721066927084041&amp;usg=AOvVaw3Y6HqO3cIRuqnb0uOjADCQ"
-          >NLP analysis of the Argentinian Presidential Debate</a
-        ></span
-      ><span>&nbsp;by La Nacion. That&rsquo;s it.</span>
-    </p>
-    <p><span></span></p>
-    <p class="image">
-      <span
-        style="
-          overflow: hidden;
-          display: inline-block;
-          margin: 0px 0px;
-          border: 0px solid #000000;
-          transform: rotate(0rad) translateZ(0px);
-          -webkit-transform: rotate(0rad) translateZ(0px);
-          width: 615px;
-          height: 515.34px;
-        "
-        ><img
-          alt=""
-          src="images/image15.png"
-          style="
-            width: 615px;
-            height: 515.34px;
-            margin-left: 0px;
-            margin-top: 0px;
-            transform: rotate(0rad) translateZ(0px);
-            -webkit-transform: rotate(0rad) translateZ(0px);
-          "
-          title=""
-      /></span>
-    </p>
-    <p class="source">
-      <span>Source: </span
-      ><span
-        ><a
-          href="https://www.google.com/url?q=https://www.lanacion.com.ar/politica/monitor-del-debate-que-palabras-eligen-los-candidatos-y-cuales-evitan-a-quienes-nombran-y-a-quienes-nid08102023/&amp;sa=D&amp;source=editors&amp;ust=1721066927084431&amp;usg=AOvVaw1vx79g35_MZ7Euq7JBztXk"
-          >La Nacion</a
-        ></span
-      >
-    </p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <p><span></span></p>
-    <h3 id="h.mcgi831gwi6s"><span>Featured Projects:</span></h3>
-    <p><span></span></p>
-    <ul>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://wevis-info.translate.goog/election66-report/?_x_tr_sl%3Dauto%26_x_tr_tl%3Den%26_x_tr_hl%3Den%26_x_tr_pto%3Dwapp&amp;sa=D&amp;source=editors&amp;ust=1721066927084937&amp;usg=AOvVaw1jkmvu3_rc4ouIf4KXVSTb"
-            >Election 66 Website Report @ WeVIS</a
-          ></span
+          dates? @ Datawrapper</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.reuters.com/graphics/GLOBAL-ELECTIONS2024/gdvzmkejkpw/&amp;sa=D&amp;source=editors&amp;ust=1721066927085189&amp;usg=AOvVaw3bUnIpT7VStybLHE6VXZb_"
-            >How this year of elections is set to reshape global politics @
-            Reuters</a
-          ></span
+        <a
+          href="https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html"
+          >Anatomy of a Landslide @ The New York Times</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://edition.cnn.com/2024/04/17/india/india-election-2024-hnk-intl-dg/index.html&amp;sa=D&amp;source=editors&amp;ust=1721066927085429&amp;usg=AOvVaw1v2g33Yxi_wkooEy3MQnRh"
-            >India election: A visual guide to voting in the world&rsquo;s
-            largest democracy @ CNN World</a
-          ></span
+        <a
+          href="https://www.bloomberg.com/graphics/2024-french-election-results/"
+          >French Left Alliance Wins Most Seats, Far Right Fails to Carry
+          First-Round Victory @ Bloomberg</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927085626&amp;usg=AOvVaw0ZRQARId5lrTUC2_spgglI"
-            >2024 UK Election Results @ Bloomberg</a
-          ></span
+        <a
+          href="https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/"
+          >Reform UK Surge Turned a Labour Election Win Into a Tory Wipeout @
+          Bloomberg</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.lemonde.fr/les-decodeurs/article/2024/07/08/legislatives-2024-155-circonscriptions-changent-de-couleur-politique_6247852_4355770.html&amp;sa=D&amp;source=editors&amp;ust=1721066927085844&amp;usg=AOvVaw0vVr7-Xh6ezTIJYfyVpcTg"
-            >L&eacute;gislatives 2024 : 155 circonscriptions changent de couleur
-            politique @ Le Monde</a
-          ></span
+        <a href="https://www.publico.pt/eleicoes/resultados/legislativas/2024/"
+          >Legislativas 2024 @ Publico</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.economist.com/interactive/uk-general-election/forecast&amp;sa=D&amp;source=editors&amp;ust=1721066927086017&amp;usg=AOvVaw0CvIVEANJhGjBXCLh1RFoq"
-            >Labour is extremely likely to win the July 4th general election @
-            The Economist</a
-          ></span
-        >
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://projects.fivethirtyeight.com/2024-election-forecast/&amp;sa=D&amp;source=editors&amp;ust=1721066927086186&amp;usg=AOvVaw1TYWk3jeoIuiBAeFvyUZQT"
-            >Who is Favored To Win The 2024 Presidential Election? @ 538</a
-          ></span
+        <a
+          href="https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html"
+          >Ready, Set, Gerrymander! @ The New York Times</a
         >
       </li>
       <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://blog.datawrapper.de/german-party-polls-vs-election-results/&amp;sa=D&amp;source=editors&amp;ust=1721066927086378&amp;usg=AOvVaw2ZoTsLxLzX60ul6vcBY0Rq"
-            >Which German party is the most unlucky when it comes to election
-            dates? @ Datawrapper</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.nytimes.com/interactive/2024/07/05/world/europe/uk-election-results-map-vote-share.html&amp;sa=D&amp;source=editors&amp;ust=1721066927086589&amp;usg=AOvVaw360Iurh0nE7v_roFzsD8a3"
-            >Anatomy of a Landslide @ The New York Times</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-french-election-results/?accessToken%3DeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTcyMDQ0NTA5NCwiZXhwIjoxNzIxMDQ5ODk0LCJhcnRpY2xlSWQiOiJTRzlTMUhUMEcxS1cwMCIsImJjb25uZWN0SWQiOiJEMjk1RDc5RkRFQzc0QjQ4OEJDMUY1Mjc1Mjg1RUQ2NSJ9.SB-lardCewYbYTc-ipGmDtaPS2KzDWIrQ4UvpJUqSj0&amp;sa=D&amp;source=editors&amp;ust=1721066927086895&amp;usg=AOvVaw0_FHyBbYw9EdpWRTvKzEhV"
-            >French Left Alliance Wins Most Seats, Far Right Fails to Carry
-            First-Round Victory @ Bloomberg</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.bloomberg.com/graphics/2024-uk-election-reform-votes-surge-labour-win-conservative-loss/&amp;sa=D&amp;source=editors&amp;ust=1721066927087104&amp;usg=AOvVaw3M03mfcapYw2UictB0z_5c"
-            >Reform UK Surge Turned a Labour Election Win Into a Tory Wipeout @
-            Bloomberg</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.publico.pt/eleicoes/resultados/legislativas/2024/&amp;sa=D&amp;source=editors&amp;ust=1721066927087275&amp;usg=AOvVaw2JmgJKPqVjVN-arX1uTCps"
-            >Legislativas 2024 @ Publico</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.nytimes.com/2022/02/01/insider/ready-set-gerrymander.html&amp;sa=D&amp;source=editors&amp;ust=1721066927087457&amp;usg=AOvVaw26SszN6IJJIQKDVu652AJ0"
-            >Ready, Set, Gerrymander! @ The New York Times</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://projects.thecity.nyc/new-york-city-council-district/&amp;sa=D&amp;source=editors&amp;ust=1721066927087629&amp;usg=AOvVaw3Ar3u89N04H9TrnRQq42xM"
-            >Get to Know Your City Council District @ The City</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.theguardian.com/us-news/ng-interactive/2021/nov/12/gerrymander-redistricting-map-republicans-democrats-visual&amp;sa=D&amp;source=editors&amp;ust=1721066927087838&amp;usg=AOvVaw2n8fmYbkaPq1rKeESjudnD"
-            >These maps show how Republicans are blatantly rigging elections @
-            The Guardian</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://pudding.cool/2019/04/eu-regions/&amp;sa=D&amp;source=editors&amp;ust=1721066927087991&amp;usg=AOvVaw0s-2KfU7fqaetqZ_SNatp6"
-            >Why EU Regions are Redrawing Their Borders @ The Pudding</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://elpais.com/espana/elecciones-generales/2023-07-24/el-mapa-con-los-resultados-de-las-elecciones-generales-del-23-j-calle-a-calle.html&amp;sa=D&amp;source=editors&amp;ust=1721066927088251&amp;usg=AOvVaw0EiIQt82tvG5EJDdrh1JWa"
-            >El mapa con los resultados de las elecciones generales del 23-J,
-            calle a calle @ El Pa&iacute;s</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://elpais.com/internacional/elecciones-europeas/2024-06-09/mapa-asi-han-votado-las-regiones-de-cada-pais-de-europa-desde-1999.html&amp;sa=D&amp;source=editors&amp;ust=1721066927088570&amp;usg=AOvVaw3ZNg-vUNmSIo0l2X_-v8IX"
-            >As&iacute; han votado las regiones de cada pa&iacute;s de Europa
-            desde 1999 @ El Pa&iacute;s</a
-          ></span
-        >
-      </li>
-      <li>
-        <span
-          ><a
-            href="https://www.google.com/url?q=https://www.lanacion.com.ar/politica/monitor-del-debate-que-palabras-eligen-los-candidatos-y-cuales-evitan-a-quienes-nombran-y-a-quienes-nid08102023/&amp;sa=D&amp;source=editors&amp;ust=1721066927088885&amp;usg=AOvVaw3Te5oEJXge9cBLClEhhZkS"
-            >Monitor del debate @ La Nacion</a
-          ></span
+        <a href="https://projects.thecity.nyc/new-york-city-council-district/"
+          >Get to Know Your City Council District @ The City</a
         >
       </li>
     </ul>
