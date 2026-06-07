@@ -20,3 +20,39 @@ function playRandomPop() {
 document.querySelectorAll('.bubble').forEach((bubble) => {
 	bubble.addEventListener('click', playRandomPop);
 });
+
+
+// Project preview: show thumbnail and description in left column on hover.
+const preview = document.querySelector('.preview');
+const previewThumb = preview?.querySelector('.preview__thumb');
+const previewDescription = preview?.querySelector('.preview__description');
+
+function showPreview(link) {
+	if (!preview) return;
+	const thumb = link.dataset.thumb || '';
+	const description = link.dataset.description || '';
+	if (!thumb && !description) return;
+
+	if (thumb) {
+		previewThumb.src = thumb;
+		previewThumb.alt = link.textContent.trim();
+	} else {
+		previewThumb.removeAttribute('src');
+	}
+	previewDescription.textContent = description;
+	preview.classList.add('is-visible');
+	preview.setAttribute('aria-hidden', 'false');
+}
+
+function hidePreview() {
+	if (!preview) return;
+	preview.classList.remove('is-visible');
+	preview.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelectorAll('.section a[href]').forEach((link) => {
+	link.addEventListener('mouseenter', () => showPreview(link));
+	link.addEventListener('focus', () => showPreview(link));
+	link.addEventListener('mouseleave', hidePreview);
+	link.addEventListener('blur', hidePreview);
+});
