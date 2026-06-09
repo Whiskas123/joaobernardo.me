@@ -9,6 +9,10 @@
 	box-sizing: border-box;
 }
 
+* {
+  cursor: url('https://cdn.cursors-4u.net/previews/neon-tetra-fish-0a7289c4-32.webp') 32 32, auto !important;
+}
+
 body {
 	color: var(--color-purple);
 	font-family: 'Sansation', system-ui, sans-serif;
