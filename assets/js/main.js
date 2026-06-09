@@ -56,3 +56,11 @@ document.querySelectorAll('.section a[href]').forEach((link) => {
 	link.addEventListener('mouseleave', hidePreview);
 	link.addEventListener('blur', hidePreview);
 });
+
+// Preload preview thumbnails so they appear instantly on hover.
+document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
+	const src = link.dataset.thumb;
+	if (!src) return;
+	const img = new Image();
+	img.src = src;
+});
