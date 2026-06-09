@@ -41,6 +41,13 @@ b{
 	font-weight: bold;
 }
 
+.languageSelector{
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	color: darkgray;
+}
+
 .headerTitle {
     font-size: 6rem;
     display: flex;
