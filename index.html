@@ -4,14 +4,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>João Bernardo Narciso</title>
-		<meta name="description" content="" />
+		<meta name="description" content="Site pessoal de João Bernardo Narciso. Trabalho em Visualização de Dados e sou estudante de Doutoramento em Economia Política." />
 		<link rel="canonical" href="https://joaobernardo.me/" />
 		<link rel="alternate" hreflang="pt" href="https://joaobernardo.me/" />
 		<link rel="alternate" hreflang="en" href="https://joaobernardo.me/en/" />
+		<link rel="alternate" hreflang="es" href="https://joaobernardo.me/es/" />
 		<link rel="alternate" hreflang="x-default" href="https://joaobernardo.me/" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="João Bernardo Narciso" />
-		<meta property="og:description" content="" />
+		<meta property="og:description" content="Site pessoal de João Bernardo Narciso. Trabalho em Visualização de Dados e estudante de Doutoramento em Economia Política." />
 		<meta property="og:url" content="https://joaobernardo.me/" />
 		<meta property="og:image" content="https://joaobernardo.me/assets/images/bubble.png" />
 		<meta name="twitter:card" content="summary" />
@@ -26,6 +27,19 @@
 			href="https://fonts.googleapis.com/css2?family=Sansation:wght@300;400;700&display=swap"
 		/>
 		<link rel="stylesheet" href="assets/css/styles.css" />
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "João Bernardo Narciso",
+				"url": "https://joaobernardo.me/",
+				"jobTitle": "Data Visualization",
+				"description": "Trabalho em Visualização de Dados e sou estudante de Doutoramento em Economia Política.",
+				"sameAs": [
+					"https://www.linkedin.com/in/joaobernardonarciso/"
+				]
+			}
+		</script>
 	</head>
 	<body>
 		<script>
@@ -34,6 +48,8 @@
 				var lang = (navigator.language || '').toLowerCase();
 				if (lang.indexOf('en') === 0) {
 					window.location.replace('/en/');
+				} else if (lang.indexOf('es') === 0) {
+					window.location.replace('/es/');
 				}
 			})();
 		</script>
@@ -47,6 +63,8 @@
 			<a href="/?lang=pt" class="is-active" aria-current="page" data-lang="pt">PT</a>
 			<span aria-hidden="true">/</span>
 			<a href="/en/" data-lang="en">EN</a>
+			<span aria-hidden="true">/</span>
+			<a href="/es/" data-lang="es">ES</a>
 		</div>
         <div class="columns">
             <div class="leftColumn">
