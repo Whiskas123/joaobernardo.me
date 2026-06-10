@@ -2,7 +2,7 @@
 
 // Preload bubble pop sounds so playback is instant on click.
 const popSounds = ['pop1.mp3', 'pop2.mp3', 'pop3.mp3'].map((file) => {
-	const audio = new Audio(`assets/audio/${file}`);
+	const audio = new Audio(`/assets/audio/${file}`);
 	audio.preload = 'auto';
 	return audio;
 });
