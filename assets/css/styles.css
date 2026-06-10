@@ -393,3 +393,37 @@ li:hover::before {
 		font-size: 1rem;
 	}
 }
+
+
+.langSwitcher {
+	position: absolute;
+	top: 1rem;
+	right: 1.5rem;
+	font-size: 0.95rem;
+	display: flex;
+	gap: 0.4rem;
+	align-items: center;
+	z-index: 10;
+}
+
+.langSwitcher a {
+	color: var(--color-purple);
+	opacity: 0.55;
+	font-weight: 700;
+}
+
+.langSwitcher a.is-active {
+	opacity: 1;
+}
+
+.langSwitcher a:hover,
+.langSwitcher a:focus-visible {
+	opacity: 1;
+}
+
+@media (max-width: 768px) {
+	.langSwitcher {
+		top: 0.5rem;
+		right: 1rem;
+	}
+}

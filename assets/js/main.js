@@ -64,3 +64,7 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 	const img = new Image();
 	img.src = src;
 });
+
+
+// Persist language preference when user clicks the switcher.
+
