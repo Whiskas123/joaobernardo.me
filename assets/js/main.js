@@ -68,3 +68,16 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 
 // Persist language preference when user clicks the switcher.
 
+
+
+// Auto-tag outbound links so Umami records clicks before navigation.
+// https://umami.is/docs/track-outbound-links
+(() => {
+	const eventName = 'outbound-link-click';
+	document.querySelectorAll('a').forEach((a) => {
+		if (a.host && a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+			a.setAttribute('data-umami-event', eventName);
+			a.setAttribute('data-umami-event-url', a.href);
+		}
+	});
+})();
