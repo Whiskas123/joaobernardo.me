@@ -16,7 +16,7 @@ html {
 }
 
 html, html * {
-  cursor: url('../images/cursor.png') 16 16, auto !important;
+  cursor: url('../images/cursor.png') 32 32, auto !important;
 }
 
 body {
@@ -418,7 +418,7 @@ li:hover::before {
 	color: var(--color-purple);
 	opacity: 0.55;
 	font-weight: 700;
-	cursor: url('../images/cursor.png') 16 16, pointer !important;
+	cursor: url('../images/cursor.png') 32 32, pointer !important;
 }
 
 .langSwitcher a.is-active {
