@@ -179,32 +179,71 @@ footer {
 	transition: transform 300ms ease-out;
 }
 
+/* Each shelf carries its own tilt in assets/data/site.js, so adding a section
+   needs no new CSS. */
+.section:hover .sectionHeader img {
+	transform: rotate(var(--tilt-hover, var(--tilt, 0deg)));
+}
+
 .section ul {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: clamp(0.5rem, 2vh, 1.25rem);
+	gap: clamp(0.35rem, 1.3vh, 0.75rem);
 }
 
 .section ul li {
 	font-size: clamp(0.8rem, 2vh, 1.1rem);
 	line-height: 1.3;
+	width: 100%;
 }
 
-#minidisc1 { --tilt: 9.4deg; }
-#minidisc2 { --tilt: -13.3deg; }
-#minidisc3 { --tilt: 9.7deg; }
-
-.section:hover #minidisc1 {
-	transform: rotate(calc(var(--tilt) - 16deg));
+/* One row per project. The year and the type read first, then the title,
+   which stays flush to the right edge the list has always aligned on. A title
+   too long for the row wraps inside itself rather than being cut. */
+.section ul li a {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: baseline;
+	gap: 0.45em;
 }
 
-.section:hover #minidisc2 {
-	transform: rotate(calc(var(--tilt) + 20deg));
+.entry__year,
+.entry__type,
+.entry__star {
+	flex: none;
 }
 
-.section:hover #minidisc3 {
-	transform: rotate(calc(var(--tilt) - 22deg));
+.entry__year {
+	font-size: 0.8em;
+	font-variant-numeric: tabular-nums;
+	opacity: 0.45;
+}
+
+.entry__type {
+	font-size: 0.8em;
+	opacity: 0.6;
+}
+
+.entry__star {
+	font-size: 0.82em;
+	line-height: 1;
+}
+
+.entry__title {
+	text-align: right;
+}
+
+/* Only the title takes the hover underline — not the year and type beside it. */
+.section ul li a:hover {
+	text-decoration: none;
+}
+
+.section ul li a:hover .entry__title,
+.section ul li a:focus-visible .entry__title {
+	text-decoration: underline dashed;
+	text-underline-offset: 0.2em;
 }
 
 .columns {
@@ -235,22 +274,24 @@ li {
 	cursor: pointer;
 }
 
-li::before {
-	content: '↖ ';
-	display: inline-block;
-	margin-right: 0.4em;
+/* The arrow sits on the link, which is the flex row, so it lines up on the
+   same baseline as the year rather than stacking above it. */
+.section ul li a::before {
+	content: '↖';
+	flex: none;
 	opacity: 0;
 	transition: opacity 150ms ease-out, translate 150ms ease-out;
 	translate: -0.2em 0.1em;
 }
 
-li:hover::before {
+.section ul li a:hover::before,
+.section ul li a:focus-visible::before {
 	opacity: 1;
 	translate: 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	li::before {
+	.section ul li a::before {
 		transition: none;
 	}
 }
@@ -345,11 +386,19 @@ li:hover::before {
 
 	.section ul {
 		align-items: flex-start;
-		gap: 0.75rem;
+		gap: 0.6rem;
 	}
 
 	.section ul li {
 		font-size: 1rem;
+	}
+
+	.section ul li a {
+		justify-content: flex-start;
+	}
+
+	.entry__title {
+		text-align: left;
 	}
 
 	ul {
@@ -360,7 +409,7 @@ li:hover::before {
 		display: none;
 	}
 
-	li::before {
+	.section ul li a::before {
 		display: none;
 	}
 
