@@ -1,0 +1,1058 @@
+<title>Eighteen Projects, One Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sansation:wght@300;400;700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&display=swap">
+
+<style>
+:root {
+  --ground: #FAF8FD;
+  --panel: #FFFFFF;
+  --ink: #210858;
+  --ink-soft: #493A76;
+  --muted: #7C6FA0;
+  --faint: #A79CC4;
+  --rule: #E3DCF1;
+  --tint: #F1EBFC;
+  --gold: #8A6508;
+
+  /* The mockups are screenshots of a white site; they keep their own
+     palette in both themes so they never lie about how the site looks. */
+  --scr-bg: #FFFFFF;
+  --scr-ink: #210858;
+  --scr-muted: #8B81AB;
+  --scr-faint: #B6AECE;
+  --scr-rule: #EAE5F5;
+  --scr-gold: #B8860B;
+
+  --shadow-s: 0 1px 2px rgba(33,8,88,.05), 0 6px 16px rgba(33,8,88,.07);
+  --shadow-l: 0 2px 4px rgba(33,8,88,.06), 0 18px 44px rgba(33,8,88,.13);
+
+  --display: 'Sansation', ui-rounded, 'Trebuchet MS', system-ui, sans-serif;
+  --body: 'Newsreader', Georgia, 'Times New Roman', serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #140D25;
+    --panel: #1C1434;
+    --ink: #EAE4F8;
+    --ink-soft: #C3B8E2;
+    --muted: #958BB5;
+    --faint: #6E6490;
+    --rule: #2E2449;
+    --tint: #241A41;
+    --gold: #D7A63A;
+    --shadow-s: 0 1px 2px rgba(0,0,0,.3), 0 6px 16px rgba(0,0,0,.35);
+    --shadow-l: 0 2px 4px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground: #140D25;
+  --panel: #1C1434;
+  --ink: #EAE4F8;
+  --ink-soft: #C3B8E2;
+  --muted: #958BB5;
+  --faint: #6E6490;
+  --rule: #2E2449;
+  --tint: #241A41;
+  --gold: #D7A63A;
+  --shadow-s: 0 1px 2px rgba(0,0,0,.3), 0 6px 16px rgba(0,0,0,.35);
+  --shadow-l: 0 2px 4px rgba(0,0,0,.35), 0 18px 44px rgba(0,0,0,.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 clamp(1rem, 5vw, 3rem) 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 78rem; margin: 0 auto; }
+.col { max-width: 37rem; margin-inline: auto; }
+
+/* ─── Type ─────────────────────────────────────────────────────── */
+
+h1, h2, h3, .eyebrow, .num { font-family: var(--display); text-wrap: balance; }
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.02em;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -.005em;
+  margin: 0;
+}
+
+p { margin: 0; }
+p + p { margin-top: .85em; }
+
+.eyebrow {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.lede { font-size: 1.25rem; line-height: 1.5; color: var(--ink-soft); }
+.small { font-size: .9375rem; color: var(--muted); }
+em { font-style: italic; }
+strong { font-weight: 600; color: var(--ink); }
+
+a { color: inherit; text-decoration-color: var(--faint); text-underline-offset: .18em; }
+a:hover { text-decoration-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: .8em;
+  background: var(--tint);
+  padding: .12em .38em;
+  border-radius: 3px;
+}
+
+/* ─── Rhythm ───────────────────────────────────────────────────── */
+
+section { margin-top: clamp(4rem, 9vh, 6.5rem); }
+.stack { display: flex; flex-direction: column; gap: 1.1rem; }
+.stack-lg { display: flex; flex-direction: column; gap: 2.25rem; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* ─── Masthead ─────────────────────────────────────────────────── */
+
+header.masthead {
+  padding: clamp(3.5rem, 12vh, 7rem) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.masthead .lede { max-width: 34rem; }
+
+.tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.tally div {
+  flex: 1 1 8rem;
+  padding: 1rem 1.25rem 1.1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+}
+
+.num {
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tally .small { font-size: .875rem; line-height: 1.35; }
+
+/* ─── Findings ─────────────────────────────────────────────────── */
+
+.finding {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0 1rem;
+  align-items: baseline;
+}
+
+.finding > .mark {
+  font-family: var(--display);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.finding h3 { margin-bottom: .3rem; }
+.finding .body { grid-column: 2; }
+
+/* ─── Screens (the mockups) ────────────────────────────────────── */
+
+.screen-figure { display: flex; flex-direction: column; gap: .7rem; }
+
+.screen {
+  background: var(--scr-bg);
+  color: var(--scr-ink);
+  font-family: var(--display);
+  border-radius: 6px;
+  box-shadow: var(--shadow-l);
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+.screen__chrome {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem .7rem;
+  border-bottom: 1px solid var(--scr-rule);
+}
+
+.screen__chrome i {
+  width: .42rem; height: .42rem;
+  border-radius: 50%;
+  background: var(--scr-faint);
+  display: block;
+}
+
+.screen__chrome span {
+  margin-left: .35rem;
+  font-size: .62rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--scr-faint);
+  font-weight: 700;
+}
+
+.screen__body {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem 1.3rem;
+  min-height: 21rem;
+}
+
+.screen__left { display: flex; flex-direction: column; }
+
+.screen__hello {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.screen__blurb {
+  font-size: .7rem;
+  line-height: 1.35;
+  margin-top: .35rem;
+  color: var(--scr-ink);
+  max-width: 14rem;
+}
+
+.screen__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* preview pane in the left column */
+.pv {
+  margin-top: 1.1rem;
+  opacity: 0;
+  transition: opacity 160ms ease-out;
+  max-width: 13rem;
+}
+.pv.on { opacity: 1; }
+.pv img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(33,8,88,.2);
+}
+.pv img[hidden], .pv img:not([src]) { display: none; }
+.pv p {
+  font-size: .64rem;
+  line-height: 1.35;
+  margin-top: .45rem;
+  color: var(--scr-ink);
+}
+
+/* teletext-styled stand-in thumbnail */
+.tt {
+  background: #000;
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: .5rem;
+  line-height: 1.35;
+  padding: .5rem .55rem;
+  border-radius: 4px;
+  letter-spacing: .04em;
+}
+.tt b { display: block; font-weight: 400; }
+.tt .y { color: #ff0; } .tt .c { color: #0ff; }
+.tt .g { color: #0f0; } .tt .m { color: #f0f; } .tt .w { color: #fff; }
+
+/* bubbles */
+.bubs { position: relative; height: 4.6rem; margin-top: auto; width: 9rem; }
+.bubs a {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  background: url('img/bubble.png') center / contain no-repeat;
+  font-weight: 700;
+  font-size: .55rem;
+  color: var(--scr-ink);
+  text-decoration: none;
+  border-radius: 50%;
+  filter: drop-shadow(3px 4px 3px rgba(0,0,0,.2));
+}
+.bubs .b1 { width: 2.1rem; height: 2.1rem; left: 1.5rem; top: 0; }
+.bubs .b2 { width: 3.4rem; height: 3.4rem; left: 0; top: 1.2rem; }
+.bubs .b3 { width: 2.6rem; height: 2.6rem; left: 3.2rem; top: 2rem; }
+
+/* section headers with minidiscs */
+.shead {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .55rem;
+  font-size: .82rem;
+  font-weight: 700;
+  margin: .95rem 0 .5rem;
+}
+.shead:first-child { margin-top: 0; }
+.shead img {
+  width: 1.55rem;
+  display: block;
+  filter: drop-shadow(3px 4px 3px rgba(0,0,0,.28));
+  transition: transform 300ms ease-out;
+}
+.shead .d1 { transform: rotate(9.4deg); }
+.shead .d2 { transform: rotate(-13.3deg); }
+.shead .d3 { transform: rotate(9.7deg); }
+.sec:hover .d1 { transform: rotate(-6.6deg); }
+.sec:hover .d2 { transform: rotate(6.7deg); }
+.sec:hover .d3 { transform: rotate(-12.3deg); }
+
+/* the list itself */
+.rows { display: flex; flex-direction: column; gap: .3rem; }
+.row {
+  display: block;
+  font-size: .72rem;
+  line-height: 1.3;
+  text-decoration: none;
+  color: var(--scr-ink);
+  cursor: pointer;
+}
+.row:hover .t { text-decoration: underline dashed; text-underline-offset: .18em; }
+.row .t { font-weight: 400; }
+.row .meta {
+  color: var(--scr-muted);
+  font-size: .64rem;
+  white-space: nowrap;
+}
+.row .yr {
+  font-variant-numeric: tabular-nums;
+  color: var(--scr-faint);
+  font-size: .64rem;
+}
+
+/* the fat, wrapping rows of the current site */
+.rows--fat .row { font-size: .78rem; line-height: 1.32; margin-bottom: .42rem; }
+
+/* One-line rows read right-to-left like a ledger: year, tag, then the title
+   flush to the right edge, so titles keep the alignment the live site has. */
+.rows--tight .row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: .45rem;
+  white-space: nowrap;
+}
+.rows--tight .row .t { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.rows--tight .row .meta,
+.rows--tight .row .yr,
+.rows--tight .row .honor,
+.rows--tight .row .mkslot { flex: none; }
+.mkslot:empty { display: none; }
+
+.honor { color: var(--scr-gold); font-size: .62rem; }
+
+/* flagship markers */
+.fs { font-size: .62rem; color: var(--scr-faint); }
+.mk-star .row.flag .t { font-weight: 700; }
+.mk-star .row.flag::after { content: none; }
+
+.bub-mark {
+  display: inline-block;
+  width: .55rem; height: .55rem;
+  background: url('img/bubble.png') center / contain no-repeat;
+  vertical-align: -.02em;
+  flex: none;
+}
+
+.caption {
+  font-family: var(--display);
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.caption b { color: var(--ink); font-weight: 700; }
+
+/* ─── Move blocks ──────────────────────────────────────────────── */
+
+.move { display: grid; gap: 1.6rem; }
+
+.move__head { display: flex; flex-direction: column; gap: .6rem; max-width: 37rem; margin-inline: auto; }
+
+.tag {
+  align-self: flex-start;
+  font-family: var(--display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--tint);
+  padding: .28rem .6rem;
+  border-radius: 100px;
+}
+
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-inline: auto;
+  max-width: 37rem;
+}
+.ledger > div { background: var(--panel); padding: .85rem 1rem 1rem; }
+.ledger .eyebrow { display: block; margin-bottom: .3rem; }
+.ledger p { font-size: .9375rem; line-height: 1.45; color: var(--ink-soft); }
+
+/* ─── Switcher ─────────────────────────────────────────────────── */
+
+.switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  font-family: var(--display);
+}
+
+.switch button {
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  padding: .32rem .8rem;
+  cursor: pointer;
+  transition: background 120ms, color 120ms, border-color 120ms;
+}
+.switch button:hover { color: var(--ink); border-color: var(--faint); }
+.switch button[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ground);
+}
+
+.verdict {
+  background: var(--tint);
+  border-radius: 5px;
+  padding: 1rem 1.15rem 1.1rem;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.verdict .eyebrow { display: block; margin-bottom: .35rem; }
+
+/* ─── Copy blocks to paste ─────────────────────────────────────── */
+
+.paste {
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--panel);
+  overflow: hidden;
+}
+.paste__row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 1rem;
+  padding: .7rem 1rem;
+  align-items: baseline;
+}
+.paste__row + .paste__row { border-top: 1px solid var(--rule); }
+.paste__row .eyebrow { font-size: .65rem; }
+.paste__row p { font-size: .9375rem; line-height: 1.45; }
+
+/* ─── Footer ───────────────────────────────────────────────────── */
+
+footer {
+  margin-top: clamp(4rem, 9vh, 6.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: .9375rem;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .screen__body { grid-template-columns: 1fr; min-height: 0; }
+  .screen__left { order: 2; }
+  .screen__right { text-align: left; }
+  .rows--tight .row { justify-content: flex-start; }
+  .shead { flex-direction: row; }
+  .pv { max-width: 100%; }
+  .bubs { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <div class="col stack">
+    <span class="eyebrow">joaobernardo.me · proposta</span>
+    <h1>Eighteen projects,<br>one screen.</h1>
+    <p class="lede">The list isn't too long because of taste. It's too long because the right column is pinned to the viewport height, and your own <code>lista projetos</code> note has nine more things waiting to go on it.</p>
+  </div>
+</header>
+
+<div class="col" style="margin-top:2.5rem">
+  <div class="tally">
+    <div><span class="num">8</span><span class="small">on the site today</span></div>
+    <div><span class="num">18</span><span class="small">if you list everything you've made</span></div>
+    <div><span class="num">3</span><span class="small">categories, on two different axes</span></div>
+    <div><span class="num">1</span><span class="small">project with nowhere to go</span></div>
+  </div>
+</div>
+
+<!-- ═══ DIAGNOSIS ═══════════════════════════════════════════════ -->
+
+<section>
+  <div class="col stack-lg">
+    <div class="stack">
+      <span class="eyebrow">What's actually wrong</span>
+      <h2>Three problems, and only one of them is about space</h2>
+    </div>
+
+    <div class="finding">
+      <span class="mark">01</span>
+      <div class="body stack">
+        <h3>The wall is arithmetic</h3>
+        <p><code>.rightColumn</code> is <code>max-height: calc(100vh - 2rem)</code> and bottom-aligned, so the list can never scroll — it can only overflow. Eight items already fill it on a laptop. The backlog in <code>lista projetos</code> holds nine more (Metro status device, the Digital Traces paper, the Culturgest debate, five political articles), and Tele-textual makes eighteen. There is no type size at which eighteen wrapping rows fit. Compactness isn't a preference here, it's forced.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <span class="mark">02</span>
+      <div class="body stack">
+        <h3>The categories mix two axes</h3>
+        <p><em>Ensaios Visuais</em> and <em>Artigos</em> sort by <strong>form</strong>. <em>Publicações Académicas</em> sorts by <strong>venue</strong>. That single inconsistency is the source of both symptoms you noticed: the Feedzai post sits under <em>Ensaios Visuais</em> even though it's a written article <em>about</em> a visualisation, and Tele-textual has no home because it's a form none of the three names — it isn't an essay, a paper, or an article. It's an installation.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <span class="mark">03</span>
+      <div class="body stack">
+        <h3>The titles are already carrying the metadata</h3>
+        <p>Four of eight titles end in <code>| Público</code>, <code>| Feedzai Techblog</code>, <code>| Fundação Francisco Manuel dos Santos</code>. That <em>is</em> the "type of project" information you're asking for — it's present, just stored in the wrong slot, where it's also what pushes rows to two and three lines. Move it out and rows collapse to one line each, for free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TODAY ═══════════════════════════════════════════════════ -->
+
+<section>
+  <div class="col stack" style="margin-bottom:1.6rem">
+    <span class="eyebrow">Baseline</span>
+    <h2>Today</h2>
+    <p class="small">Hover the rows — the preview fires in the left column, as on the live site.</p>
+  </div>
+
+  <div class="screen-figure">
+    <div class="screen" data-screen>
+      <div class="screen__chrome"><i></i><i></i><i></i><span>hoje · 8 itens</span></div>
+      <div class="screen__body">
+        <div class="screen__left">
+          <div class="screen__hello">Olá</div>
+          <div class="screen__blurb">Chamo-me <b>João Bernardo Narciso</b> e faço coisas.</div>
+          <div class="pv" data-pv><img data-pv-img alt=""><p data-pv-txt></p></div>
+          <div class="bubs">
+            <a class="b1" href="#">CV</a><a class="b2" href="#">LinkedIn</a><a class="b3" href="#">E-mail</a>
+          </div>
+        </div>
+        <div class="screen__right">
+          <div class="sec">
+            <div class="shead"><img class="d1" src="img/minidisc1.png" alt="">Ensaios Visuais</div>
+            <div class="rows rows--fat">
+              <a class="row" data-thumb="img/desalojamento.png" data-desc="Ensaio visual sobre o impacto do Alojamento Local na crise da habitação."><span class="t">DesALojamento</span></a>
+              <a class="row" data-thumb="img/ruasdogenero.png" data-desc="Ensaio visual sobre a representação das mulheres na toponímia do Porto."><span class="t">Ruas do Género</span></a>
+              <a class="row" data-thumb="img/europeanparliament2.png" data-desc="As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede."><span class="t">Constelações Parlamentares</span></a>
+              <a class="row" data-thumb="img/fraud.png" data-desc="Artigo no Feedzai Techblog sobre metáforas visuais em dados de transações."><span class="t">Uncovering the Shape of Fraud with Cosmos Explorer | Feedzai Techblog</span></a>
+            </div>
+          </div>
+          <div class="sec">
+            <div class="shead"><img class="d2" src="img/minidisc2.png" alt="">Publicações Académicas</div>
+            <div class="rows rows--fat">
+              <a class="row" data-thumb="img/farright.png" data-desc="Capítulo sobre o papel dos media na normalização da extrema-direita."><span class="t">Media's role in normalizing the far right: evidence from Spain and Portugal</span></a>
+              <a class="row" data-thumb="img/abstencao.png" data-desc="Policy paper sobre a abstenção eleitoral em Portugal."><span class="t">Afinal, quantas pessoas se abstêm em Portugal? | Fundação Francisco Manuel dos Santos</span></a>
+            </div>
+          </div>
+          <div class="sec">
+            <div class="shead"><img class="d3" src="img/minidisc3.png" alt="">Artigos</div>
+            <div class="rows rows--fat">
+              <a class="row" data-thumb="img/publico2.png" data-desc="Artigo de opinião sobre a ética do Pulsómetro eleitoral da CNN."><span class="t">Onde está a ética do Pulsómetro? | Público</span></a>
+              <a class="row" data-thumb="img/razine2.png" data-desc="Artigo sobre a cultura dos videojogos como espaço da manosfera."><span class="t">A cultura dos jogos na construção da manosfera | RA Zine</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="caption col" style="margin-inline:auto"><b>Eight items, fourteen lines.</b> Six of the eight rows wrap. Three section headers cost another three lines plus their margins. The column is full.</p>
+  </div>
+</section>
+
+<!-- ═══ MOVE 1 ══════════════════════════════════════════════════ -->
+
+<section>
+  <div class="move">
+    <div class="move__head">
+      <span class="tag">Move 1 · typography</span>
+      <h2>Give every project one line</h2>
+      <p>Pull the venue out of the title into a metadata span, add the year, let the row be a single baseline. Nothing about the structure changes — same three sections, same order — but fourteen lines become eight.</p>
+    </div>
+
+    <div class="screen-figure">
+      <div class="screen" data-screen>
+        <div class="screen__chrome"><i></i><i></i><i></i><span>move 1 · uma linha por projeto</span></div>
+        <div class="screen__body">
+          <div class="screen__left">
+            <div class="screen__hello">Olá</div>
+            <div class="screen__blurb">Chamo-me <b>João Bernardo Narciso</b> e faço coisas.</div>
+            <div class="pv" data-pv><img data-pv-img alt=""><p data-pv-txt></p></div>
+            <div class="bubs">
+              <a class="b1" href="#">CV</a><a class="b2" href="#">LinkedIn</a><a class="b3" href="#">E-mail</a>
+            </div>
+          </div>
+          <div class="screen__right">
+            <div class="sec">
+              <div class="shead"><img class="d1" src="img/minidisc1.png" alt="">Ensaios Visuais</div>
+              <div class="rows rows--tight">
+                <a class="row" data-thumb="img/desalojamento.png" data-desc="Ensaio visual sobre o impacto do Alojamento Local na crise da habitação."><span class="yr">2025</span><span class="meta">ensaio visual</span><span class="t">DesALojamento</span></a>
+                <a class="row" data-thumb="img/ruasdogenero.png" data-desc="Ensaio visual sobre a representação das mulheres na toponímia do Porto."><span class="yr">2022</span><span class="honor">🏆</span><span class="meta">ensaio visual</span><span class="t">Ruas do Género</span></a>
+                <a class="row" data-thumb="img/europeanparliament2.png" data-desc="As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede."><span class="yr">2025</span><span class="meta">ensaio · exposição</span><span class="t">Constelações Parlamentares</span></a>
+                <a class="row" data-thumb="img/fraud.png" data-desc="Artigo no Feedzai Techblog sobre metáforas visuais em dados de transações."><span class="yr">2026</span><span class="meta">Feedzai Techblog</span><span class="t">Cosmos Explorer</span></a>
+              </div>
+            </div>
+            <div class="sec">
+              <div class="shead"><img class="d2" src="img/minidisc2.png" alt="">Publicações Académicas</div>
+              <div class="rows rows--tight">
+                <a class="row" data-thumb="img/farright.png" data-desc="Capítulo sobre o papel dos media na normalização da extrema-direita."><span class="yr">2026</span><span class="meta">Routledge</span><span class="t">Media's role in normalizing the far right</span></a>
+                <a class="row" data-thumb="img/abstencao.png" data-desc="Policy paper sobre a abstenção eleitoral em Portugal."><span class="yr">2023</span><span class="meta">FFMS</span><span class="t">Afinal, quantas pessoas se abstêm?</span></a>
+              </div>
+            </div>
+            <div class="sec">
+              <div class="shead"><img class="d3" src="img/minidisc3.png" alt="">Artigos</div>
+              <div class="rows rows--tight">
+                <a class="row" data-thumb="img/publico2.png" data-desc="Artigo de opinião sobre a ética do Pulsómetro eleitoral da CNN."><span class="yr">2024</span><span class="meta">Público</span><span class="t">Onde está a ética do Pulsómetro?</span></a>
+                <a class="row" data-thumb="img/razine2.png" data-desc="Artigo sobre a cultura dos videojogos como espaço da manosfera."><span class="yr">2025</span><span class="meta">RA Zine</span><span class="t">A cultura dos jogos…</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="caption col" style="margin-inline:auto"><b>Same eight projects, eight lines.</b> The venue now reads as venue, the year gives the list a spine, and the row is scannable in one pass instead of parsed.</p>
+    </div>
+
+    <div class="ledger">
+      <div><span class="eyebrow">Buys</span><p>~40% of the vertical budget back, and the "type of project" label you asked for, at no extra cost.</p></div>
+      <div><span class="eyebrow">Costs</span><p>Long titles must be trimmed or truncated. <em>Media's role in normalizing the far right: evidence from Spain and Portugal</em> loses its subtitle in the row — it can live in the hover preview instead.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MOVE 2 ══════════════════════════════════════════════════ -->
+
+<section>
+  <div class="move">
+    <div class="move__head">
+      <span class="tag">Move 2 · taxonomy</span>
+      <h2>Two shelves, not three categories</h2>
+      <p>Sort on one axis only: <strong>things you made</strong> and <strong>things you wrote</strong>. What used to be a section name becomes a tag on the row — so <em>ensaio visual</em>, <em>académico</em> and <em>opinião</em> survive as labels, and stop being containers that have to hold things they don't describe.</p>
+      <p>This is the move that fixes the Feedzai misfile (it's a text, so it goes in <em>Textos</em>, tagged <em>técnico</em>) and the one that makes room for Tele-textual — and for the Metro device, and the Culturgest debate, and the five political articles still in your notes.</p>
+    </div>
+
+    <div class="screen-figure">
+      <div class="screen" data-screen>
+        <div class="screen__chrome"><i></i><i></i><i></i><span>move 2 · projetos / textos · 13 itens</span></div>
+        <div class="screen__body">
+          <div class="screen__left">
+            <div class="screen__hello">Olá</div>
+            <div class="screen__blurb">Chamo-me <b>João Bernardo Narciso</b> e faço coisas.</div>
+            <div class="pv" data-pv><img data-pv-img alt=""><div data-pv-tt hidden class="tt"><b class="y">P100    TELE-TEXTUAL      21/09 16:32</b><b class="w">&nbsp;</b><b class="c">▙▚▘ ARQUIVO DO TELETEXTO PT</b><b class="w">&nbsp;</b><b class="g">101 NOTICIAS      401 METEOROLOGIA</b><b class="m">201 DESPORTO      555 HOROSCOPO</b><b class="w">700 EDITOR LIVRE  888 LEGENDAS</b></div><p data-pv-txt></p></div>
+            <div class="bubs">
+              <a class="b1" href="#">CV</a><a class="b2" href="#">LinkedIn</a><a class="b3" href="#">E-mail</a>
+            </div>
+          </div>
+          <div class="screen__right">
+            <div class="sec">
+              <div class="shead"><img class="d1" src="img/minidisc1.png" alt="">Projetos</div>
+              <div class="rows rows--tight">
+                <a class="row" data-tt="1" data-desc="Uma instalação participativa construída sobre o arquivo do teletexto português."><span class="yr">2026</span><span class="meta">instalação</span><span class="t">Tele-textual</span></a>
+                <a class="row" data-thumb="img/europeanparliament2.png" data-desc="As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede."><span class="yr">2025</span><span class="meta">ensaio · exposição</span><span class="t">Constelações Parlamentares</span></a>
+                <a class="row" data-thumb="img/desalojamento.png" data-desc="Ensaio visual sobre o impacto do Alojamento Local na crise da habitação."><span class="yr">2025</span><span class="meta">ensaio visual</span><span class="t">DesALojamento</span></a>
+                <a class="row" data-thumb="img/ruasdogenero.png" data-desc="Ensaio visual sobre a representação das mulheres na toponímia do Porto."><span class="yr">2022</span><span class="honor">🏆</span><span class="meta">ensaio visual</span><span class="t">Ruas do Género</span></a>
+                <a class="row" data-desc="Um objeto que mostra o estado da rede do metro em tempo real."><span class="yr">2026</span><span class="meta">objeto</span><span class="t">Metro status device</span></a>
+              </div>
+            </div>
+            <div class="sec">
+              <div class="shead"><img class="d2" src="img/minidisc2.png" alt="">Textos</div>
+              <div class="rows rows--tight">
+                <a class="row" data-thumb="img/fraud.png" data-desc="Artigo no Feedzai Techblog sobre metáforas visuais em dados de transações."><span class="yr">2026</span><span class="meta">técnico · Feedzai</span><span class="t">Cosmos Explorer</span></a>
+                <a class="row" data-thumb="img/farright.png" data-desc="Capítulo sobre o papel dos media na normalização da extrema-direita."><span class="yr">2026</span><span class="meta">académico · Routledge</span><span class="t">Media's role in normalizing the far right</span></a>
+                <a class="row" data-desc="Paper sobre rastos digitais e comportamento político."><span class="yr">2025</span><span class="meta">académico</span><span class="t">Digital Traces</span></a>
+                <a class="row" data-thumb="img/razine2.png" data-desc="Artigo sobre a cultura dos videojogos como espaço da manosfera."><span class="yr">2025</span><span class="meta">opinião · RA Zine</span><span class="t">A cultura dos jogos</span></a>
+                <a class="row" data-desc="Artigo sobre a nova geração de apologistas autoritários."><span class="yr">2025</span><span class="meta">opinião</span><span class="t">Novos tankies</span></a>
+                <a class="row" data-thumb="img/publico2.png" data-desc="Artigo de opinião sobre a ética do Pulsómetro eleitoral da CNN."><span class="yr">2024</span><span class="meta">opinião · Público</span><span class="t">Onde está a ética do Pulsómetro?</span></a>
+                <a class="row" data-desc="Artigo sobre o algoritmo como praça pública."><span class="yr">2024</span><span class="meta">opinião</span><span class="t">A ágora do algoritmo</span></a>
+                <a class="row" data-thumb="img/abstencao.png" data-desc="Policy paper sobre a abstenção eleitoral em Portugal."><span class="yr">2023</span><span class="meta">académico · FFMS</span><span class="t">Afinal, quantas pessoas se abstêm?</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="caption col" style="margin-inline:auto"><b>Thirteen projects in the space eight used to need</b> — and the third minidisc is now free for a <em>Conversas</em> shelf when the Culturgest debate and the workshops go up.</p>
+    </div>
+
+    <div class="ledger">
+      <div><span class="eyebrow">Buys</span><p>One consistent axis. Every future thing you make has an obvious shelf — including the ones that are neither essays nor articles.</p></div>
+      <div><span class="eyebrow">Costs</span><p><em>Ensaios Visuais</em> stops being a headline. If that name is part of how you see the work, this is the move to skip — or keep three shelves as <em>Ensaios&nbsp;/ Textos&nbsp;/ Outros</em> and accept the axis is still bent.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MOVE 3 ══════════════════════════════════════════════════ -->
+
+<section>
+  <div class="move">
+    <div class="move__head">
+      <span class="tag">Move 3 · hierarchy</span>
+      <h2>Let the layout say what's flagship</h2>
+      <p>Three or four projects get a line of description and room to breathe. Everything else is a dense index underneath, with the tail folded behind one line. A visitor who reads only the top of the column still sees your best work — which is the actual job of the page.</p>
+    </div>
+
+    <div class="screen-figure">
+      <div class="screen" data-screen>
+        <div class="screen__chrome"><i></i><i></i><i></i><span>move 3 · destaque + índice</span></div>
+        <div class="screen__body">
+          <div class="screen__left">
+            <div class="screen__hello">Olá</div>
+            <div class="screen__blurb">Chamo-me <b>João Bernardo Narciso</b> e faço coisas.</div>
+            <div class="pv" data-pv><img data-pv-img alt=""><div data-pv-tt hidden class="tt"><b class="y">P100    TELE-TEXTUAL      21/09 16:32</b><b class="w">&nbsp;</b><b class="c">▙▚▘ ARQUIVO DO TELETEXTO PT</b><b class="w">&nbsp;</b><b class="g">101 NOTICIAS      401 METEOROLOGIA</b><b class="m">201 DESPORTO      555 HOROSCOPO</b><b class="w">700 EDITOR LIVRE  888 LEGENDAS</b></div><p data-pv-txt></p></div>
+            <div class="bubs">
+              <a class="b1" href="#">CV</a><a class="b2" href="#">LinkedIn</a><a class="b3" href="#">E-mail</a>
+            </div>
+          </div>
+          <div class="screen__right">
+            <div class="sec">
+              <div class="shead"><img class="d1" src="img/minidisc1.png" alt="">Destaque</div>
+              <div class="rows" style="gap:.5rem">
+                <a class="row" data-tt="1" data-desc="Uma instalação participativa construída sobre o arquivo do teletexto português.">
+                  <span class="t" style="font-size:.88rem;font-weight:700">Tele-textual</span><br>
+                  <span class="meta" style="white-space:normal">Arquivo do teletexto português, visto em conjunto. 2026 · instalação</span>
+                </a>
+                <a class="row" data-thumb="img/europeanparliament2.png" data-desc="As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede.">
+                  <span class="t" style="font-size:.88rem;font-weight:700">Constelações Parlamentares</span><br>
+                  <span class="meta" style="white-space:normal">Vinte anos de votações como uma rede. 2025 · ensaio + exposição</span>
+                </a>
+                <a class="row" data-thumb="img/ruasdogenero.png" data-desc="Ensaio visual sobre a representação das mulheres na toponímia do Porto.">
+                  <span class="t" style="font-size:.88rem;font-weight:700">Ruas do Género <span class="honor">🏆</span></span><br>
+                  <span class="meta" style="white-space:normal">As mulheres na toponímia do Porto. 2022 · ensaio visual</span>
+                </a>
+              </div>
+            </div>
+            <div class="sec">
+              <div class="shead"><img class="d2" src="img/minidisc2.png" alt="">Tudo o resto</div>
+              <div class="rows rows--tight">
+                <a class="row" data-thumb="img/desalojamento.png" data-desc="Ensaio visual sobre o impacto do Alojamento Local na crise da habitação."><span class="yr">2025</span><span class="meta">ensaio visual</span><span class="t">DesALojamento</span></a>
+                <a class="row" data-thumb="img/fraud.png" data-desc="Artigo no Feedzai Techblog sobre metáforas visuais em dados de transações."><span class="yr">2026</span><span class="meta">técnico</span><span class="t">Cosmos Explorer</span></a>
+                <a class="row" data-thumb="img/farright.png" data-desc="Capítulo sobre o papel dos media na normalização da extrema-direita."><span class="yr">2026</span><span class="meta">académico</span><span class="t">Media's role in normalizing the far right</span></a>
+                <div data-fold hidden>
+                  <div class="rows rows--tight">
+                    <a class="row" data-desc="Paper sobre rastos digitais e comportamento político."><span class="yr">2025</span><span class="meta">académico</span><span class="t">Digital Traces</span></a>
+                    <a class="row" data-thumb="img/razine2.png" data-desc="Artigo sobre a cultura dos videojogos como espaço da manosfera."><span class="yr">2025</span><span class="meta">opinião</span><span class="t">A cultura dos jogos</span></a>
+                    <a class="row" data-desc="Artigo sobre a nova geração de apologistas autoritários."><span class="yr">2025</span><span class="meta">opinião</span><span class="t">Novos tankies</span></a>
+                    <a class="row" data-thumb="img/publico2.png" data-desc="Artigo de opinião sobre a ética do Pulsómetro eleitoral da CNN."><span class="yr">2024</span><span class="meta">opinião</span><span class="t">Onde está a ética do Pulsómetro?</span></a>
+                    <a class="row" data-thumb="img/abstencao.png" data-desc="Policy paper sobre a abstenção eleitoral em Portugal."><span class="yr">2023</span><span class="meta">académico</span><span class="t">Afinal, quantas pessoas se abstêm?</span></a>
+                  </div>
+                </div>
+                <a class="row" data-foldtoggle role="button" tabindex="0" style="color:var(--scr-muted);margin-top:.15rem">mais 5 ↓</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="caption col" style="margin-inline:auto"><b>The fold is real — click "mais 5 ↓".</b> Eighteen items fit here without the column ever overflowing, because only eleven are visible at rest.</p>
+    </div>
+
+    <div class="ledger">
+      <div><span class="eyebrow">Buys</span><p>Unlimited runway. The archive can grow forever without touching the first screen.</p></div>
+      <div><span class="eyebrow">Costs</span><p>You must decide what's flagship, and re-decide it each time you publish something good. Three is the right number; four is the limit.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FLAGSHIP MARKER ═════════════════════════════════════════ -->
+
+<section>
+  <div class="col stack-lg">
+    <div class="stack">
+      <span class="tag">The star question</span>
+      <h2>A star will collide with your trophies</h2>
+      <p>You already have an award vocabulary: <code>.honor</code> renders 🏆 in gold on Ruas do Género. A gold ★ next to it reads as a second, weaker award — not as "this is one of my main projects". The flagship marker has to be visually unrelated to that gold.</p>
+      <p class="small">Try each one against the real list:</p>
+    </div>
+
+    <div class="switch" role="group" aria-label="Flagship marker style">
+      <button type="button" data-mk="star" aria-pressed="false">★ star</button>
+      <button type="button" data-mk="bub" aria-pressed="true">bubble</button>
+      <button type="button" data-mk="weight" aria-pressed="false">weight only</button>
+      <button type="button" data-mk="rule" aria-pressed="false">rule + order</button>
+    </div>
+  </div>
+
+  <div class="col" style="margin-top:1.2rem">
+    <div class="screen" data-screen>
+      <div class="screen__chrome"><i></i><i></i><i></i><span data-mklabel>bubble</span></div>
+      <div class="screen__body" style="grid-template-columns:1fr;min-height:0">
+        <div class="screen__right" id="mkDemo">
+          <div class="rows rows--tight">
+            <a class="row flag" data-tt="1" data-desc="Instalação participativa sobre o arquivo do teletexto português."><span class="yr">2026</span><span class="meta">instalação</span><span class="mkslot"></span><span class="t">Tele-textual</span></a>
+            <a class="row flag" data-thumb="img/europeanparliament2.png" data-desc="As votações do Parlamento Europeu desde 2004, como uma rede."><span class="yr">2025</span><span class="meta">ensaio · exposição</span><span class="mkslot"></span><span class="t">Constelações Parlamentares</span></a>
+            <a class="row flag" data-thumb="img/ruasdogenero.png" data-desc="As mulheres na toponímia do Porto."><span class="yr">2022</span><span class="honor">🏆</span><span class="meta">ensaio visual</span><span class="mkslot"></span><span class="t">Ruas do Género</span></a>
+            <a class="row" data-thumb="img/desalojamento.png" data-desc="O impacto do Alojamento Local na crise da habitação."><span class="yr">2025</span><span class="meta">ensaio visual</span><span class="mkslot"></span><span class="t">DesALojamento</span></a>
+            <a class="row" data-thumb="img/fraud.png" data-desc="Metáforas visuais em dados de transações financeiras."><span class="yr">2026</span><span class="meta">técnico</span><span class="mkslot"></span><span class="t">Cosmos Explorer</span></a>
+            <a class="row" data-thumb="img/publico2.png" data-desc="A ética do Pulsómetro eleitoral da CNN."><span class="yr">2024</span><span class="meta">opinião</span><span class="mkslot"></span><span class="t">Onde está a ética do Pulsómetro?</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" style="margin-top:1.4rem">
+    <div class="verdict">
+      <span class="eyebrow">Recommendation</span>
+      <p><strong>The bubble.</strong> It's already your mark — it's in the CV/LinkedIn/E-mail cluster, in the favicon, in the OG image. Reused at 0.55rem beside a title it reads as <em>yours</em> rather than as a generic rating, it can't be confused with the gold trophy, and it costs no new asset. <em>Weight only</em> is the honest runner-up and the most restrained option; it just doesn't survive being scanned quickly. A star is the one I'd avoid, for the collision above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TELE-TEXTUAL ════════════════════════════════════════════ -->
+
+<section>
+  <div class="col stack-lg">
+    <div class="stack">
+      <span class="tag">Tele-textual</span>
+      <h2>It goes in Projetos, at the top, as a flagship</h2>
+      <p>Tele-textual is the clearest evidence that the current categories are wrong rather than that the project is awkward. It isn't an <em>ensaio visual</em> — it makes no argument and it isn't journalism. It's a participatory installation with an archive, a collective viewing mode and an editor. Under today's three headings it can only be misfiled; under <em>Projetos</em> it's simply the newest and largest thing you've built.</p>
+      <p>It also belongs in the same tier as Constelações for a structural reason: both have a second life off the browser — Constelações became printed walls, Tele-textual is built to be shown in a room. That's a real shared property, and a <em>Projetos</em> shelf with an <code>instalação</code> / <code>exposição</code> tag expresses it without needing its own category.</p>
+    </div>
+
+    <div class="stack">
+      <h3>Two more things it needs</h3>
+      <p class="small">It should be a <code>data-modal</code> project, like Constelações — the collective-room idea takes more than one line to land, and a visitor who goes straight to <code>teletext.joaobernardo.me</code> without it arrives at a black screen with no context. Which means you need both a short hover line and a longer modal one. Drafted from your own <code>ABOUT.md</code>:</p>
+    </div>
+
+    <div class="stack">
+      <span class="eyebrow">data-description · max two lines, per the bubbles</span>
+      <div class="paste">
+        <div class="paste__row"><span class="eyebrow">PT</span><p>Uma instalação participativa construída sobre o arquivo do teletexto português.</p></div>
+        <div class="paste__row"><span class="eyebrow">EN</span><p>A participatory installation built on the Portuguese teletext archive.</p></div>
+        <div class="paste__row"><span class="eyebrow">ES</span><p>Una instalación participativa construida sobre el archivo del teletexto portugués.</p></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <span class="eyebrow">data-modal-description</span>
+      <div class="paste">
+        <div class="paste__row"><span class="eyebrow">PT</span><p>Páginas de teletexto recuperadas do Arquivo.pt — notícias, meteorologia, lotaria, horóscopos — devolvidas a um ecrã. Podes ver sozinho ou abrir uma sala: todos veem a mesma página ao mesmo tempo, e mudar de página é uma votação. E há um editor, para fazer páginas novas dentro das mesmas restrições: 40×24, oito cores, gráficos em mosaico.</p></div>
+        <div class="paste__row"><span class="eyebrow">EN</span><p>Teletext pages recovered from Arquivo.pt — news, weather, the lottery, horoscopes — put back on a screen. Watch alone, or open a room: everyone sees the same page at the same moment, and changing it is a vote. There's an editor too, for making new pages under the same constraints: 40×24, eight colours, mosaic graphics.</p></div>
+        <div class="paste__row"><span class="eyebrow">ES</span><p>Páginas de teletexto recuperadas de Arquivo.pt — noticias, meteorología, lotería, horóscopos — devueltas a una pantalla. Puedes verlas solo o abrir una sala: todos ven la misma página al mismo tiempo y cambiarla es una votación. También hay un editor, para crear páginas nuevas con las mismas restricciones: 40×24, ocho colores, gráficos en mosaico.</p></div>
+      </div>
+    </div>
+
+    <p class="small">The second thing is a thumbnail — there isn't one in <code>assets/images/thumbnails/</code>. A page 100 index screen would do the job, and it's the one preview on the site that could be rendered in HTML rather than shipped as a PNG. That's the stand-in you're hovering in the mockups above.</p>
+  </div>
+</section>
+
+<!-- ═══ WHAT I'D SHIP ═══════════════════════════════════════════ -->
+
+<section>
+  <div class="col stack-lg">
+    <div class="stack">
+      <span class="eyebrow">If you only do one thing</span>
+      <h2>Move 1, then 2, then 3 — in that order</h2>
+      <p><strong>Move 1 is free.</strong> It's a find-and-replace across three language files plus about twenty lines of CSS, it doesn't commit you to any taxonomy, and it buys back nearly half the column on its own. Do it whether or not you do anything else.</p>
+      <p><strong>Move 2 is the one that answers your actual question.</strong> You asked whether the categories are the best ones — they aren't, and the reason is diagnosable rather than a matter of taste. It's also the only move that gives Tele-textual a home.</p>
+      <p><strong>Move 3 is the one to defer.</strong> With 1 and 2 done you have room for about fourteen items, so you don't need the fold yet. Add it when the political articles go up and the count crosses the teens — and by then you'll know which three projects are genuinely the flagships.</p>
+    </div>
+
+    <hr>
+
+    <div class="stack">
+      <h3>Two smaller things worth noting</h3>
+      <p><strong>The hover preview gets more important, not less.</strong> A one-line row carries less, so the left column has to carry more. With the list shorter, the right column has slack the left one doesn't — the preview is currently boxed into <code>max-width: 22rem</code> above the bubbles, and that's the constraint keeping descriptions to two lines. Worth revisiting once the rows are tight.</p>
+      <p><strong>Sort by year inside each shelf.</strong> Your <code>lista projetos</code> note is already organised by year, which suggests it's how you think about the work. Newest first makes the list self-maintaining — new things go at the top and you never re-litigate an order.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <p>Nothing on <code>main</code> was touched. The mockups above are live replicas, not the site — built from your real copy, thumbnails, minidiscs and bubble. Branch <code>worktree-portfolio-revamp-proposal</code> holds this page; say which moves you want and I'll implement them across <code>index.html</code>, <code>en/</code> and <code>es/</code>.</p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  // ── Hover preview, mirroring the behaviour on the live site ──
+  document.querySelectorAll('[data-screen]').forEach(function (screen) {
+    var pv = screen.querySelector('[data-pv]');
+    if (!pv) return;
+    var img = pv.querySelector('[data-pv-img]');
+    var txt = pv.querySelector('[data-pv-txt]');
+    var tt = pv.querySelector('[data-pv-tt]');
+
+    function show(row) {
+      var thumb = row.getAttribute('data-thumb');
+      var desc = row.getAttribute('data-desc') || '';
+      var useTT = row.hasAttribute('data-tt');
+
+      if (tt) tt.hidden = !useTT;
+      if (thumb) {
+        img.src = thumb;
+        img.hidden = false;
+      } else {
+        img.removeAttribute('src');
+        img.hidden = true;
+      }
+      txt.textContent = desc;
+      pv.classList.add('on');
+    }
+
+    function hide() { pv.classList.remove('on'); }
+
+    screen.querySelectorAll('.row[data-desc]').forEach(function (row) {
+      row.addEventListener('mouseenter', function () { show(row); });
+      row.addEventListener('focus', function () { show(row); });
+      row.addEventListener('mouseleave', hide);
+      row.addEventListener('blur', hide);
+    });
+  });
+
+  // ── Move 3: the fold actually folds ──
+  document.querySelectorAll('[data-foldtoggle]').forEach(function (btn) {
+    function toggle(e) {
+      e.preventDefault();
+      var scope = btn.closest('.rows');
+      var fold = scope.querySelector('[data-fold]');
+      if (!fold) return;
+      var open = !fold.hidden;
+      fold.hidden = open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.textContent = open ? 'mais 5 ↓' : 'menos ↑';
+    }
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', toggle);
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') toggle(e);
+    });
+  });
+
+  // ── Flagship marker switcher ──
+  var demo = document.getElementById('mkDemo');
+  var label = document.querySelector('[data-mklabel]');
+  var buttons = document.querySelectorAll('.switch [data-mk]');
+
+  var names = { star: 'star', bub: 'bubble', weight: 'weight only', rule: 'rule + order' };
+
+  function applyMarker(kind) {
+    if (!demo) return;
+    demo.querySelectorAll('.row').forEach(function (row) {
+      var slot = row.querySelector('.mkslot');
+      var title = row.querySelector('.t');
+      var isFlag = row.classList.contains('flag');
+
+      slot.textContent = '';
+      slot.className = 'mkslot';
+      title.style.fontWeight = '';
+      row.style.borderTop = '';
+      row.style.paddingTop = '';
+      row.style.opacity = '';
+
+      if (kind === 'star' && isFlag) {
+        slot.textContent = '★';
+        slot.className = 'mkslot fs';
+        slot.style.color = '#B8860B';
+      } else if (kind === 'bub' && isFlag) {
+        slot.className = 'mkslot bub-mark';
+      } else if (kind === 'weight') {
+        if (isFlag) title.style.fontWeight = '700';
+        else row.style.opacity = '.7';
+      } else if (kind === 'rule') {
+        if (isFlag) title.style.fontWeight = '700';
+      }
+    });
+
+    // "rule + order" puts a hairline between the flagships and the rest.
+    if (kind === 'rule') {
+      var rows = demo.querySelectorAll('.row');
+      var firstPlain = null;
+      rows.forEach(function (r) {
+        if (!firstPlain && !r.classList.contains('flag')) firstPlain = r;
+      });
+      if (firstPlain) {
+        firstPlain.style.borderTop = '1px solid var(--scr-rule)';
+        firstPlain.style.paddingTop = '.4rem';
+      }
+    }
+
+    if (label) label.textContent = names[kind] || kind;
+  }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      applyMarker(btn.getAttribute('data-mk'));
+    });
+  });
+
+  applyMarker('bub');
+})();
+</script>
