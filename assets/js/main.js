@@ -1,161 +1,7 @@
 // Site scripts for joaobernardo.me
 //
-// Everything on the page comes from assets/data/site.js — projects, section
-// names and translations alike. Nothing here needs editing to add a project.
-
-const LANG = (document.documentElement.lang || 'pt').slice(0, 2);
-
-// Picks the right language out of a field that may be either a plain value
-// (same in every language) or an object keyed by language.
-function t(value, fallback) {
-	if (value === undefined || value === null) return fallback !== undefined ? fallback : '';
-	if (typeof value === 'object' && !Array.isArray(value)) {
-		return value[LANG] !== undefined ? value[LANG] : value.pt;
-	}
-	return value;
-}
-
-const SITE = window.SITE || { shelves: [], projects: [], ui: {}, config: {} };
-const UI = (SITE.ui && (SITE.ui[LANG] || SITE.ui.pt)) || {};
-
-
-// ── Render the portfolio list ────────────────────────────────────────────────
-
-(function renderPortfolio() {
-	const portfolio = document.querySelector('.portfolio');
-	if (!portfolio) return;
-
-	const flagshipsFirst = Boolean(SITE.config && SITE.config.flagshipsFirst);
-
-	portfolio.textContent = '';
-	portfolio.setAttribute('aria-label', UI.listLabel || '');
-
-	SITE.shelves.forEach((shelf) => {
-		const items = SITE.projects.filter((p) => p.shelf === shelf.id);
-		if (!items.length) return;
-
-		// Newest first, so a new project needs no reordering by hand. With
-		// flagshipsFirst on, the starred ones float to the top of their shelf.
-		items.sort((a, b) => {
-			if (flagshipsFirst && Boolean(a.flagship) !== Boolean(b.flagship)) {
-				return a.flagship ? -1 : 1;
-			}
-			return (b.year || 0) - (a.year || 0);
-		});
-
-		const section = document.createElement('div');
-		section.className = 'section';
-
-		const header = document.createElement('div');
-		header.className = 'sectionHeader';
-		header.textContent = t(shelf.name);
-
-		const discWrap = document.createElement('span');
-		discWrap.className = 'disc';
-		const discImg = document.createElement('img');
-		discImg.src = shelf.disc;
-		discImg.alt = '';
-		if (shelf.tilt) discImg.style.setProperty('--tilt', shelf.tilt);
-		if (shelf.tiltHover) discImg.style.setProperty('--tilt-hover', shelf.tiltHover);
-		discWrap.appendChild(discImg);
-		header.prepend(discWrap);
-
-		const list = document.createElement('ul');
-		items.forEach((p) => list.appendChild(buildEntry(p)));
-
-		section.appendChild(header);
-		section.appendChild(list);
-		portfolio.appendChild(section);
-	});
-})();
-
-
-function buildEntry(p) {
-	const title = t(p.title);
-	const li = document.createElement('li');
-	const a = document.createElement('a');
-
-	a.href = t(p.url);
-	a.dataset.title = title;
-
-	// Awards hang off the description so they show in both the hover preview
-	// and the popup, the way they always have.
-	const description = t(p.description) + renderAwards(p.awards);
-	if (description) a.dataset.description = description;
-
-	if (p.modal) a.dataset.modalDescription = t(p.modal) + renderAwards(p.awards);
-	if (p.thumb) a.dataset.thumb = p.thumb;
-	if (p.popup) a.setAttribute('data-modal', '');
-
-	if (p.gallery && p.gallery.length) {
-		a.dataset.gallery = p.gallery.join('|');
-		const alts = t(p.galleryAlt);
-		if (Array.isArray(alts)) a.dataset.galleryAlt = alts.join('|');
-	}
-
-	if (p.year) {
-		const year = document.createElement('span');
-		year.className = 'entry__year';
-		year.textContent = p.year;
-		a.appendChild(year);
-	}
-
-	// Type and venue read as one unit: "opinião · Público".
-	const type = t(p.type);
-	const venue = t(p.venue);
-	if (type || venue) {
-		const meta = document.createElement('span');
-		meta.className = 'entry__type';
-		meta.textContent = [type, venue].filter(Boolean).join(' · ');
-		a.appendChild(meta);
-	}
-
-	if (p.flagship) {
-		const star = document.createElement('span');
-		star.className = 'entry__star';
-		star.textContent = '★';
-		star.title = UI.flagshipLabel || '';
-		star.setAttribute('aria-label', UI.flagshipLabel || '');
-		star.setAttribute('role', 'img');
-		a.appendChild(star);
-	}
-
-	const name = document.createElement('span');
-	name.className = 'entry__title';
-	name.textContent = title;
-	a.appendChild(name);
-
-	li.appendChild(a);
-	return li;
-}
-
-
-function renderAwards(awards) {
-	if (!Array.isArray(awards) || !awards.length) return '';
-	return awards
-		.map((award) => {
-			const label = t(award.label);
-			const link = award.url
-				? '<a href="' + award.url + '" target="_blank" rel="noopener noreferrer">' + label + '</a>'
-				: label;
-			return '<span class="honor">' + link + '</span>';
-		})
-		.join('');
-}
-
-
-// ── Page copy ────────────────────────────────────────────────────────────────
-
-(function fillCopy() {
-	const hello = document.querySelector('.headerTitleTitle');
-	if (hello && UI.hello) hello.textContent = UI.hello;
-
-	const blurb = document.querySelector('.headerDescription p');
-	if (blurb && UI.blurb) blurb.innerHTML = UI.blurb;
-
-	const bubbles = document.querySelector('.bubbles');
-	if (bubbles && UI.linksLabel) bubbles.setAttribute('aria-label', UI.linksLabel);
-})();
+// The pages are generated by build.js from assets/data/site.js, so the list is
+// already in the HTML. This file only adds behaviour to it.
 
 
 // ── Bubble pop sounds ────────────────────────────────────────────────────────
@@ -186,8 +32,13 @@ document.querySelectorAll('.bubble').forEach((bubble) => {
 
 // Project preview: show thumbnail and description in left column on hover.
 const preview = document.querySelector('.preview');
-const previewThumb = preview?.querySelector('.preview__thumb');
+let previewThumb = preview?.querySelector('.preview__thumb'); // the top print of the pile
 const previewDescription = preview?.querySelector('.preview__description');
+const projectLinks = [...document.querySelectorAll('.section a[href]')];
+
+// Phones have no hover and hide the preview, so they skip all of this and do
+// not download images they never show.
+const canHover = window.matchMedia('(hover: hover)').matches;
 
 function showPreview(link) {
 	if (!preview) return;
@@ -208,24 +59,252 @@ function showPreview(link) {
 
 function hidePreview() {
 	if (!preview) return;
-	preview.classList.remove('is-visible');
+	preview.classList.remove('is-visible', 'is-idle');
 	preview.setAttribute('aria-hidden', 'true');
 }
 
-document.querySelectorAll('.section a[href]').forEach((link) => {
-	link.addEventListener('mouseenter', () => showPreview(link));
-	link.addEventListener('focus', () => showPreview(link));
-	link.addEventListener('mouseleave', hidePreview);
-	link.addEventListener('blur', hidePreview);
+// What the left column shows while nothing is hovered — `idlePreview` in
+// site.js: 'none', 'featured' (the newest starred project, still) or 'stack':
+// a pile of prints that works through every project with a thumbnail, the next
+// ones sticking out from under the top one, which is tossed aside when the
+// line under it fills up. The look lives in the CSS under "Idle preview".
+const IDLE_MS = 4000;
+const EXIT_MS = 450; // just past the 400ms CSS transition on the prints
+const STACK_PEEK = [56, 104]; // px a narrower print shows past the one covering it
+const STACK_NUDGE = [24, -24]; // px a wider print is moved off-centre
+
+let idleMode = (canHover && preview?.dataset.idle) || 'none';
+// Anything that moves on its own becomes a still image for those who ask.
+if (idleMode === 'stack' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+	idleMode = 'featured';
+}
+
+const idleLinks = projectLinks.filter((link) => link.dataset.thumb);
+const featuredLink = idleLinks.find((link) => link.hasAttribute('data-flagship')) || idleLinks[0];
+const cycling = idleMode === 'stack' && idleLinks.length > 1;
+let idleIndex = Math.max(0, idleLinks.indexOf(featuredLink));
+let previewBusy = false; // a link is hovered or the popup is open
+let idleTimer = null;
+let idleRun = 0; // bumped whenever the pile is rebuilt, to drop stale callbacks
+
+// The pile, top print first. The images never trade pictures while visible:
+// when the top one leaves, each element below is already lying where it goes
+// next, so the elements just move up a role and the one that left is reused
+// at the bottom. Swapping pictures between them instead made the lower prints
+// jump whenever a portrait followed a landscape.
+const pile = [previewThumb];
+if (preview && cycling) {
+	preview.dataset.mode = 'stack';
+	preview.style.setProperty('--idle-ms', `${IDLE_MS}ms`);
+	STACK_PEEK.slice(0, idleLinks.length - 1).forEach(() => {
+		const img = document.createElement('img');
+		img.alt = '';
+		preview.prepend(img);
+		pile.push(img);
+	});
+	assignRoles();
+}
+
+function assignRoles() {
+	pile.forEach((img, depth) => {
+		img.className = depth === 0 ? 'preview__thumb' : 'preview__next';
+		if (depth === 0) delete img.dataset.depth;
+		else img.dataset.depth = depth;
+	});
+	previewThumb = pile[0];
+}
+
+// Every print is centred on the same axis; these offsets move the lower ones
+// off it. A print narrower than the one covering it would be hidden, so it is
+// pushed right until STACK_PEEK of it shows past the edge. A wider one already
+// shows on both sides, so it only gets a small nudge — lining its right edge up
+// instead left it hanging far out to the left. `--x-up` is the same offset
+// measured against the print that becomes the top when the pile moves up.
+function stackOffset(coverWidth, width, slot) {
+	return width < coverWidth ? (coverWidth - width) / 2 + STACK_PEEK[slot] : STACK_NUDGE[slot];
+}
+
+function placeStack() {
+	const widths = pile.map((img) => img.offsetWidth);
+	pile.forEach((img, depth) => {
+		if (depth === 0) return;
+		img.style.setProperty('--x', `${stackOffset(widths[0], widths[depth], depth - 1)}px`);
+		if (depth > 1) {
+			img.style.setProperty('--x-up', `${stackOffset(widths[1], widths[depth], depth - 2)}px`);
+		}
+	});
+}
+
+// Resolves once every image knows its size. Not img.decode(): that can wait
+// for a paint that never comes while the tab is in the background.
+const loaded = (imgs) =>
+	Promise.all(
+		imgs.map(
+			(img) =>
+				new Promise((resolve) => {
+					if (img.complete) return resolve();
+					img.addEventListener('load', resolve, { once: true });
+					img.addEventListener('error', resolve, { once: true });
+				})
+		)
+	);
+
+// Positions are set with transitions off, so placing is never seen as motion.
+function placeUnseen() {
+	preview.classList.add('is-resetting');
+	placeStack();
+	void preview.offsetWidth;
+	preview.classList.remove('is-resetting');
+}
+
+const SWAP_MS = 160; // matches the CSS fade under `.is-swapping`
+let shownLink = null; // the project the preview is showing right now
+
+// The list marks the project on top of the pile the way it marks a hovered one.
+function markShown(link) {
+	shownLink = link;
+	projectLinks.forEach((other) => other.classList.toggle('is-idle-current', other === link));
+}
+
+// Puts `link` on top, with the projects after it underneath, all at once.
+function fillPile(link) {
+	showPreview(link);
+	if (!cycling || !link.dataset.thumb) {
+		preview.classList.remove('is-idle');
+		return Promise.resolve();
+	}
+	idleIndex = idleLinks.indexOf(link);
+	pile.forEach((img, depth) => {
+		img.style.opacity = '';
+		if (depth > 0) img.src = idleLinks[(idleIndex + depth) % idleLinks.length].dataset.thumb;
+	});
+	// The lower prints are only shown once every image has its size.
+	return loaded(pile).then(() => {
+		preview.classList.add('is-idle');
+		placeUnseen();
+	});
+}
+
+// Changes what the preview shows with a short fade out and in, so neither a
+// hover nor the return to the pile is a hard cut.
+function swapTo(link, then) {
+	const run = ++idleRun;
+	clearTimeout(idleTimer);
+	preview.classList.remove('is-leaving');
+	preview.classList.add('is-swapping');
+	setTimeout(() => {
+		if (run !== idleRun) return;
+		fillPile(link).then(() => {
+			if (run !== idleRun) return;
+			markShown(link);
+			preview.classList.remove('is-swapping');
+			if (then) then();
+		});
+	}, SWAP_MS);
+}
+
+function startIdleTimer() {
+	clearTimeout(idleTimer);
+	if (cycling && !previewBusy) idleTimer = setTimeout(advanceIdle, IDLE_MS);
+}
+
+function showIdle() {
+	if (!preview || previewBusy) return;
+	if (idleMode === 'none' || !featuredLink) {
+		markShown(null);
+		return hidePreview();
+	}
+	const link = cycling ? idleLinks[idleIndex] : featuredLink;
+	// A hovered project stays on top when the mouse leaves: the pile simply
+	// carries on from it, so there is nothing to swap.
+	// (Unless the hover cut a change short and left a print still hidden.)
+	const pileWhole = pile.every((img) => img.style.opacity !== '0');
+	if (shownLink === link && pileWhole && preview.classList.contains('is-visible')) {
+		// Bumping idleRun drops any fade still under way, so its class has to
+		// go too — otherwise the pile stays faded out with nothing to bring it back.
+		idleRun++;
+		preview.classList.remove('is-leaving', 'is-swapping');
+		return startIdleTimer();
+	}
+	swapTo(link, startIdleTimer);
+}
+
+function advanceIdle() {
+	if (previewBusy) return;
+	if (document.hidden) {
+		idleTimer = setTimeout(advanceIdle, IDLE_MS);
+		return;
+	}
+	const run = idleRun;
+	preview.classList.add('is-leaving');
+	setTimeout(() => {
+		if (run !== idleRun || previewBusy) return;
+		idleIndex = (idleIndex + 1) % idleLinks.length;
+		const link = idleLinks[idleIndex];
+
+		// Everyone moves up a role, exactly where the exit animation left them.
+		const gone = pile.shift();
+		pile.push(gone);
+		preview.classList.add('is-resetting');
+		gone.style.opacity = '0';
+		for (let depth = 1; depth < pile.length - 1; depth++) {
+			pile[depth].style.setProperty('--x', pile[depth].style.getPropertyValue('--x-up'));
+		}
+		assignRoles();
+		previewThumb.alt = link.dataset.title || '';
+		previewDescription.innerHTML = link.dataset.description || '';
+		markShown(link);
+		preview.classList.remove('is-leaving');
+
+		// The print that left comes back at the bottom with the picture after
+		// the ones showing, fading in once it has its size.
+		gone.alt = '';
+		gone.src = idleLinks[(idleIndex + pile.length - 1) % idleLinks.length].dataset.thumb;
+		loaded([gone]).then(() => {
+			if (run !== idleRun || previewBusy) return;
+			placeUnseen();
+			gone.style.opacity = '';
+			startIdleTimer();
+		});
+	}, EXIT_MS);
+}
+
+projectLinks.forEach((link) => {
+	const enter = () => {
+		if (!preview) return;
+		previewBusy = true;
+		clearTimeout(idleTimer);
+		preview.classList.add('is-hovering');
+		// Already on top of the pile: just hold it there.
+		if (shownLink === link && preview.classList.contains('is-visible')) {
+			idleRun++;
+			preview.classList.remove('is-leaving', 'is-resetting', 'is-swapping');
+			return;
+		}
+		preview.classList.remove('is-resetting');
+		swapTo(link);
+	};
+	const leave = () => {
+		if (!preview) return;
+		previewBusy = false;
+		preview.classList.remove('is-hovering');
+		showIdle();
+	};
+	link.addEventListener('mouseenter', enter);
+	link.addEventListener('focus', enter);
+	link.addEventListener('mouseleave', leave);
+	link.addEventListener('blur', leave);
 });
 
 // Preload preview thumbnails so they appear instantly on hover.
-document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
-	const src = link.dataset.thumb;
-	if (!src) return;
-	const img = new Image();
-	img.src = src;
-});
+if (canHover) {
+	idleLinks.forEach((link) => {
+		const img = new Image();
+		img.src = link.dataset.thumb;
+	});
+}
+
+showIdle();
 
 
 // ── Analytics ────────────────────────────────────────────────────────────────
@@ -249,39 +328,38 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 // only for links that opt in with `popup: true` (projects with a gallery or a
 // longer description).
 (function () {
+	const modal = document.querySelector('.projectModal');
+	if (!modal) return;
 	const mobileMQ = window.matchMedia('(max-width: 768px)');
-	let modal = null;
 	let lastFocused = null;
 
-	function buildModal() {
-		if (modal) return modal;
-		modal = document.createElement('div');
-		modal.className = 'projectModal';
-		modal.hidden = true;
-		modal.setAttribute('role', 'dialog');
-		modal.setAttribute('aria-modal', 'true');
-		modal.setAttribute('aria-labelledby', 'projectModalTitle');
-		modal.innerHTML =
-			'<div class="projectModal__backdrop" data-close></div>' +
-			'<div class="projectModal__card">' +
-			'<div class="projectModal__header">' +
-			'<h2 class="projectModal__title" id="projectModalTitle"></h2>' +
-			'<button class="projectModal__close" type="button" aria-label="' + (UI.close || 'Close') + '" data-close>×</button>' +
-			'</div>' +
-			'<img class="projectModal__thumb" alt="">' +
-			'<div class="projectModal__gallery" role="group" aria-label="' + (UI.gallery || '') + '" hidden></div>' +
-			'<p class="projectModal__description"></p>' +
-			'<a class="projectModal__link" target="_blank" rel="noopener noreferrer">' + (UI.open || 'Open') + ' ↗</a>' +
-			'</div>';
-		document.body.appendChild(modal);
+	const gallery = modal.querySelector('.projectModal__gallery');
+	const galleryNav = modal.querySelector('.projectModal__galleryNav');
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-		modal.addEventListener('click', (e) => {
-			if (e.target.dataset && e.target.dataset.close !== undefined) {
-				closeModal();
-			}
-		});
-		return modal;
+	// The arrows are the alternative to scrolling the strip sideways; each is
+	// switched off at its end of the strip.
+	function updateGalleryNav() {
+		const atStart = gallery.scrollLeft <= 1;
+		const atEnd = gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1;
+		galleryNav.querySelector('[data-gallery-step="-1"]').disabled = atStart;
+		galleryNav.querySelector('[data-gallery-step="1"]').disabled = atEnd;
 	}
+	gallery.addEventListener('scroll', updateGalleryNav, { passive: true });
+
+	modal.addEventListener('click', (e) => {
+		if (e.target.dataset && e.target.dataset.close !== undefined) {
+			closeModal();
+		}
+		const step = Number(e.target.dataset && e.target.dataset.galleryStep);
+		if (step) {
+			// Most of a screenful; scroll-snap then settles on a photo's edge.
+			gallery.scrollBy({
+				left: step * gallery.clientWidth * 0.8,
+				behavior: reducedMotion.matches ? 'auto' : 'smooth',
+			});
+		}
+	});
 
 	// `data-gallery` holds pipe-separated image paths; captions are optional and
 	// line up with them positionally in `data-gallery-alt`.
@@ -294,6 +372,7 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 
 		galleryEl.textContent = '';
 		galleryEl.hidden = sources.length === 0;
+		galleryNav.hidden = sources.length < 2;
 		if (!sources.length) return;
 
 		sources.forEach((src, i) => {
@@ -303,12 +382,15 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 			img.alt = alts[i] || `${title} (${i + 1}/${sources.length})`;
 			img.loading = i === 0 ? 'eager' : 'lazy';
 			img.decoding = 'async';
+			// The strip grows as photos load, which moves where its end is.
+			img.addEventListener('load', updateGalleryNav);
 			galleryEl.appendChild(img);
 		});
+		galleryEl.scrollLeft = 0;
+		updateGalleryNav();
 	}
 
 	function openModal(link) {
-		const m = buildModal();
 		const thumb = link.dataset.thumb || '';
 		// The hover preview shares the left column with the bubbles, so it keeps
 		// the short copy; the modal has room for a fuller one when it exists.
@@ -316,10 +398,10 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 		const title = link.dataset.title || '';
 		const hasGallery = Boolean(link.dataset.gallery);
 
-		m.querySelector('.projectModal__title').textContent = title;
+		modal.querySelector('.projectModal__title').textContent = title;
 
 		// The gallery replaces the single thumbnail when a project has one.
-		const thumbEl = m.querySelector('.projectModal__thumb');
+		const thumbEl = modal.querySelector('.projectModal__thumb');
 		if (thumb && !hasGallery) {
 			thumbEl.src = thumb;
 			thumbEl.alt = title;
@@ -329,25 +411,31 @@ document.querySelectorAll('.section a[data-thumb]').forEach((link) => {
 			thumbEl.hidden = true;
 		}
 
-		fillGallery(m.querySelector('.projectModal__gallery'), link, title);
-		m.classList.toggle('projectModal--wide', hasGallery);
+		fillGallery(modal.querySelector('.projectModal__gallery'), link, title);
+		modal.classList.toggle('projectModal--wide', hasGallery);
 
-		m.querySelector('.projectModal__description').innerHTML = description;
-		m.querySelector('.projectModal__link').href = link.href;
-		m.hidden = false;
+		modal.querySelector('.projectModal__description').innerHTML = description;
+		modal.querySelector('.projectModal__link').href = link.href;
+		modal.hidden = false;
 		document.body.classList.add('is-modal-open');
 
 		// The hover preview in the left column would otherwise stay up behind it.
+		previewBusy = true;
+		idleRun++;
+		clearTimeout(idleTimer);
+		markShown(null);
 		hidePreview();
 
 		lastFocused = document.activeElement;
-		m.querySelector('.projectModal__close').focus();
+		modal.querySelector('.projectModal__close').focus();
 	}
 
 	function closeModal() {
-		if (!modal || modal.hidden) return;
+		if (modal.hidden) return;
 		modal.hidden = true;
 		document.body.classList.remove('is-modal-open');
+		previewBusy = false;
+		showIdle();
 		if (lastFocused && lastFocused.focus) lastFocused.focus();
 		lastFocused = null;
 	}

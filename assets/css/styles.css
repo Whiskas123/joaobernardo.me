@@ -19,6 +19,11 @@ html, html * {
   cursor: url('../images/cursor.png') 0 0, auto !important;
 }
 
+/* Anything clickable gets the system hand, so links read as links. */
+html a, html a *, html button {
+  cursor: pointer !important;
+}
+
 body {
 	color: var(--color-purple);
 	font-family: 'Sansation', system-ui, sans-serif;
@@ -48,13 +53,6 @@ b{
 	font-weight: bold;
 }
 
-.languageSelector{
-	position: absolute;
-	top: 0.5rem;
-	right: 0.5rem;
-	color: darkgray;
-}
-
 .headerTitle {
     font-size: 6rem;
     display: flex;
@@ -71,18 +69,10 @@ b{
 }
 
 .headerDescription {
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 112.295%;
-}
-
-footer {
-	width: 100%;
-	max-width: var(--max-width);
-	margin: 0 auto;
-	padding: 1rem 0;
-	font-size: 0.875rem;
 }
 
 .bubbles {
@@ -251,12 +241,21 @@ footer {
 	grid-template-columns: 50% 1fr;
 	gap: 1rem;
 	align-items: start;
-	padding: 1rem clamp(1rem, 5vw, 4rem);
+	padding: 1rem clamp(1rem, 3vw, 2rem);
+}
+
+/* The bubbles are pinned to the bottom-left of the first screen (their cluster
+   reaches 17.4rem up from it), so the left column stops above them and the
+   preview shrinks into whatever height is left. */
+.leftColumn {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 2rem);
+	padding-bottom: 17.5rem;
 }
 
 .rightColumn {
 	min-height: calc(100vh - 2rem);
-	max-height: calc(100vh - 2rem);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -271,7 +270,6 @@ ul {
 
 li {
 	position: relative;
-	cursor: pointer;
 }
 
 /* The arrow sits on the link, which is the flex row, so it lines up on the
@@ -297,11 +295,21 @@ li {
 }
 
 .preview {
+	flex: 1 1 0;
+	min-height: 0;
+	display: grid;
+	/* The image row takes what it needs but gives way first on short screens. */
+	grid-template-rows: minmax(0, auto) auto;
+	align-content: start;
+	/* Centred in the left column, and every print centred on the same axis. */
+	justify-items: center;
+	align-self: center;
+	width: 100%;
 	margin: 2rem 0 0;
 	max-width: 22rem;
 	opacity: 0;
 	transition: opacity 200ms ease-out;
-	text-align: left;
+	text-align: center;
 }
 
 .preview.is-visible {
@@ -311,7 +319,7 @@ li {
 .preview__thumb {
 	display: block;
 	max-width: 100%;
-	max-height: 30vh;
+	max-height: min(100%, 30vh);
 	border-radius: 0.5rem;
 	box-shadow: 0 8px 16px rgba(33, 8, 88, 0.2);
 }
@@ -335,6 +343,146 @@ li {
 	.preview {
 		transition: none;
 	}
+}
+
+/* ── Idle preview ─────────────────────────────────────────────────────────────
+   What the left column does before anything is hovered (`idlePreview: 'stack'`
+   in site.js): a pile of prints. The next two stick out from under the top
+   one; a line fills up, the top one is tossed aside and the pile moves up.
+   `.is-leaving` plays that exit; the script then swaps the images under
+   `.is-resetting`, which turns transitions off so the swap is never seen. */
+.preview__thumb,
+.preview__next {
+	grid-area: 1 / 1;
+	transition: transform 400ms ease, opacity 400ms ease;
+}
+
+.preview__thumb {
+	z-index: 3;
+}
+
+/* The pile's row keeps one height whatever is in it, and the prints stand on
+   its bottom edge: a row sized by its content changed height every time a
+   portrait entered or left the pile, and everything jumped with it. The 39.5rem
+   is what the rest of the first screen needs (header ≈ 13rem, margins 3rem,
+   three lines of text ≈ 6rem, bubbles 17.5rem) — raise it if the intro grows. */
+.preview[data-mode='stack'] {
+	grid-template-rows: max(4rem, min(30vh, 100vh - 39.5rem)) auto;
+}
+
+.preview[data-mode='stack'] .preview__thumb,
+.preview[data-mode='stack'] .preview__next {
+	align-self: end;
+}
+
+/* Room for the corners of the tilted prints, so they do not dip into the text. */
+.preview[data-mode='stack'] .preview__description {
+	margin-top: 1.5rem;
+}
+
+.preview__description {
+	grid-row: 2;
+	transition: opacity 200ms ease-out;
+}
+
+.preview__next {
+	display: none;
+	max-width: 100%;
+	max-height: min(100%, 30vh);
+	border-radius: 0.5rem;
+	box-shadow: 0 8px 16px rgba(33, 8, 88, 0.2);
+}
+
+.preview.is-idle .preview__next[src] {
+	display: block;
+}
+
+/* --x / --x-up are set per image by placeStack() in main.js. */
+.preview__next[data-depth='1'] {
+	transform: translate(var(--x, 3.5rem), -0.4rem) rotate(5deg);
+	opacity: 0.9;
+}
+
+/* The second print moves up into the first one's place. It must read --x-up
+   here rather than have --x overridden: --x is set inline and would win. */
+.preview.is-leaving .preview__next[data-depth='2'] {
+	transform: translate(var(--x-up, 3.5rem), -0.4rem) rotate(5deg);
+	opacity: 0.9;
+}
+
+.preview__next[data-depth='1'] {
+	z-index: 2;
+}
+
+.preview__next[data-depth='2'] {
+	z-index: 1;
+	transform: translate(var(--x, 6.5rem), -0.9rem) rotate(-6deg);
+	opacity: 0.7;
+}
+
+.preview.is-leaving .preview__thumb {
+	transform: translate(-45%, -8%) rotate(-12deg);
+	opacity: 0;
+}
+
+.preview.is-leaving .preview__next[data-depth='1'] {
+	transform: none;
+	opacity: 1;
+}
+
+.preview.is-leaving .preview__description {
+	opacity: 0;
+}
+
+.preview.is-resetting .preview__thumb,
+.preview.is-resetting .preview__next {
+	transition: none;
+}
+
+/* A hover, or the return from one, fades the old content out and the new in. */
+.preview.is-swapping .preview__thumb,
+.preview.is-swapping .preview__next,
+.preview.is-swapping .preview__description {
+	opacity: 0;
+	transition: opacity 160ms ease-out;
+}
+
+/* The list marks the project on top of the pile the way it marks a hovered one. */
+.section ul li a.is-idle-current::before {
+	opacity: 1;
+	translate: 0 0;
+}
+
+.section ul li a.is-idle-current .entry__title {
+	text-decoration: underline dashed;
+	text-underline-offset: 0.2em;
+}
+
+/* The line that fills up until the next change; it waits while a title is
+   hovered and starts over when the pile carries on. */
+.preview.is-idle:not(.is-hovering) .preview__description::before {
+	content: '';
+	display: block;
+	height: 2px;
+	margin-bottom: 0.6rem;
+	background: currentColor;
+	opacity: 0.5;
+	transform-origin: left;
+	animation: idleProgress var(--idle-ms, 4000ms) linear both;
+}
+
+/* Switched off between rounds so it starts over each time. These selectors
+   carry `.is-idle` to outweigh the rule above — without it the `:not()` there
+   won, the line was never switched off, and it stayed full after one round. */
+.preview.is-idle.is-leaving .preview__description::before,
+.preview.is-idle.is-swapping .preview__description::before,
+.preview.is-idle.is-resetting .preview__description::before {
+	animation: none;
+}
+
+@keyframes idleProgress {
+	from { transform: scaleX(0); }
+	to { transform: scaleX(1); }
 }
 
 /* Mobile: stack columns, align everything left */
@@ -361,9 +509,14 @@ li {
 		display: block;
 	}
 
+	.leftColumn {
+		display: block;
+		height: auto;
+		padding-bottom: 0;
+	}
+
 	.rightColumn {
 		min-height: 0;
-		max-height: none;
 		display: block;
 		padding-bottom: 1rem;
 	}
@@ -455,7 +608,7 @@ li {
 .langSwitcher {
 	position: absolute;
 	top: 1rem;
-	right: clamp(1rem, 5vw, 4rem);
+	right: clamp(1rem, 3vw, 2rem);
 	font-size: 0.95rem;
 	display: flex;
 	gap: 0.4rem;
@@ -467,7 +620,6 @@ li {
 	color: var(--color-purple);
 	opacity: 0.55;
 	font-weight: 700;
-	cursor: url('../images/cursor.png') 0 0, pointer !important;
 }
 
 .langSwitcher a.is-active {
@@ -573,6 +725,31 @@ li {
 
 .projectModal__gallery[hidden] {
 	display: none;
+}
+
+.projectModal__galleryNav {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	margin: -0.5rem 0 1rem;
+}
+
+.projectModal__galleryNav[hidden] {
+	display: none;
+}
+
+.projectModal__galleryNav button {
+	background: none;
+	border: 0;
+	padding: 0.25rem 0.5rem;
+	font-family: inherit;
+	font-size: 1.5rem;
+	line-height: 1;
+	color: var(--color-purple);
+}
+
+.projectModal__galleryNav button:disabled {
+	opacity: 0.25;
 }
 
 .projectModal__galleryItem {

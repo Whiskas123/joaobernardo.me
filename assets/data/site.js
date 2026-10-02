@@ -2,8 +2,9 @@
    joaobernardo.me — FICHEIRO ÚNICO
    ----------------------------------------------------------------------------
    Tudo o que aparece nas três páginas (pt / en / es) vem daqui.
-   As páginas index.html, en/index.html e es/index.html não têm texto nenhum
-   da lista — só o esqueleto. Para mudar seja o que for, muda-se este ficheiro.
+   As páginas index.html, en/index.html e es/index.html são GERADAS a partir
+   deste ficheiro por build.js — não as edites à mão. No push o GitHub gera-as
+   sozinho; para ver em local depois de mudar algo aqui: `node build.js`.
 
    ── COMO ADICIONAR UM PROJETO ──────────────────────────────────────────────
    Copia um bloco da lista `projects` e muda os campos. Só `id`, `shelf`,
@@ -29,7 +30,7 @@
                  é sempre popup, isto é só para o computador)
    gallery       opcional. Lista de fotografias para o popup.
    galleryAlt    descrição de cada fotografia, pela mesma ordem. { pt, en, es }
-   awards        opcional. Prémios, aparecem por baixo da descrição.
+   awards        opcional. Prémios: texto simples no hover, links no popup.
    ============================================================================ */
 
 window.SITE = {
@@ -39,6 +40,12 @@ window.SITE = {
 		// true = os projetos com ★ sobem todos para o topo da sua secção.
 		// false = a lista é puramente por ano (mais recente primeiro).
 		flagshipsFirst: false,
+
+		// O que a metade esquerda mostra antes de alguém passar o rato:
+		// 'none' = nada · 'featured' = o projeto ★ mais recente com miniatura
+		// 'stack' = uma pilha que vai passando por todos os projetos com
+		// miniatura, com os seguintes a espreitar por baixo.
+		idlePreview: 'stack',
 	},
 
 	/* ── Secções ──────────────────────────────────────────────────────────────
@@ -47,17 +54,17 @@ window.SITE = {
 	shelves: [
 		{
 			id: 'projetos',
-			disc: '/assets/images/minidisc1.png',
+			disc: '/assets/images/minidisc1.webp',
 			tilt: '9.4deg',
 			tiltHover: '-6.6deg',
 			name: { pt: 'Projetos', en: 'Projects', es: 'Proyectos' },
 		},
 		{
 			id: 'textos',
-			disc: '/assets/images/minidisc2.png',
+			disc: '/assets/images/minidisc2.webp',
 			tilt: '-13.3deg',
 			tiltHover: '6.7deg',
-			name: { pt: 'Textos', en: 'Writing', es: 'Textos' },
+			name: { pt: 'Publicações', en: 'Publications', es: 'Publicaciones' },
 		},
 	],
 
@@ -65,33 +72,43 @@ window.SITE = {
 	ui: {
 		pt: {
 			hello: 'Olá',
-			blurb: 'Chamo-me <b>João Bernardo Narciso</b> e faço coisas.',
+			blurb: 'Chamo-me <b>João Bernardo Narciso</b> e trabalho em visualização de dados. Faço ensaios visuais, exposições, artigos académicos e, de vez em quando, de opinião. Quase sempre com dados.',
+			// Texto para o Google e para as pré-visualizações de links. Sem HTML.
+			description: 'Chamo-me João Bernardo Narciso e trabalho em visualização de dados. Faço ensaios visuais, exposições, artigos académicos e, de vez em quando, de opinião. Quase sempre com dados',
 			linksLabel: 'Links',
-			listLabel: 'Projetos e textos',
+			listLabel: 'Projetos e publicações',
 			flagshipLabel: 'Projeto principal',
 			open: 'Abrir',
 			close: 'Fechar',
 			gallery: 'Fotografias do projeto',
+			galleryPrev: 'Fotografia anterior',
+			galleryNext: 'Fotografia seguinte',
 		},
 		en: {
 			hello: 'Hi',
-			blurb: 'My name is <b>João Bernardo Narciso</b> and I make things.',
+			blurb: 'My name is <b>João Bernardo Narciso</b> and I work in data visualization. I make visual essays, exhibitions, academic papers and, every now and then, opinion pieces. Almost always with data.',
+			description: 'João Bernardo Narciso works in data visualization. I make visual essays, exhibitions, academic papers and, every now and then, opinion pieces. Almost always with data.',
 			linksLabel: 'Links',
-			listLabel: 'Projects and writing',
+			listLabel: 'Projects and publications',
 			flagshipLabel: 'Main project',
 			open: 'Open',
 			close: 'Close',
 			gallery: 'Project photographs',
+			galleryPrev: 'Previous photograph',
+			galleryNext: 'Next photograph',
 		},
 		es: {
 			hello: 'Hola',
-			blurb: 'Me llamo <b>João Bernardo Narciso</b> y hago cosas.',
+			blurb: 'Me llamo <b>João Bernardo Narciso</b> y trabajo en visualización de datos. Hago ensayos visuales, exposiciones, artículos académicos y, de vez en cuando, de opinión. Casi siempre con datos.',
+			description: 'João Bernardo Narciso trabaja en visualización de datos. Hace ensayos visuales, exposiciones, artículos académicos y, de vez en cuando, de opinión. Casi siempre con datos.',
 			linksLabel: 'Enlaces',
-			listLabel: 'Proyectos y textos',
+			listLabel: 'Proyectos y publicaciones',
 			flagshipLabel: 'Proyecto principal',
 			open: 'Abrir',
 			close: 'Cerrar',
 			gallery: 'Fotografías del proyecto',
+			galleryPrev: 'Fotografía anterior',
+			galleryNext: 'Fotografía siguiente',
 		},
 	},
 
@@ -111,9 +128,7 @@ window.SITE = {
 				es: 'https://teletext.joaobernardo.me/en',
 			},
 			type: { pt: 'instalação', en: 'installation', es: 'instalación' },
-			// FALTA A MINIATURA. Mete um screenshot da página 100 em
-			// /assets/images/thumbnails/teletextual.png e descomenta a linha:
-			// thumb: '/assets/images/thumbnails/teletextual.png',
+			thumb: '/assets/images/thumbnails/teletextual.webp',
 			description: {
 				pt: 'Uma instalação participativa construída sobre o arquivo do teletexto português.',
 				en: 'A participatory installation built on the Portuguese teletext archive.',
@@ -139,7 +154,7 @@ window.SITE = {
 				en: 'essay + exhibition',
 				es: 'ensayo + exposición',
 			},
-			thumb: '/assets/images/thumbnails/europeanparliament2.png',
+			thumb: '/assets/images/thumbnails/europeanparliament2.webp',
 			description: {
 				pt: 'As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede.',
 				en: 'Every European Parliament roll-call vote since 2004, redrawn as a network.',
@@ -193,7 +208,7 @@ window.SITE = {
 				es: 'https://desalojamento.pt',
 			},
 			type: { pt: 'ensaio visual', en: 'visual essay', es: 'ensayo visual' },
-			thumb: '/assets/images/thumbnails/desalojamento.png',
+			thumb: '/assets/images/thumbnails/desalojamento.webp',
 			description: {
 				pt: 'Ensaio visual sobre o impacto do Alojamento Local na crise da habitação em Lisboa e no Porto.',
 				en: 'Visual essay on the impact of short-term rentals on the housing crisis in Lisbon and Porto.',
@@ -213,7 +228,7 @@ window.SITE = {
 				es: 'https://ruasdogenero.pt',
 			},
 			type: { pt: 'ensaio visual', en: 'visual essay', es: 'ensayo visual' },
-			thumb: '/assets/images/thumbnails/ruasdogenero.png',
+			thumb: '/assets/images/thumbnails/ruasdogenero.webp',
 			description: {
 				pt: 'Ensaio visual sobre a representação das mulheres na toponímia do Porto.',
 				en: "Visual essay on the representation of women in Porto's street naming.",
@@ -247,7 +262,7 @@ window.SITE = {
 			url: 'https://medium.com/feedzaitech/uncovering-the-shape-of-fraud-with-cosmos-explorer-visual-metaphors-behind-millions-of-transactions-b98e4cf56e56',
 			type: { pt: 'artigo técnico', en: 'technical article', es: 'artículo técnico' },
 			venue: 'Feedzai',
-			thumb: '/assets/images/thumbnails/fraud.png',
+			thumb: '/assets/images/thumbnails/fraud.webp',
 			description: {
 				pt: 'Sobre o uso de metáforas visuais para revelar padrões em dados de transações financeiras.',
 				en: 'On using visual metaphors to reveal patterns in financial transaction data.',
@@ -263,7 +278,7 @@ window.SITE = {
 			url: 'https://www.taylorfrancis.com/chapters/edit/10.4324/9781032710167-3/role-media-normalising-far-right-luca-manucci-joão-bernardo-narciso',
 			type: { pt: 'capítulo de livro', en: 'book chapter', es: 'capítulo de libro' },
 			venue: 'Routledge',
-			thumb: '/assets/images/thumbnails/farright.png',
+			thumb: '/assets/images/thumbnails/farright.webp',
 			description: {
 				pt: 'Sobre o papel dos meios de comunicação na normalização da extrema-direita em Portugal e Espanha.',
 				en: 'On the role of the media in normalizing the far right in Portugal and Spain.',
@@ -279,7 +294,7 @@ window.SITE = {
 			url: 'https://redeanticapitalista.net/a-cultura-dos-jogos-na-construcao-da-manosfera/',
 			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
 			venue: 'RA Zine',
-			thumb: '/assets/images/thumbnails/razine2.png',
+			thumb: '/assets/images/thumbnails/razine2.webp',
 			description: {
 				pt: 'Sobre a cultura dos videojogos como espaço de socialização da manosfera.',
 				en: 'On video game culture as a space for the socialization of the manosphere.',
@@ -295,7 +310,7 @@ window.SITE = {
 			url: 'https://www.publico.pt/2024/02/17/opiniao/opiniao/onde-etica-pulsometro-2080435',
 			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
 			venue: 'Público',
-			thumb: '/assets/images/thumbnails/publico2.png',
+			thumb: '/assets/images/thumbnails/publico2.webp',
 			description: {
 				pt: "Sobre a ética do Pulsómetro eleitoral da CNN, um 'indicador de sentimento nas redes sociais' usado nas legislativas de 2024.",
 				en: "On the ethics of CNN Portugal's Pulsómetro, an 'electoral sentiment indicator of social media' promoted during the 2024 general elections.",
@@ -311,11 +326,41 @@ window.SITE = {
 			url: 'https://ffms.pt/pt-pt/estudos/policy-papers/afinal-quantas-pessoas-se-abstem-em-portugal',
 			type: 'policy paper',
 			venue: 'FFMS',
-			thumb: '/assets/images/thumbnails/abstencao.png',
+			thumb: '/assets/images/thumbnails/abstencao.webp',
 			description: {
 				pt: 'Sobre a abstenção eleitoral em Portugal, publicado pela Fundação Francisco Manuel dos Santos.',
 				en: 'On electoral abstention in Portugal, published by Fundação Francisco Manuel dos Santos.',
 				es: 'Sobre la abstención electoral en Portugal, publicado por la Fundação Francisco Manuel dos Santos.',
+			},
+		},
+
+		{
+			id: 'digitaltraces',
+			shelf: 'textos',
+			year: 2025,
+			title: 'Digital Traces',
+			url: 'https://diglib.eg.org/items/fb9c677a-8d79-43c6-8754-9d08834771e2',
+			type: { pt: 'artigo científico', en: 'short paper', es: 'artículo científico' },
+			venue: 'EuroVis',
+			description: {
+				pt: 'Uma ferramenta visual para detetar fraude na atividade digital dos utilizadores.',
+				en: "A visual analytics tool for spotting fraud in users' digital activity.",
+				es: 'Una herramienta visual para detectar fraude en la actividad digital de los usuarios.',
+			},
+		},
+
+		{
+			id: 'bomba-relogio-abstencao',
+			shelf: 'textos',
+			year: 2024,
+			title: 'A Bomba-Relógio da Abstenção',
+			url: 'https://www.culturgest.pt/pt/media/bomba-relogio-da-abstencao/',
+			type: 'debate',
+			venue: 'Culturgest',
+			description: {
+				pt: 'Debate sobre as motivações da abstenção, a partir da investigação da Divergente.',
+				en: "A debate on why people abstain from voting, based on Divergente's investigation.",
+				es: 'Debate sobre las motivaciones de la abstención, a partir de la investigación de Divergente.',
 			},
 		},
 
@@ -328,7 +373,7 @@ window.SITE = {
 			url: 'https://…',
 			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
 			venue: 'Onde saiu',
-			thumb: '/assets/images/thumbnails/ficheiro.png',
+			thumb: '/assets/images/thumbnails/ficheiro.webp',
 			description: {
 				pt: 'Duas linhas, no máximo.',
 				en: 'Two lines, maximum.',

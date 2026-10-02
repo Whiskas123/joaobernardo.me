@@ -3,3 +3,5 @@ assets/images/new_favicon.png
 
 # Full-resolution originals of the exhibition photos (web copies are committed)
 assets/images/constelacoes/_originals/
+.claude/launch.json
+docs/implementation-notes/2026-10-01-site-improvements.md
