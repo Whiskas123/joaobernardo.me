@@ -26,10 +26,7 @@
    description   o texto curto do hover. MÁXIMO DUAS LINHAS — mais do que isso
                  passa por cima das bolhas. { pt, en, es }
    modal         opcional. Texto mais longo, só aparece no popup. { pt, en, es }
-   popup         true abre o popup em vez de ir direto ao site (no telemóvel
-                 é sempre popup, isto é só para o computador)
    gallery       opcional. Lista de fotografias para o popup.
-   galleryAlt    descrição de cada fotografia, pela mesma ordem. { pt, en, es }
    awards        opcional. Prémios: texto simples no hover, links no popup.
    ============================================================================ */
 
@@ -74,7 +71,7 @@ window.SITE = {
 			hello: 'Olá',
 			blurb: 'Chamo-me <b>João Bernardo Narciso</b> e trabalho em visualização de dados. Faço ensaios visuais, exposições, artigos académicos e, de vez em quando, de opinião. Quase sempre com dados.',
 			// Texto para o Google e para as pré-visualizações de links. Sem HTML.
-			description: 'Chamo-me João Bernardo Narciso e trabalho em visualização de dados. Faço ensaios visuais, exposições, artigos académicos e, de vez em quando, de opinião. Quase sempre com dados',
+			description: 'João Bernardo Narciso trabalha em visualização de dados. Faz ensaios visuais, exposições, artigos académicos e, de vez em quando, de opinião. Quase sempre com dados.',
 			linksLabel: 'Links',
 			listLabel: 'Projetos e publicações',
 			flagshipLabel: 'Projeto principal',
@@ -83,11 +80,13 @@ window.SITE = {
 			gallery: 'Fotografias do projeto',
 			galleryPrev: 'Fotografia anterior',
 			galleryNext: 'Fotografia seguinte',
+			prevProject: 'Projeto anterior',
+			nextProject: 'Projeto seguinte',
 		},
 		en: {
 			hello: 'Hi',
 			blurb: 'My name is <b>João Bernardo Narciso</b> and I work in data visualization. I make visual essays, exhibitions, academic papers and, every now and then, opinion pieces. Almost always with data.',
-			description: 'João Bernardo Narciso works in data visualization. I make visual essays, exhibitions, academic papers and, every now and then, opinion pieces. Almost always with data.',
+			description: 'João Bernardo Narciso works in data visualization. He makes visual essays, exhibitions, academic papers and, every now and then, opinion pieces. Almost always with data.',
 			linksLabel: 'Links',
 			listLabel: 'Projects and publications',
 			flagshipLabel: 'Main project',
@@ -96,6 +95,8 @@ window.SITE = {
 			gallery: 'Project photographs',
 			galleryPrev: 'Previous photograph',
 			galleryNext: 'Next photograph',
+			prevProject: 'Previous project',
+			nextProject: 'Next project',
 		},
 		es: {
 			hello: 'Hola',
@@ -109,6 +110,8 @@ window.SITE = {
 			gallery: 'Fotografías del proyecto',
 			galleryPrev: 'Fotografía anterior',
 			galleryNext: 'Fotografía siguiente',
+			prevProject: 'Proyecto anterior',
+			nextProject: 'Proyecto siguiente',
 		},
 	},
 
@@ -120,14 +123,13 @@ window.SITE = {
 			shelf: 'projetos',
 			year: 2026,
 			flagship: true,
-			popup: true,
 			title: 'Tele-textual',
 			url: {
 				pt: 'https://teletext.joaobernardo.me',
 				en: 'https://teletext.joaobernardo.me/en',
 				es: 'https://teletext.joaobernardo.me/en',
 			},
-			type: { pt: 'instalação', en: 'installation', es: 'instalación' },
+			type: { pt: 'instalação e site', en: 'installation and website', es: 'instalación y página web' },
 			thumb: '/assets/images/thumbnails/teletextual.webp',
 			description: {
 				pt: 'Uma instalação participativa construída sobre o arquivo do teletexto português.',
@@ -135,9 +137,9 @@ window.SITE = {
 				es: 'Una instalación participativa construida sobre el archivo del teletexto portugués.',
 			},
 			modal: {
-				pt: 'Páginas de teletexto recuperadas do Arquivo.pt — notícias, meteorologia, lotaria, horóscopos — devolvidas a um ecrã. Podes ver sozinho ou abrir uma sala: todos veem a mesma página ao mesmo tempo, e mudar de página é uma votação. E há um editor, para fazer páginas novas dentro das mesmas restrições: 40×24, oito cores, gráficos em mosaico.',
-				en: 'Teletext pages recovered from Arquivo.pt — news, weather, the lottery, horoscopes — put back on a screen. Watch alone, or open a room: everyone sees the same page at the same moment, and changing it is a vote. There is an editor too, for making new pages under the same constraints: 40×24, eight colours, mosaic graphics.',
-				es: 'Páginas de teletexto recuperadas de Arquivo.pt — noticias, meteorología, lotería, horóscopos — devueltas a una pantalla. Puedes verlas solo o abrir una sala: todos ven la misma página al mismo tiempo y cambiarla es una votación. También hay un editor, para crear páginas nuevas con las mismas restricciones: 40×24, ocho colores, gráficos en mosaico.',
+				pt: 'Um arquivo vivo de páginas do teletexto da RTP e da SIC. Qualquer pessoa pode também criar páginas novas, dentro das restrições de uma tecnologia (aparentemente) obsoleta.',
+				en: 'A living archive of teletext pages from RTP and SIC. Anyone can also create new pages, within the constraints of an (apparently) obsolete technology.',
+				es: 'Un archivo vivo de páginas del teletexto de RTP y SIC. Cualquier persona puede además crear páginas nuevas, dentro de las restricciones de una tecnología (aparentemente) obsoleta.',
 			},
 		},
 
@@ -146,24 +148,23 @@ window.SITE = {
 			shelf: 'projetos',
 			year: 2025,
 			flagship: true,
-			popup: true,
 			title: 'Constelações Parlamentares',
 			url: 'https://parliament.joaobernardo.me',
 			type: {
-				pt: 'ensaio + exposição',
-				en: 'essay + exhibition',
-				es: 'ensayo + exposición',
+				pt: 'exposição',
+				en: 'exhibition',
+				es: 'exposición',
 			},
-			thumb: '/assets/images/thumbnails/europeanparliament2.webp',
+			thumb: '/assets/images/thumbnails/constelacoes.webp',
 			description: {
-				pt: 'As votações do Parlamento Europeu desde 2004, redesenhadas como uma rede.',
-				en: 'Every European Parliament roll-call vote since 2004, redrawn as a network.',
-				es: 'Las votaciones del Parlamento Europeo desde 2004, redibujadas como una red.',
+				pt: 'Exposição sobre as votações do Parlamento Europeu desde 2004, redesenhadas como redes.',
+				en: 'Exhibition on every European Parliament roll-call vote since 2004, redrawn as networks.',
+				es: 'Exposición sobre las votaciones del Parlamento Europeo desde 2004, redibujadas como redes.',
 			},
 			modal: {
-				pt: 'Todas as votações nominais do Parlamento Europeu desde 2004, redesenhadas como uma rede: dois eurodeputados ficam lado a lado quando votam da mesma maneira. Do site interativo nasceu uma exposição — três paredes impressas e anotadas que explicam como se constrói a rede, o que as constelações dizem sobre os grupos políticos e como o Parlamento mudou em vinte anos.',
-				en: 'Every roll-call vote of the European Parliament since 2004, redrawn as a network: two MEPs sit close together when they vote the same way. The interactive site grew into an exhibition — three printed, annotated walls on how the network is built, what the constellations say about the political groups, and how the Parliament changed over twenty years.',
-				es: 'Todas las votaciones nominales del Parlamento Europeo desde 2004, redibujadas como una red: dos eurodiputados se sitúan juntos cuando votan de la misma manera. Del sitio interactivo nació una exposición: tres paredes impresas y anotadas sobre cómo se construye la red, qué dicen las constelaciones de los grupos políticos y cómo cambió el Parlamento en veinte años.',
+				pt: 'Todas as votações nominais do Parlamento Europeu desde 2004, redesenhadas como redes, em que dois eurodeputados ficam mais próximos quanto mais semelhantes forem as suas votações. A exposição está em itinerância no Festival Política.',
+				en: 'Every roll-call vote of the European Parliament since 2004, redrawn as networks, in which two MEPs sit closer together the more alike their votes are. The exhibition is touring with Festival Política.',
+				es: 'Todas las votaciones nominales del Parlamento Europeo desde 2004, redibujadas como redes, en las que dos eurodiputados quedan más cerca cuanto más parecidas son sus votaciones. La exposición está en itinerancia en el Festival Política.',
 			},
 			gallery: [
 				'/assets/images/constelacoes/4.jpg',
@@ -172,29 +173,6 @@ window.SITE = {
 				'/assets/images/constelacoes/5.jpg',
 				'/assets/images/constelacoes/3.jpg',
 			],
-			galleryAlt: {
-				pt: [
-					'Visita guiada à exposição, em frente aos painéis das redes por área política.',
-					'Visitante a apontar para a rede impressa, com fios a ligar os eurodeputados.',
-					'Pormenor do painel «Agricultura e desenvolvimento rural», com a rede e o texto explicativo.',
-					'Grupo de visitantes em frente à parede central da exposição.',
-					'Vista da sala da exposição, com os painéis das redes no piso superior.',
-				],
-				en: [
-					'Guided tour of the exhibition, in front of the policy-area network panels.',
-					'A visitor pointing at the printed network, threads linking the MEPs.',
-					'Detail of the Agriculture and rural development panel, network and explanatory text.',
-					"Visitors in front of the exhibition's centre wall.",
-					'View of the exhibition room, with the network panels on the upper floor.',
-				],
-				es: [
-					'Visita guiada a la exposición, frente a los paneles de redes por área política.',
-					'Una visitante señalando la red impresa, con hilos que unen a los eurodiputados.',
-					'Detalle del panel Agricultura y desarrollo rural, con la red y el texto explicativo.',
-					'Grupo de visitantes frente a la pared central de la exposición.',
-					'Vista de la sala de la exposición, con los paneles de redes en el piso superior.',
-				],
-			},
 		},
 
 		{
@@ -264,9 +242,9 @@ window.SITE = {
 			venue: 'Feedzai',
 			thumb: '/assets/images/thumbnails/fraud.webp',
 			description: {
-				pt: 'Sobre o uso de metáforas visuais para revelar padrões em dados de transações financeiras.',
-				en: 'On using visual metaphors to reveal patterns in financial transaction data.',
-				es: 'Sobre el uso de metáforas visuales para revelar patrones en datos de transacciones financieras.',
+				pt: 'Artigo técnico sobre o uso de metáforas visuais para revelar padrões em dados de transações financeiras.',
+				en: 'Technical article on using visual metaphors to reveal patterns in financial transaction data.',
+				es: 'Artículo técnico sobre el uso de metáforas visuales para revelar patrones en datos de transacciones financieras.',
 			},
 		},
 
@@ -280,9 +258,9 @@ window.SITE = {
 			venue: 'Routledge',
 			thumb: '/assets/images/thumbnails/farright.webp',
 			description: {
-				pt: 'Sobre o papel dos meios de comunicação na normalização da extrema-direita em Portugal e Espanha.',
-				en: 'On the role of the media in normalizing the far right in Portugal and Spain.',
-				es: 'Sobre el papel de los medios en la normalización de la extrema derecha en Portugal y España.',
+				pt: 'Capítulo de livro sobre o papel dos meios de comunicação na normalização da extrema-direita em Portugal e Espanha.',
+				en: 'Book chapter on the role of the media in normalizing the far right in Portugal and Spain.',
+				es: 'Capítulo de libro sobre el papel de los medios en la normalización de la extrema derecha en Portugal y España.',
 			},
 		},
 
@@ -292,13 +270,13 @@ window.SITE = {
 			year: 2025,
 			title: 'A cultura dos jogos na construção da manosfera',
 			url: 'https://redeanticapitalista.net/a-cultura-dos-jogos-na-construcao-da-manosfera/',
-			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
+			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
 			venue: 'RA Zine',
 			thumb: '/assets/images/thumbnails/razine2.webp',
 			description: {
-				pt: 'Sobre a cultura dos videojogos como espaço de socialização da manosfera.',
-				en: 'On video game culture as a space for the socialization of the manosphere.',
-				es: 'Sobre la cultura de los videojuegos como espacio de socialización de la manosfera.',
+				pt: 'Artigo de opinião sobre a cultura dos videojogos como espaço de socialização da manosfera.',
+				en: 'Opinion piece on video game culture as a space for the socialization of the manosphere.',
+				es: 'Artículo de opinión sobre la cultura de los videojuegos como espacio de socialización de la manosfera.',
 			},
 		},
 
@@ -308,13 +286,13 @@ window.SITE = {
 			year: 2024,
 			title: 'Onde está a ética do Pulsómetro?',
 			url: 'https://www.publico.pt/2024/02/17/opiniao/opiniao/onde-etica-pulsometro-2080435',
-			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
+			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
 			venue: 'Público',
 			thumb: '/assets/images/thumbnails/publico2.webp',
 			description: {
-				pt: "Sobre a ética do Pulsómetro eleitoral da CNN, um 'indicador de sentimento nas redes sociais' usado nas legislativas de 2024.",
-				en: "On the ethics of CNN Portugal's Pulsómetro, an 'electoral sentiment indicator of social media' promoted during the 2024 general elections.",
-				es: "Sobre la ética del Pulsómetro electoral de CNN Portugal, un 'indicador de sentimiento en redes sociales' utilizado en las elecciones generales de 2024.",
+				pt: "Artigo de opinião sobre a ética do Pulsómetro eleitoral da CNN, um 'indicador de sentimento nas redes sociais' usado nas legislativas de 2024.",
+				en: "Opinion piece on the ethics of CNN Portugal's Pulsómetro, an 'electoral sentiment indicator of social media' promoted during the 2024 general elections.",
+				es: "Artículo de opinión sobre la ética del Pulsómetro electoral de CNN Portugal, un 'indicador de sentimiento en redes sociales' utilizado en las elecciones generales de 2024.",
 			},
 		},
 
@@ -328,9 +306,9 @@ window.SITE = {
 			venue: 'FFMS',
 			thumb: '/assets/images/thumbnails/abstencao.webp',
 			description: {
-				pt: 'Sobre a abstenção eleitoral em Portugal, publicado pela Fundação Francisco Manuel dos Santos.',
-				en: 'On electoral abstention in Portugal, published by Fundação Francisco Manuel dos Santos.',
-				es: 'Sobre la abstención electoral en Portugal, publicado por la Fundação Francisco Manuel dos Santos.',
+				pt: 'Policy paper sobre a abstenção eleitoral em Portugal, publicado pela Fundação Francisco Manuel dos Santos.',
+				en: 'Policy paper on electoral abstention in Portugal, published by Fundação Francisco Manuel dos Santos.',
+				es: 'Policy paper sobre la abstención electoral en Portugal, publicado por la Fundação Francisco Manuel dos Santos.',
 			},
 		},
 
@@ -338,14 +316,15 @@ window.SITE = {
 			id: 'digitaltraces',
 			shelf: 'textos',
 			year: 2025,
-			title: 'Digital Traces',
+			title: 'DigitalTraces',
 			url: 'https://diglib.eg.org/items/fb9c677a-8d79-43c6-8754-9d08834771e2',
-			type: { pt: 'artigo científico', en: 'short paper', es: 'artículo científico' },
+			type: { pt: 'artigo científico', en: 'scientific paper', es: 'artículo científico' },
 			venue: 'EuroVis',
+			thumb: '/assets/images/thumbnails/digitaltraces.webp',
 			description: {
-				pt: 'Uma ferramenta visual para detetar fraude na atividade digital dos utilizadores.',
-				en: "A visual analytics tool for spotting fraud in users' digital activity.",
-				es: 'Una herramienta visual para detectar fraude en la actividad digital de los usuarios.',
+				pt: 'Artigo científico sobre uma ferramenta visual para detetar fraude na atividade digital dos utilizadores.',
+				en: "Scientific paper on a visual analytics tool for spotting fraud in users' digital activity.",
+				es: 'Artículo científico sobre una herramienta visual para detectar fraude en la actividad digital de los usuarios.',
 			},
 		},
 
@@ -357,10 +336,11 @@ window.SITE = {
 			url: 'https://www.culturgest.pt/pt/media/bomba-relogio-da-abstencao/',
 			type: 'debate',
 			venue: 'Culturgest',
+			thumb: '/assets/images/thumbnails/bombarelogio.webp',
 			description: {
-				pt: 'Debate sobre as motivações da abstenção, a partir da investigação da Divergente.',
-				en: "A debate on why people abstain from voting, based on Divergente's investigation.",
-				es: 'Debate sobre las motivaciones de la abstención, a partir de la investigación de Divergente.',
+				pt: 'Debate sobre as motivações da abstenção eleitoral.',
+				en: 'A debate on why people abstain from voting.',
+				es: 'Debate sobre las motivaciones de la abstención electoral.',
 			},
 		},
 
@@ -371,7 +351,7 @@ window.SITE = {
 			year: 2025,
 			title: 'Título',
 			url: 'https://…',
-			type: { pt: 'opinião', en: 'opinion', es: 'opinión' },
+			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
 			venue: 'Onde saiu',
 			thumb: '/assets/images/thumbnails/ficheiro.webp',
 			description: {

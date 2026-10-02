@@ -55,7 +55,6 @@ function entry(p, lang, ui) {
 		attrs.push(`data-modal-description="${esc(long + awards(p, lang, true))}"`);
 	}
 	if (p.thumb) attrs.push(`data-thumb="${esc(p.thumb)}"`);
-	if (p.popup) attrs.push('data-modal');
 	if (p.flagship) attrs.push('data-flagship');
 	if (p.gallery && p.gallery.length) {
 		attrs.push(`data-gallery="${esc(p.gallery.join('|'))}"`);
@@ -204,7 +203,6 @@ ${SITE.shelves.map((s) => shelf(s, lang, ui)).filter(Boolean).join('\n')}
 					<h2 class="projectModal__title" id="projectModalTitle"></h2>
 					<button class="projectModal__close" type="button" aria-label="${esc(ui.close)}" data-close>×</button>
 				</div>
-				<img class="projectModal__thumb" alt="" hidden>
 				<div class="projectModal__gallery" role="group" aria-label="${esc(ui.gallery)}" hidden></div>
 				<div class="projectModal__galleryNav" hidden>
 					<button type="button" data-gallery-step="-1" aria-label="${esc(ui.galleryPrev)}">←</button>
@@ -212,6 +210,10 @@ ${SITE.shelves.map((s) => shelf(s, lang, ui)).filter(Boolean).join('\n')}
 				</div>
 				<p class="projectModal__description"></p>
 				<a class="projectModal__link" target="_blank" rel="noopener noreferrer">${esc(ui.open)} ↗</a>
+				<div class="projectModal__nav">
+					<button type="button" data-project-step="-1" data-label="${esc(ui.prevProject)}"><span aria-hidden="true">←</span> <span class="projectModal__navTitle"></span></button>
+					<button type="button" data-project-step="1" data-label="${esc(ui.nextProject)}"><span class="projectModal__navTitle"></span> <span aria-hidden="true">→</span></button>
+				</div>
 			</div>
 		</div>
 		<script src="/assets/js/main.js" defer></script>

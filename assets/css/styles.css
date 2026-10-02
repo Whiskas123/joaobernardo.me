@@ -300,16 +300,18 @@ li {
 	display: grid;
 	/* The image row takes what it needs but gives way first on short screens. */
 	grid-template-rows: minmax(0, auto) auto;
-	align-content: start;
-	/* Centred in the left column, and every print centred on the same axis. */
+	/* Centred in the space the left column has left, both ways, and every print
+	   centred on the same axis. The width follows the column, so the pile grows
+	   on a big screen instead of sitting small in a corner of it. */
+	align-content: center;
 	justify-items: center;
 	align-self: center;
 	width: 100%;
 	margin: 2rem 0 0;
-	max-width: 22rem;
+	max-width: min(44rem, 90%);
 	opacity: 0;
 	transition: opacity 200ms ease-out;
-	text-align: center;
+	text-align: left;
 }
 
 .preview.is-visible {
@@ -331,7 +333,7 @@ li {
 
 .preview__description {
 	margin-top: 1rem;
-	font-size: 1rem;
+	font-size: 0.85rem;
 	line-height: 1.4;
 }
 
@@ -367,17 +369,34 @@ li {
    is what the rest of the first screen needs (header ≈ 13rem, margins 3rem,
    three lines of text ≈ 6rem, bubbles 17.5rem) — raise it if the intro grows. */
 .preview[data-mode='stack'] {
-	grid-template-rows: max(4rem, min(30vh, 100vh - 39.5rem)) auto;
+	--pile-gap: clamp(2rem, 6vh, 4.5rem);
+	grid-template-rows: max(4rem, min(42vh, 100vh - 37.5rem - var(--pile-gap), 24rem)) auto;
+	/* The tilted prints underneath rise above the row at their corners, more
+	   the bigger they are; this gap, which grows with the screen, keeps them
+	   off the intro text. */
+	margin-top: var(--pile-gap);
 }
 
 .preview[data-mode='stack'] .preview__thumb,
 .preview[data-mode='stack'] .preview__next {
 	align-self: end;
+	/* Every print is as tall as the row, whatever its format: the preview is
+	   wide enough for a landscape at that height. Capping the width instead
+	   made landscapes much shorter than portraits, and since they all stand on
+	   the row's bottom edge the landscapes looked dropped to the floor.
+	   `height`, not `max-height`: a maximum never enlarges, so a thumbnail whose
+	   file is smaller than the row stayed at its own small size. */
+	height: 100%;
+	width: auto;
+	max-height: none;
+	object-fit: contain;
 }
 
-/* Room for the corners of the tilted prints, so they do not dip into the text. */
+/* Room for the corners of the tilted prints, so they do not dip into the text.
+   The text keeps a reading width of its own, centred under the pile. */
 .preview[data-mode='stack'] .preview__description {
 	margin-top: 1.5rem;
+	width: min(100%, 22rem);
 }
 
 .preview__description {
@@ -458,9 +477,10 @@ li {
 	text-underline-offset: 0.2em;
 }
 
-/* The line that fills up until the next change; it waits while a title is
-   hovered and starts over when the pile carries on. */
-.preview.is-idle:not(.is-hovering) .preview__description::before {
+/* The line that fills up until the next change. Its place is always kept,
+   empty, so the text does not move when the line stops for a hover and comes
+   back afterwards. */
+.preview[data-mode='stack'] .preview__description::before {
 	content: '';
 	display: block;
 	height: 2px;
@@ -468,6 +488,12 @@ li {
 	background: currentColor;
 	opacity: 0.5;
 	transform-origin: left;
+	transform: scaleX(0);
+}
+
+/* It only runs while the pile is cycling: it waits while a title is hovered
+   and starts over when the pile carries on. */
+.preview.is-idle:not(.is-hovering) .preview__description::before {
 	animation: idleProgress var(--idle-ms, 4000ms) linear both;
 }
 
@@ -661,16 +687,21 @@ li {
 
 .projectModal__card {
 	position: relative;
-	max-width: 24rem;
+	/* One size for every popup, whatever it holds, so the title at the top and
+	   the previous/next row at the bottom never move from one project to the
+	   next. The side padding is room for the photos' shadows (see the gallery). */
+	display: flex;
+	flex-direction: column;
+	max-width: 58rem;
 	width: 100%;
-	max-height: 88vh;
+	height: min(88vh, 44rem);
+	padding: 0 1rem;
 	overflow-y: auto;
 	color: var(--color-purple);
 }
 
-/* Projects with a photo gallery need room for the strip to read. */
-.projectModal--wide .projectModal__card {
-	max-width: 56rem;
+.projectModal__card > * {
+	flex: none;
 }
 
 .projectModal__close {
@@ -700,27 +731,20 @@ li {
 	line-height: 1.25;
 }
 
-.projectModal__thumb {
-	display: block;
-	max-width: 100%;
-	max-height: 40vh;
-	margin: 0 0 1rem;
-}
-
-.projectModal__thumb[hidden] {
-	display: none;
-}
-
 /* Photos vary between portrait and landscape, so fix the height and let each
    one take the width it needs; the strip scrolls sideways. */
 .projectModal__gallery {
 	display: flex;
 	gap: 0.75rem;
-	margin: 0 0 1.25rem;
 	overflow-x: auto;
 	overscroll-behavior-x: contain;
 	scroll-snap-type: x mandatory;
-	padding-bottom: 0.5rem;
+	/* A scrolling box clips whatever leaves it, shadows included. The padding
+	   gives the photos' shadows room inside the box; the negative margins put
+	   the photos back in line with the text. */
+	padding: 1rem 1rem 2rem;
+	margin: -1rem -1rem 0;
+	scroll-padding-inline: 1rem;
 }
 
 .projectModal__gallery[hidden] {
@@ -731,7 +755,7 @@ li {
 	display: flex;
 	justify-content: flex-end;
 	gap: 0.5rem;
-	margin: -0.5rem 0 1rem;
+	margin: -1.25rem 0 1rem;
 }
 
 .projectModal__galleryNav[hidden] {
@@ -768,7 +792,56 @@ li {
 }
 
 .projectModal__link {
+	align-self: flex-start;
+	margin-bottom: 2rem;
 	font-weight: 700;
+}
+
+/* Previous / next project, each arrow naming where it leads. */
+.projectModal__nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 1.5rem;
+	/* Pinned to the bottom of the card. */
+	margin-top: auto;
+	padding: 1rem 0;
+	border-top: 1px solid rgba(33, 8, 88, 0.15);
+}
+
+.projectModal__nav[hidden] {
+	display: none;
+}
+
+.projectModal__nav button {
+	/* The arrow stays beside the title even when the title wraps. */
+	display: flex;
+	align-items: baseline;
+	gap: 0.4em;
+	background: none;
+	border: 0;
+	padding: 0;
+	max-width: 48%;
+	font-family: inherit;
+	font-size: 0.9rem;
+	line-height: 1.3;
+	color: var(--color-purple);
+	opacity: 0.65;
+	text-align: left;
+}
+
+.projectModal__nav button:last-child {
+	text-align: right;
+}
+
+.projectModal__nav button:hover,
+.projectModal__nav button:focus-visible {
+	opacity: 1;
+}
+
+/* The prints on the pile open their project's popup. */
+.preview__thumb,
+.preview__next {
+	cursor: pointer !important;
 }
 
 body.is-modal-open {
@@ -778,6 +851,14 @@ body.is-modal-open {
 @media (max-width: 768px) {
 	.projectModal__galleryItem {
 		height: 12rem;
+	}
+
+	/* A lone picture has nothing to scroll to, so it shrinks to the width of a
+	   phone instead of sticking out and bringing up a scrollbar. */
+	.projectModal__galleryItem:only-child {
+		height: auto;
+		max-height: 12rem;
+		max-width: 100%;
 	}
 }
 

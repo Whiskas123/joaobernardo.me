@@ -291,7 +291,11 @@ projectLinks.forEach((link) => {
 		showIdle();
 	};
 	link.addEventListener('mouseenter', enter);
-	link.addEventListener('focus', enter);
+	// Keyboard focus only: the popup hands focus back to the link when it
+	// closes, and that should not count as hovering it.
+	link.addEventListener('focus', () => {
+		if (link.matches(':focus-visible')) enter();
+	});
 	link.addEventListener('mouseleave', leave);
 	link.addEventListener('blur', leave);
 });
@@ -311,9 +315,12 @@ showIdle();
 
 // Auto-tag outbound links so Umami records clicks before navigation.
 // https://umami.is/docs/track-outbound-links
+// The project links are left out: clicking one opens its popup, and it is the
+// popup's own "open" link (tagged in openModal) that leaves the site.
 (() => {
 	const eventName = 'outbound-link-click';
 	document.querySelectorAll('a').forEach((a) => {
+		if (a.closest('.section')) return;
 		if (a.host && a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
 			a.setAttribute('data-umami-event', eventName);
 			a.setAttribute('data-umami-event-url', a.href);
@@ -324,14 +331,14 @@ showIdle();
 
 // ── Project popup ────────────────────────────────────────────────────────────
 
-// Project popup: a modal instead of navigating. Always on mobile; on desktop
-// only for links that opt in with `popup: true` (projects with a gallery or a
-// longer description).
+// Project popup: clicking a project — its title in the list or its print on
+// the pile — opens a modal instead of navigating; the modal links out, and
+// steps to the previous and next project in list order.
 (function () {
 	const modal = document.querySelector('.projectModal');
 	if (!modal) return;
-	const mobileMQ = window.matchMedia('(max-width: 768px)');
 	let lastFocused = null;
+	let openLink = null; // the project the popup is showing
 
 	const gallery = modal.querySelector('.projectModal__gallery');
 	const galleryNav = modal.querySelector('.projectModal__galleryNav');
@@ -359,12 +366,26 @@ showIdle();
 				behavior: reducedMotion.matches ? 'auto' : 'smooth',
 			});
 		}
+		const projectStep = e.target.closest('[data-project-step]');
+		if (projectStep) stepProject(Number(projectStep.dataset.projectStep));
 	});
 
+	// Previous / next project in list order, wrapping round at the ends.
+	function neighbour(link, step) {
+		const count = projectLinks.length;
+		return projectLinks[(projectLinks.indexOf(link) + step + count) % count];
+	}
+
+	function stepProject(step) {
+		if (openLink && projectLinks.length > 1) openModal(neighbour(openLink, step));
+	}
+
 	// `data-gallery` holds pipe-separated image paths; captions are optional and
-	// line up with them positionally in `data-gallery-alt`.
+	// line up with them positionally in `data-gallery-alt`. A project without a
+	// gallery shows its thumbnail in the same strip, so every popup has the same
+	// shape whatever the picture's proportions.
 	function fillGallery(galleryEl, link, title) {
-		const sources = (link.dataset.gallery || '')
+		const sources = (link.dataset.gallery || link.dataset.thumb || '')
 			.split('|')
 			.map((s) => s.trim())
 			.filter(Boolean);
@@ -379,7 +400,7 @@ showIdle();
 			const img = document.createElement('img');
 			img.className = 'projectModal__galleryItem';
 			img.src = src;
-			img.alt = alts[i] || `${title} (${i + 1}/${sources.length})`;
+			img.alt = alts[i] || (sources.length > 1 ? `${title} (${i + 1}/${sources.length})` : title);
 			img.loading = i === 0 ? 'eager' : 'lazy';
 			img.decoding = 'async';
 			// The strip grows as photos load, which moves where its end is.
@@ -391,32 +412,32 @@ showIdle();
 	}
 
 	function openModal(link) {
-		const thumb = link.dataset.thumb || '';
 		// The hover preview shares the left column with the bubbles, so it keeps
 		// the short copy; the modal has room for a fuller one when it exists.
 		const description = link.dataset.modalDescription || link.dataset.description || '';
 		const title = link.dataset.title || '';
-		const hasGallery = Boolean(link.dataset.gallery);
 
 		modal.querySelector('.projectModal__title').textContent = title;
-
-		// The gallery replaces the single thumbnail when a project has one.
-		const thumbEl = modal.querySelector('.projectModal__thumb');
-		if (thumb && !hasGallery) {
-			thumbEl.src = thumb;
-			thumbEl.alt = title;
-			thumbEl.hidden = false;
-		} else {
-			thumbEl.removeAttribute('src');
-			thumbEl.hidden = true;
-		}
-
-		fillGallery(modal.querySelector('.projectModal__gallery'), link, title);
-		modal.classList.toggle('projectModal--wide', hasGallery);
+		fillGallery(gallery, link, title);
 
 		modal.querySelector('.projectModal__description').innerHTML = description;
-		modal.querySelector('.projectModal__link').href = link.href;
+		const out = modal.querySelector('.projectModal__link');
+		out.href = link.href;
+		out.setAttribute('data-umami-event', 'outbound-link-click');
+		out.setAttribute('data-umami-event-url', link.href);
+
+		// Each arrow names the project it leads to.
+		modal.querySelectorAll('[data-project-step]').forEach((button) => {
+			const target = neighbour(link, Number(button.dataset.projectStep));
+			button.querySelector('.projectModal__navTitle').textContent = target.dataset.title || '';
+			button.setAttribute('aria-label', `${button.dataset.label}: ${target.dataset.title || ''}`);
+		});
+		modal.querySelector('.projectModal__nav').hidden = projectLinks.length < 2;
+
+		const wasClosed = modal.hidden;
+		openLink = link;
 		modal.hidden = false;
+		modal.querySelector('.projectModal__card').scrollTop = 0;
 		document.body.classList.add('is-modal-open');
 
 		// The hover preview in the left column would otherwise stay up behind it.
@@ -426,13 +447,17 @@ showIdle();
 		markShown(null);
 		hidePreview();
 
-		lastFocused = document.activeElement;
-		modal.querySelector('.projectModal__close').focus();
+		// Stepping between projects keeps focus on the arrow that was used.
+		if (wasClosed) {
+			lastFocused = document.activeElement;
+			modal.querySelector('.projectModal__close').focus();
+		}
 	}
 
 	function closeModal() {
 		if (modal.hidden) return;
 		modal.hidden = true;
+		openLink = null;
 		document.body.classList.remove('is-modal-open');
 		previewBusy = false;
 		showIdle();
@@ -441,7 +466,19 @@ showIdle();
 	}
 
 	document.addEventListener('keydown', (e) => {
+		if (modal.hidden) return;
 		if (e.key === 'Escape') closeModal();
+		if (e.key === 'ArrowLeft') stepProject(-1);
+		if (e.key === 'ArrowRight') stepProject(1);
+	});
+
+	// A print on the pile opens its own project: the top one is the project
+	// being shown, the ones under it are the next in line.
+	preview?.addEventListener('click', (e) => {
+		const depth = pile.indexOf(e.target);
+		if (depth < 0) return;
+		const link = depth === 0 ? shownLink : idleLinks[(idleIndex + depth) % idleLinks.length];
+		if (link) openModal(link);
 	});
 
 	// Use capture phase so we can prevent navigation before the link sees the click.
@@ -450,7 +487,8 @@ showIdle();
 		(e) => {
 			const link = e.target.closest('.section a[href]');
 			if (!link) return;
-			if (!mobileMQ.matches && !link.hasAttribute('data-modal')) return;
+			// Cmd/Ctrl/Shift-click still opens the project itself in a new tab.
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
 			e.preventDefault();
 			e.stopPropagation();
 			e.stopImmediatePropagation();
