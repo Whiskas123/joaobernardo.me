@@ -79,7 +79,9 @@ if (idleMode === 'stack' && window.matchMedia('(prefers-reduced-motion: reduce)'
 	idleMode = 'featured';
 }
 
-const idleLinks = projectLinks.filter((link) => link.dataset.thumb);
+// The projects the pile works through: only those site.js opts in with
+// `pile: true` (and that have a thumbnail to show).
+const idleLinks = projectLinks.filter((link) => link.dataset.thumb && link.hasAttribute('data-pile'));
 const featuredLink = idleLinks.find((link) => link.hasAttribute('data-flagship')) || idleLinks[0];
 const cycling = idleMode === 'stack' && idleLinks.length > 1;
 let idleIndex = Math.max(0, idleLinks.indexOf(featuredLink));
@@ -169,7 +171,9 @@ function markShown(link) {
 // Puts `link` on top, with the projects after it underneath, all at once.
 function fillPile(link) {
 	showPreview(link);
-	if (!cycling || !link.dataset.thumb) {
+	// A project that is not in the pile (no thumbnail, or no `pile: true`) is
+	// shown on its own when hovered, without the prints underneath.
+	if (!cycling || !idleLinks.includes(link)) {
 		preview.classList.remove('is-idle');
 		return Promise.resolve();
 	}
@@ -302,7 +306,8 @@ projectLinks.forEach((link) => {
 
 // Preload preview thumbnails so they appear instantly on hover.
 if (canHover) {
-	idleLinks.forEach((link) => {
+	projectLinks.forEach((link) => {
+		if (!link.dataset.thumb) return;
 		const img = new Image();
 		img.src = link.dataset.thumb;
 	});

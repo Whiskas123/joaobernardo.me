@@ -397,6 +397,11 @@ li {
 .preview[data-mode='stack'] .preview__description {
 	margin-top: 1.5rem;
 	width: min(100%, 22rem);
+	/* A fixed height, about four lines. The pile and its text are centred
+	   together in the column, so a caption that was one line longer or shorter
+	   moved the whole block up or down as the projects changed. A longer
+	   caption now runs past this box instead of resizing it. */
+	height: 5.5rem;
 }
 
 .preview__description {

@@ -56,6 +56,7 @@ function entry(p, lang, ui) {
 	}
 	if (p.thumb) attrs.push(`data-thumb="${esc(p.thumb)}"`);
 	if (p.flagship) attrs.push('data-flagship');
+	if (p.pile === true) attrs.push('data-pile');
 	if (p.gallery && p.gallery.length) {
 		attrs.push(`data-gallery="${esc(p.gallery.join('|'))}"`);
 		const alts = t(p.galleryAlt, lang);

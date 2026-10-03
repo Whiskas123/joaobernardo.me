@@ -23,6 +23,9 @@
    venue         opcional. Onde saiu (Público, FFMS, Routledge…). Aparece
                  a seguir ao tipo. Apaga o campo e desaparece.
    thumb         opcional. Imagem que aparece ao passar o rato.
+   pile          opcional. `pile: true` põe o projeto na pilha que roda
+                 sozinha. Sem este campo o projeto fica fora dela: continua
+                 na lista, e a imagem aparece ao passar o rato e no popup.
    description   o texto curto do hover. MÁXIMO DUAS LINHAS — mais do que isso
                  passa por cima das bolhas. { pt, en, es }
    modal         opcional. Texto mais longo, só aparece no popup. { pt, en, es }
@@ -120,6 +123,7 @@ window.SITE = {
 
 		{
 			id: 'tele-textual',
+			pile: true,
 			shelf: 'projetos',
 			year: 2026,
 			flagship: true,
@@ -145,6 +149,7 @@ window.SITE = {
 
 		{
 			id: 'constelacoes',
+			pile: true,
 			shelf: 'projetos',
 			year: 2025,
 			flagship: true,
@@ -177,6 +182,8 @@ window.SITE = {
 
 		{
 			id: 'desalojamento',
+			pile: true,
+			flagship: true,
 			shelf: 'projetos',
 			year: 2025,
 			title: 'DesALojamento',
@@ -196,6 +203,7 @@ window.SITE = {
 
 		{
 			id: 'ruas-do-genero',
+			pile: true,
 			shelf: 'projetos',
 			year: 2022,
 			flagship: true,
@@ -234,6 +242,7 @@ window.SITE = {
 
 		{
 			id: 'cosmos-explorer',
+			pile: false,
 			shelf: 'textos',
 			year: 2026,
 			title: 'Uncovering the Shape of Fraud with Cosmos Explorer',
@@ -250,6 +259,7 @@ window.SITE = {
 
 		{
 			id: 'far-right',
+			pile: true,
 			shelf: 'textos',
 			year: 2026,
 			title: "Media's role in normalizing the far right",
@@ -266,6 +276,7 @@ window.SITE = {
 
 		{
 			id: 'cultura-dos-jogos',
+			pile: false,
 			shelf: 'textos',
 			year: 2025,
 			title: 'A cultura dos jogos na construção da manosfera',
@@ -282,6 +293,8 @@ window.SITE = {
 
 		{
 			id: 'pulsometro',
+			pile: true,
+			flashship: true,
 			shelf: 'textos',
 			year: 2024,
 			title: 'Onde está a ética do Pulsómetro?',
@@ -298,6 +311,7 @@ window.SITE = {
 
 		{
 			id: 'abstencao',
+			pile: true,
 			shelf: 'textos',
 			year: 2023,
 			title: 'Afinal, quantas pessoas se abstêm em Portugal?',
@@ -314,6 +328,7 @@ window.SITE = {
 
 		{
 			id: 'digitaltraces',
+			pile: false,
 			shelf: 'textos',
 			year: 2025,
 			title: 'DigitalTraces',
@@ -330,6 +345,7 @@ window.SITE = {
 
 		{
 			id: 'bomba-relogio-abstencao',
+			pile: false,
 			shelf: 'textos',
 			year: 2024,
 			title: 'A Bomba-Relógio da Abstenção',
@@ -347,6 +363,7 @@ window.SITE = {
 		/* ── MODELO — copia isto para acrescentar um projeto ───────────────────
 		{
 			id: 'nome-curto',
+			pile: true,
 			shelf: 'textos',
 			year: 2025,
 			title: 'Título',
