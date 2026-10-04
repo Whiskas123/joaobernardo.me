@@ -15,6 +15,7 @@ vm.runInNewContext(fs.readFileSync(path.join(__dirname, 'assets/data/site.js'), 
 const SITE = sandbox.window.SITE;
 
 const ORIGIN = 'https://joaobernardo.me';
+const PROJECT_FIELDS = ['id', 'shelf', 'year', 'flagship', 'pile', 'title', 'url', 'type', 'venue', 'thumb', 'description', 'modal', 'gallery', 'galleryAlt', 'awards'];
 const PATHS = { pt: '/', en: '/en/', es: '/es/' };
 
 const esc = (s) =>
@@ -230,6 +231,10 @@ for (const lang of Object.keys(PATHS)) {
 	assert.strictEqual((html.match(/<h1[ >]/g) || []).length, 1, `${lang}: expected exactly one <h1>`);
 	assert(!/undefined|\[object Object\]/.test(html), `${lang}: a field rendered as undefined/[object Object]`);
 	for (const p of SITE.projects) {
+		// A misspelt field name is silently ignored otherwise (a "flashship: true"
+		// once left a project without its star).
+		const unknown = Object.keys(p).filter((key) => !PROJECT_FIELDS.includes(key));
+		assert(!unknown.length, `${p.id}: unknown field(s) ${unknown.join(', ')} — check the spelling`);
 		assert(SITE.shelves.some((s) => s.id === p.shelf), `${p.id}: unknown shelf "${p.shelf}"`);
 		assert(html.includes(esc(t(p.title, lang))), `${lang}: "${p.id}" is missing from the page`);
 	}

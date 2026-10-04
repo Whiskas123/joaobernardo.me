@@ -294,7 +294,7 @@ window.SITE = {
 		{
 			id: 'pulsometro',
 			pile: true,
-			flashship: true,
+			flagship: true,
 			shelf: 'textos',
 			year: 2024,
 			title: 'Onde está a ética do Pulsómetro?',
