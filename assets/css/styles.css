@@ -189,14 +189,15 @@ b{
 }
 
 /* One row per project. The year and the type read first, then the title,
-   which stays flush to the right edge the list has always aligned on. A title
-   too long for the row wraps inside itself rather than being cut. */
+   which stays flush to the right edge the list has always aligned on. When
+   the row is too narrow for both, wrap-reverse puts the title on the line
+   above and the year and type below it. */
 .section ul li a {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: wrap-reverse;
 	justify-content: flex-end;
 	align-items: baseline;
-	gap: 0.45em;
+	gap: 0.15em 0.45em;
 }
 
 .entry__year,
@@ -277,6 +278,9 @@ li {
 .section ul li a::before {
 	content: '↖';
 	flex: none;
+	/* Full-size glyph on a line of smaller type: without this it makes the
+	   year-and-type line taller and pushes it away from a wrapped title. */
+	line-height: 0;
 	opacity: 0;
 	transition: opacity 150ms ease-out, translate 150ms ease-out;
 	translate: -0.2em 0.1em;
@@ -570,7 +574,7 @@ li {
 
 	.section ul {
 		align-items: flex-start;
-		gap: 0.6rem;
+		gap: 1.15rem;
 	}
 
 	.section ul li {
@@ -581,8 +585,15 @@ li {
 		justify-content: flex-start;
 	}
 
+	/* The title always takes a line to itself, which wrap-reverse stacks
+	   above the year, type and star. */
 	.entry__title {
+		flex-basis: 100%;
 		text-align: left;
+	}
+
+	.entry__type {
+		flex: 0 1 auto;
 	}
 
 	ul {
