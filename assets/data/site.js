@@ -354,6 +354,11 @@ window.SITE = {
 				en: 'A debate on why people abstain from voting.',
 				es: 'Debate sobre las motivaciones de la abstención electoral.',
 			},
+			modal: {
+				pt: 'Conversa na Culturgest, no Dia da Europa de 2024, a partir de A Bomba-Relógio da Abstenção, a investigação de jornalismo de dados da DIVERGENTE que cruza a abstenção na União Europeia com a desigualdade, o desemprego e a escolaridade. Com Susana Peralta e moderação das jornalistas da DIVERGENTE.',
+				en: 'A conversation at Culturgest, on Europe Day 2024, based on The Abstention Time Bomb, a data journalism investigation by DIVERGENTE that sets abstention in the European Union against inequality, unemployment and education. With Susana Peralta, moderated by DIVERGENTE journalists.',
+				es: 'Conversación en la Culturgest, en el Día de Europa de 2024, a partir de La bomba de relojería de la abstención, la investigación de periodismo de datos de DIVERGENTE que cruza la abstención en la Unión Europea con la desigualdad, el desempleo y la escolaridad. Con Susana Peralta y moderación de las periodistas de DIVERGENTE.',
+			},
 		},
 
 		/* ── MODELO — copia isto para acrescentar um projeto ───────────────────
