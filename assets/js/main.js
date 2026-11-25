@@ -36,6 +36,33 @@ let previewThumb = preview?.querySelector('.preview__thumb'); // the top print o
 const previewDescription = preview?.querySelector('.preview__description');
 const projectLinks = [...document.querySelectorAll('.section a[href]')];
 
+// The word "Projetos" starts level with the intro text (see .rightColumn).
+// Its disc makes the heading taller than the word, so this lines up the word
+// itself. Both move as the screen or the loaded font changes their size.
+const intro = document.querySelector('.headerDescription');
+const shelfTitle = document.querySelector('.sectionHeader');
+if (intro && shelfTitle) {
+	const word = document.createRange();
+	word.selectNodeContents([...shelfTitle.childNodes].find((n) => n.nodeType === Node.TEXT_NODE) || shelfTitle);
+	const watch = new ResizeObserver(() => {
+		const lift = word.getBoundingClientRect().top - shelfTitle.getBoundingClientRect().top;
+		document.documentElement.style.setProperty('--intro', `${intro.offsetTop - lift}px`);
+	});
+	watch.observe(intro.closest('header'));
+	watch.observe(shelfTitle);
+}
+
+// The scroll hint under the list (see .rightColumn::after) goes once the end
+// of the list is in view, and never shows when the whole list fits.
+const markListEnd = () => {
+	const page = document.documentElement;
+	page.classList.toggle('is-list-end', window.innerHeight + window.scrollY >= page.scrollHeight - 4);
+};
+window.addEventListener('scroll', markListEnd, { passive: true });
+window.addEventListener('resize', markListEnd);
+window.addEventListener('load', markListEnd);
+markListEnd();
+
 // Phones have no hover and hide the preview, so they skip all of this and do
 // not download images they never show.
 const canHover = window.matchMedia('(hover: hover)').matches;
@@ -427,6 +454,8 @@ showIdle();
 
 		modal.querySelector('.projectModal__description').innerHTML = description;
 		const out = modal.querySelector('.projectModal__link');
+		// A project with no url of its own (href="#id") has nothing to open.
+		out.hidden = link.getAttribute('href').startsWith('#');
 		out.href = link.href;
 		out.setAttribute('data-umami-event', 'outbound-link-click');
 		out.setAttribute('data-umami-event-url', link.href);

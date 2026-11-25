@@ -1,6 +1,10 @@
 :root {
 	--color-purple: #210858;
 	--max-width: 42rem;
+	--section-gap: clamp(1rem, 5.3vh, 3rem);
+	/* The bubbles' unit: 0.9rem on a screen 960px tall or more, shrinking
+	   with shorter screens (a raised macOS display scale makes them shorter). */
+	--bubble: clamp(0.6rem, 1.5vh, 0.9rem);
 }
 
 *,
@@ -75,12 +79,16 @@ b{
 	line-height: 112.295%;
 }
 
+/* Fixed, like the left column, so they stay put however long the list gets. */
 .bubbles {
-	position: absolute;
+	position: fixed;
 	bottom: 2rem;
 	left: 2rem;
-	width: 11rem;
+	width: calc(11 * var(--bubble));
 	pointer-events: none;
+	/* Above the sticky left column, which would otherwise take their clicks;
+	   below the project popup. */
+	z-index: 20;
 }
 
 .bubble {
@@ -112,28 +120,29 @@ b{
 	}
 }
 
+/* Everything in multiples of --bubble, so the whole cluster scales together. */
 .bubble--cv {
-	bottom: 11.4rem;
-	left: 3rem;
-	width: 4rem;
-	height: 4rem;
-	font-size: 1.2rem;
+	bottom: calc(11.4 * var(--bubble));
+	left: calc(3 * var(--bubble));
+	width: calc(4 * var(--bubble));
+	height: calc(4 * var(--bubble));
+	font-size: max(0.75rem, calc(1.2 * var(--bubble)));
 }
 
 .bubble--linkedin {
-	bottom: 3.7rem;
+	bottom: calc(3.7 * var(--bubble));
 	left: 0;
-	width: 7rem;
-	height: 7rem;
-	font-size: 1.2rem;
+	width: calc(7 * var(--bubble));
+	height: calc(7 * var(--bubble));
+	font-size: max(0.75rem, calc(1.2 * var(--bubble)));
 }
 
 .bubble--email {
 	bottom: 0;
-	left: 6.5rem;
-	width: 5rem;
-	height: 5rem;
-	font-size: 1.2rem;
+	left: calc(6.5 * var(--bubble));
+	width: calc(5 * var(--bubble));
+	height: calc(5 * var(--bubble));
+	font-size: max(0.75rem, calc(1.2 * var(--bubble)));
 }
 
 .portfolio {
@@ -148,7 +157,7 @@ b{
 	gap: 1rem;
 	font-size: clamp(1.1rem, 3.2vh, 1.8rem);
 	font-weight: 700;
-	margin-top: clamp(1rem, 5.3vh, 3rem);
+	margin-top: var(--section-gap);
 	margin-bottom: clamp(0.5rem, 3.5vh, 2rem);
 	text-align: right;
 
@@ -202,8 +211,19 @@ b{
 
 .entry__year,
 .entry__type,
+.entry__badge,
 .entry__star {
 	flex: none;
+}
+
+/* Type of work. The colour comes from site.js (`typeColors`). */
+.entry__badge {
+	font-size: 0.72em;
+	line-height: 1.35;
+	padding: 0.05em 0.55em;
+	border-radius: 1em;
+	background: var(--badge);
+	white-space: nowrap;
 }
 
 .entry__year {
@@ -217,12 +237,18 @@ b{
 	opacity: 0.6;
 }
 
+/* On desktop the star leads the line; on a phone it goes back to the end.
+   The hover arrow stays ahead of it. */
 .entry__star {
+	order: -1;
 	font-size: 0.82em;
 	line-height: 1;
 }
 
+/* The title always takes a line to itself, which wrap-reverse stacks above
+   the year, type and star. */
 .entry__title {
+	flex-basis: 100%;
 	text-align: right;
 }
 
@@ -245,22 +271,51 @@ b{
 	padding: 1rem clamp(1rem, 3vw, 2rem);
 }
 
-/* The bubbles are pinned to the bottom-left of the first screen (their cluster
-   reaches 17.4rem up from it), so the left column stops above them and the
-   preview shrinks into whatever height is left. */
+/* The bubbles are pinned to the bottom-left of the screen (their cluster
+   reaches 2rem + 15.4 bubble units up from it), so the left column stops
+   above them and the preview shrinks into whatever height is left. It stays
+   put while the list on the right scrolls, so the preview is always beside
+   the hovered project. */
 .leftColumn {
+	position: sticky;
+	top: 1rem;
 	display: flex;
 	flex-direction: column;
 	height: calc(100vh - 2rem);
-	padding-bottom: 17.5rem;
+	padding-bottom: calc(2rem + 15.5 * var(--bubble));
 }
 
+/* "Projetos" starts level with the intro text ("Chamo-me…"): --intro is that
+   text's distance from the top, set by main.js. The rest of the list scrolls. */
 .rightColumn {
-	min-height: calc(100vh - 2rem);
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+	padding-top: max(0px, var(--intro, 0px) - var(--section-gap));
 	padding-bottom: clamp(1rem, 2rem, 3rem);
+}
+
+/* Scroll hint: while the list runs on below the screen, its bottom edge fades
+   out and an arrow points down. main.js adds .is-list-end once the end of the
+   list is in view, and both go. To keep only the fade, delete `content: '↓'`
+   and put `content: ''` in its place. */
+.rightColumn::after {
+	content: '↓';
+	position: sticky;
+	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	height: 5rem;
+	margin-top: -5rem;
+	padding-bottom: 0.3rem;
+	font-size: 1.1rem;
+	color: rgba(33, 8, 88, 0.5);
+	/* Solid at the bottom, so the arrow never sits on a faded title. */
+	background: linear-gradient(rgba(255, 255, 255, 0), #fff 60%);
+	pointer-events: none;
+	transition: opacity 200ms ease-out;
+}
+
+.is-list-end .rightColumn::after {
+	opacity: 0;
 }
 
 
@@ -277,6 +332,7 @@ li {
    same baseline as the year rather than stacking above it. */
 .section ul li a::before {
 	content: '↖';
+	order: -2;
 	flex: none;
 	/* Full-size glyph on a line of smaller type: without this it makes the
 	   year-and-type line taller and pushes it away from a wrapped title. */
@@ -371,10 +427,11 @@ li {
    its bottom edge: a row sized by its content changed height every time a
    portrait entered or left the pile, and everything jumped with it. The 39.5rem
    is what the rest of the first screen needs (header ≈ 13rem, margins 3rem,
-   three lines of text ≈ 6rem, bubbles 17.5rem) — raise it if the intro grows. */
+   three lines of text ≈ 6rem, bubbles 17.5 at full size) — raise it if the
+   intro grows. */
 .preview[data-mode='stack'] {
 	--pile-gap: clamp(2rem, 6vh, 4.5rem);
-	grid-template-rows: max(4rem, min(42vh, 100vh - 37.5rem - var(--pile-gap), 24rem)) auto;
+	grid-template-rows: max(4rem, min(42vh, 100vh - 22rem - 15.5 * var(--bubble) - var(--pile-gap), 24rem)) auto;
 	/* The tilted prints underneath rise above the row at their corners, more
 	   the bigger they are; this gap, which grows with the screen, keeps them
 	   off the intro text. */
@@ -545,12 +602,19 @@ li {
 	}
 
 	.leftColumn {
+		position: static;
 		display: block;
 		height: auto;
 		padding-bottom: 0;
 	}
 
+	/* On a phone the whole page scrolls, as phones always do. */
+	.rightColumn::after {
+		display: none;
+	}
+
 	.rightColumn {
+		padding-top: 0;
 		min-height: 0;
 		display: block;
 		padding-bottom: 1rem;
@@ -585,15 +649,16 @@ li {
 		justify-content: flex-start;
 	}
 
-	/* The title always takes a line to itself, which wrap-reverse stacks
-	   above the year, type and star. */
 	.entry__title {
-		flex-basis: 100%;
 		text-align: left;
 	}
 
 	.entry__type {
 		flex: 0 1 auto;
+	}
+
+	.entry__star {
+		order: 0;
 	}
 
 	ul {

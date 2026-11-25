@@ -8,7 +8,7 @@
 
    ── COMO ADICIONAR UM PROJETO ──────────────────────────────────────────────
    Copia um bloco da lista `projects` e muda os campos. Só `id`, `shelf`,
-   `year`, `title` e `url` são obrigatórios. A lista é ordenada sozinha por
+   `year` e `title` são obrigatórios. A lista é ordenada sozinha por
    ano (mais recente primeiro) — não é preciso pôr na ordem certa.
 
    ── CAMPOS ─────────────────────────────────────────────────────────────────
@@ -18,8 +18,10 @@
    flagship      true põe uma ★ ao lado do título. Usa com parcimónia.
    title         "texto" se for igual nas três línguas,
                  ou { pt: "...", en: "...", es: "..." } se mudar
-   url           idem — "texto" ou { pt, en, es }
-   type          o tipo de projeto que aparece na linha. "texto" ou { pt, en, es }
+   url           opcional. idem — "texto" ou { pt, en, es }. Sem url, o popup
+                 abre na mesma mas sem o link "Abrir ↗".
+   type          o tipo de trabalho, como badge colorida: um id de `types`
+                 (ex.: 'exposicao') ou vários (ex.: ['instalacao', 'arquivo'])
    venue         opcional. Onde saiu (Público, FFMS, Routledge…). Aparece
                  a seguir ao tipo. Apaga o campo e desaparece.
    thumb         opcional. Imagem que aparece ao passar o rato.
@@ -118,6 +120,32 @@ window.SITE = {
 		},
 	},
 
+	/* ── Tipos de trabalho ─────────────────────────────────────────────────
+	   Cada projeto usa um ou mais destes ids no campo `type`, e cada um
+	   aparece como uma badge colorida. A cor vem de `typeColors`: tipos com a
+	   mesma cor leem-se como da mesma família. Para um tipo novo, acrescenta
+	   uma linha aqui (e uma cor, se for de uma família nova).                */
+	typeColors: {
+		academico: '#dbe6ff',
+		exposicao: '#ffe0c4',
+		ensaio: '#d5f2dc',
+		opiniao: '#ffd8e2',
+		debate: '#fff0b0',
+		arquivo: '#e8ddff',
+	},
+	types: {
+		'artigo-cientifico': { color: 'academico', pt: 'artigo científico', en: 'scientific paper', es: 'artículo científico' },
+		'policy-paper':      { color: 'academico', pt: 'policy paper' },
+		'capitulo-livro':    { color: 'academico', pt: 'capítulo de livro', en: 'book chapter', es: 'capítulo de libro' },
+		'artigo-tecnico':    { color: 'academico', pt: 'artigo técnico', en: 'technical article', es: 'artículo técnico' },
+		'exposicao':         { color: 'exposicao', pt: 'exposição', en: 'exhibition', es: 'exposición' },
+		'instalacao':        { color: 'exposicao', pt: 'instalação', en: 'installation', es: 'instalación' },
+		'ensaio-visual':     { color: 'ensaio', pt: 'ensaio visual', en: 'visual essay', es: 'ensayo visual' },
+		'opiniao':           { color: 'opiniao', pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
+		'debate':            { color: 'debate', pt: 'debate' },
+		'arquivo':           { color: 'arquivo', pt: 'arquivo', en: 'archive', es: 'archivo' },
+	},
+
 	/* ── Projetos ─────────────────────────────────────────────────────────── */
 	projects: [
 
@@ -133,7 +161,7 @@ window.SITE = {
 				en: 'https://teletext.joaobernardo.me/en',
 				es: 'https://teletext.joaobernardo.me/en',
 			},
-			type: { pt: 'instalação e site', en: 'installation and website', es: 'instalación y página web' },
+			type: ['instalacao', 'arquivo'],
 			thumb: '/assets/images/thumbnails/teletextual.webp',
 			description: {
 				pt: 'Uma instalação participativa construída sobre o arquivo do teletexto português.',
@@ -151,15 +179,10 @@ window.SITE = {
 			id: 'constelacoes',
 			pile: true,
 			shelf: 'projetos',
-			year: 2025,
+			year: 2026,
 			flagship: true,
 			title: { pt: 'Constelações Parlamentares', en: 'Parliamentary Constellations', es: 'Constelaciones Parlamentarias' },
-			url: 'https://parliament.joaobernardo.me',
-			type: {
-				pt: 'exposição',
-				en: 'exhibition',
-				es: 'exposición',
-			},
+			type: 'exposicao',
 			thumb: '/assets/images/thumbnails/constelacoes.webp',
 			description: {
 				pt: 'Exposição sobre as votações do Parlamento Europeu desde 2004, redesenhadas como redes.',
@@ -188,7 +211,7 @@ window.SITE = {
 			year: 2025,
 			title: { pt: 'DesALojamento', en: 'DesALojamento', es: 'DesALojamiento' },
 			url: 'https://desalojamento.pt',
-			type: { pt: 'ensaio visual', en: 'visual essay', es: 'ensayo visual' },
+			type: 'ensaio-visual',
 			thumb: '/assets/images/thumbnails/desalojamento.webp',
 			description: {
 				pt: 'Ensaio visual sobre o impacto do Alojamento Local na crise da habitação em Lisboa e no Porto.',
@@ -209,7 +232,7 @@ window.SITE = {
 				en: 'https://ruasdogenero.pt',
 				es: 'https://ruasdogenero.pt',
 			},
-			type: { pt: 'ensaio visual', en: 'visual essay', es: 'ensayo visual' },
+			type: 'ensaio-visual',
 			thumb: '/assets/images/thumbnails/ruasdogenero.webp',
 			description: {
 				pt: 'Ensaio visual sobre a representação das mulheres na toponímia do Porto.',
@@ -243,7 +266,7 @@ window.SITE = {
 			year: 2026,
 			title: { pt: 'Revelar a forma da fraude com o Cosmos Explorer', en: 'Uncovering the Shape of Fraud with Cosmos Explorer', es: 'Descubrir la forma del fraude con Cosmos Explorer' },
 			url: 'https://medium.com/feedzaitech/uncovering-the-shape-of-fraud-with-cosmos-explorer-visual-metaphors-behind-millions-of-transactions-b98e4cf56e56',
-			type: { pt: 'artigo técnico', en: 'technical article', es: 'artículo técnico' },
+			type: 'artigo-tecnico',
 			venue: 'Feedzai',
 			thumb: '/assets/images/thumbnails/fraud.webp',
 			description: {
@@ -260,7 +283,7 @@ window.SITE = {
 			year: 2026,
 			title: { pt: 'O papel dos media na normalização da extrema-direita', en: "Media's role in normalizing the far right", es: 'El papel de los medios en la normalización de la extrema derecha' },
 			url: 'https://www.taylorfrancis.com/chapters/edit/10.4324/9781032710167-3/role-media-normalising-far-right-luca-manucci-joão-bernardo-narciso',
-			type: { pt: 'capítulo de livro', en: 'book chapter', es: 'capítulo de libro' },
+			type: 'capitulo-livro',
 			venue: 'Routledge',
 			thumb: '/assets/images/thumbnails/farright.webp',
 			description: {
@@ -277,7 +300,7 @@ window.SITE = {
 			year: 2025,
 			title: { pt: 'A cultura dos jogos na construção da manosfera', en: 'Gaming culture and the making of the manosphere', es: 'La cultura de los videojuegos en la construcción de la manosfera' },
 			url: 'https://redeanticapitalista.net/a-cultura-dos-jogos-na-construcao-da-manosfera/',
-			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
+			type: 'opiniao',
 			venue: 'RA Zine',
 			thumb: '/assets/images/thumbnails/razine2.webp',
 			description: {
@@ -295,7 +318,7 @@ window.SITE = {
 			year: 2024,
 			title: { pt: 'Onde está a ética do Pulsómetro?', en: "Where are the Pulsómetro's ethics?", es: '¿Dónde está la ética del Pulsómetro?' },
 			url: 'https://www.publico.pt/2024/02/17/opiniao/opiniao/onde-etica-pulsometro-2080435',
-			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
+			type: 'opiniao',
 			venue: 'Público',
 			thumb: '/assets/images/thumbnails/publico2.webp',
 			description: {
@@ -312,7 +335,7 @@ window.SITE = {
 			year: 2023,
 			title: { pt: 'Afinal, quantas pessoas se abstêm em Portugal?', en: 'So how many people actually abstain in Portugal?', es: 'Al final, ¿cuántas personas se abstienen en Portugal?' },
 			url: 'https://ffms.pt/pt-pt/estudos/policy-papers/afinal-quantas-pessoas-se-abstem-em-portugal',
-			type: 'policy paper',
+			type: 'policy-paper',
 			venue: 'FFMS',
 			thumb: '/assets/images/thumbnails/abstencao.webp',
 			description: {
@@ -329,7 +352,7 @@ window.SITE = {
 			year: 2025,
 			title: 'DigitalTraces',
 			url: 'https://diglib.eg.org/items/fb9c677a-8d79-43c6-8754-9d08834771e2',
-			type: { pt: 'artigo científico', en: 'scientific paper', es: 'artículo científico' },
+			type: 'artigo-cientifico',
 			venue: 'EuroVis',
 			thumb: '/assets/images/thumbnails/digitaltraces.webp',
 			description: {
@@ -369,7 +392,7 @@ window.SITE = {
 			year: 2025,
 			title: 'Título',
 			url: 'https://…',
-			type: { pt: 'artigo de opinião', en: 'opinion piece', es: 'artículo de opinión' },
+			type: 'opiniao',   // um id de `types`, ou vários: ['instalacao', 'arquivo']
 			venue: 'Onde saiu',
 			thumb: '/assets/images/thumbnails/ficheiro.webp',
 			description: {

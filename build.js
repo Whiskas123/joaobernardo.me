@@ -48,7 +48,10 @@ function awards(p, lang, linked) {
 function entry(p, lang, ui) {
 	const title = t(p.title, lang);
 	const description = t(p.description, lang);
-	const attrs = [`href="${esc(t(p.url, lang))}"`, `data-title="${esc(title)}"`];
+	// Without a url the entry still opens its popup; main.js hides "Abrir ↗"
+	// for a same-page href.
+	const href = p.url ? t(p.url, lang) : `#${p.id}`;
+	const attrs = [`href="${esc(href)}"`, `data-title="${esc(title)}"`];
 
 	if (description) attrs.push(`data-description="${esc(description + awards(p, lang, false))}"`);
 	if (p.modal || p.awards) {
@@ -64,11 +67,17 @@ function entry(p, lang, ui) {
 		if (Array.isArray(alts)) attrs.push(`data-gallery-alt="${esc(alts.join('|'))}"`);
 	}
 
-	// Type and venue read as one unit: "opinião · Público".
-	const meta = [t(p.type, lang), t(p.venue, lang)].filter(Boolean).join(' · ');
+	// Type first, then venue and year as in a citation: "[opinião] Público, 2024".
 	const parts = [];
+	for (const id of [].concat(p.type || [])) {
+		const type = SITE.types[id];
+		assert(type, `${p.id}: unknown type "${id}" — add it to \`types\``);
+		const color = SITE.typeColors[type.color];
+		assert(color, `type "${id}": unknown color "${type.color}" — add it to \`typeColors\``);
+		parts.push(`<span class="entry__badge" style="--badge: ${esc(color)}">${esc(t(type, lang))}</span>`);
+	}
+	if (p.venue) parts.push(`<span class="entry__type">${esc(t(p.venue, lang))}${p.year ? ',' : ''}</span>`);
 	if (p.year) parts.push(`<span class="entry__year">${esc(p.year)}</span>`);
-	if (meta) parts.push(`<span class="entry__type">${esc(meta)}</span>`);
 	if (p.flagship) {
 		const label = esc(ui.flagshipLabel || '');
 		parts.push(`<span class="entry__star" role="img" title="${label}" aria-label="${label}">★</span>`);
