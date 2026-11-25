@@ -2,8 +2,9 @@
 // Writes index.html, en/index.html and es/index.html from assets/data/site.js,
 // so the project list is in the HTML itself rather than drawn by JavaScript.
 //
-// Runs on every push (.github/workflows/pages.yml). To preview locally after
-// editing site.js: `node build.js`.
+// GitHub Pages serves the committed files as they are (Settings → Pages →
+// "Deploy from a branch"), so after editing site.js run `node build.js` and
+// commit the regenerated pages with it.
 
 const fs = require('fs');
 const path = require('path');

@@ -3,8 +3,9 @@
    ----------------------------------------------------------------------------
    Tudo o que aparece nas três páginas (pt / en / es) vem daqui.
    As páginas index.html, en/index.html e es/index.html são GERADAS a partir
-   deste ficheiro por build.js — não as edites à mão. No push o GitHub gera-as
-   sozinho; para ver em local depois de mudar algo aqui: `node build.js`.
+   deste ficheiro por build.js — não as edites à mão. Depois de mudar algo
+   aqui, corre `node build.js` e faz commit das páginas junto: o GitHub
+   publica os ficheiros tal como estão, não as gera sozinho.
 
    ── COMO ADICIONAR UM PROJETO ──────────────────────────────────────────────
    Copia um bloco da lista `projects` e muda os campos. Só `id`, `shelf`,
