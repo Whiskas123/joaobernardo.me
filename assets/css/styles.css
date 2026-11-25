@@ -211,8 +211,7 @@ b{
 
 .entry__year,
 .entry__type,
-.entry__badge,
-.entry__star {
+.entry__badge {
 	flex: none;
 }
 
@@ -237,12 +236,16 @@ b{
 	opacity: 0.6;
 }
 
-/* On desktop the star leads the line; on a phone it goes back to the end.
-   The hover arrow stays ahead of it. */
-.entry__star {
-	order: -1;
+/* Flagship star, on the title: it leads the title on desktop and trails it on
+   a phone. inline-block keeps it out of the hover underline; the text after
+   the slash is what a screen reader says (older browsers drop it and keep
+   the plain star from the line before). */
+.entry__title[data-star]::before {
+	content: '★';
+	content: '★' / attr(data-star);
+	display: inline-block;
+	margin-right: 0.35em;
 	font-size: 0.82em;
-	line-height: 1;
 }
 
 /* The title always takes a line to itself, which wrap-reverse stacks above
@@ -657,8 +660,16 @@ li {
 		flex: 0 1 auto;
 	}
 
-	.entry__star {
-		order: 0;
+	.entry__title[data-star]::before {
+		content: none;
+	}
+
+	.entry__title[data-star]::after {
+		content: '★';
+		content: '★' / attr(data-star);
+		display: inline-block;
+		margin-left: 0.35em;
+		font-size: 0.82em;
 	}
 
 	ul {

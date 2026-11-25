@@ -79,11 +79,10 @@ function entry(p, lang, ui) {
 	}
 	if (p.venue) parts.push(`<span class="entry__type">${esc(t(p.venue, lang))}${p.year ? ',' : ''}</span>`);
 	if (p.year) parts.push(`<span class="entry__year">${esc(p.year)}</span>`);
-	if (p.flagship) {
-		const label = esc(ui.flagshipLabel || '');
-		parts.push(`<span class="entry__star" role="img" title="${label}" aria-label="${label}">★</span>`);
-	}
-	parts.push(`<span class="entry__title">${esc(title)}</span>`);
+	// The star sits on the title itself, drawn by CSS (.entry__title[data-star])
+	// so it can lead on desktop and trail on a phone; data-star is its spoken label.
+	const star = p.flagship ? ` data-star="${esc(ui.flagshipLabel || '★')}"` : '';
+	parts.push(`<span class="entry__title"${star}>${esc(title)}</span>`);
 
 	return `\t\t\t\t\t\t\t<li><a ${attrs.join(' ')}>${parts.join('')}</a></li>`;
 }
